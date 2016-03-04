@@ -1,0 +1,494 @@
+<openerp>
+<data>
+
+<record id="po_buyer" model="ir.model.access">
+     <field name="name">po_buyer</field>
+     <field name="group_id"    ref="pr_buyer"/>
+     <field name="model_id"    ref="001_purchase.model_purchase_order"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="1"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="po_purchaser" model="ir.model.access">
+     <field name="name">po_purchaser</field>
+     <field name="group_id"    ref="pr_purchaser"/>
+     <field name="model_id"    ref="001_purchase.model_purchase_order"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="po_generalmanager" model="ir.model.access">
+     <field name="name">po_generalmanager</field>
+     <field name="group_id"    ref="generalmanager"/>
+     <field name="model_id"    ref="001_purchase.model_purchase_order"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>	 
+<record id="po_chairman" model="ir.model.access">
+     <field name="name">po_chairman</field>
+     <field name="group_id"    ref="chairman"/>
+     <field name="model_id"    ref="001_purchase.model_purchase_order"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>	 	 
+<record id="pr_creater" model="ir.model.access">
+     <field name="name">pr_creater</field>
+     <field name="group_id"    ref="pr_creater"/>
+     <field name="model_id"    ref="001_purchase_requisition.model_purchase_requisition"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="1"/>
+     <field name="perm_write"  eval="1"/>
+</record>	 	 
+<record id="pr_director" model="ir.model.access">
+     <field name="name">pr_director</field>
+     <field name="group_id"    ref="director"/>
+     <field name="model_id"    ref="001_purchase_requisition.model_purchase_requisition"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>	 	 
+<record id="pr_supervisor" model="ir.model.access">
+     <field name="name">pr_supervisor</field>
+     <field name="group_id"    ref="supervisor"/>
+     <field name="model_id"    ref="001_purchase_requisition.model_purchase_requisition"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>	 	 
+<record id="pr_manager" model="ir.model.access">
+     <field name="name">pr_manager</field>
+     <field name="group_id"    ref="dpt_manager"/>
+     <field name="model_id"    ref="001_purchase_requisition.model_purchase_requisition"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>	 	 
+<record id="pr_purchaser" model="ir.model.access">
+     <field name="name">pr_purchaser</field>
+     <field name="group_id"    ref="pr_purchaser"/>
+     <field name="model_id"    ref="001_purchase_requisition.model_purchase_requisition"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>	 	 
+<record id="pr_generalmanager" model="ir.model.access">
+     <field name="name">pr_generalmanager</field>
+     <field name="group_id"    ref="generalmanager"/>
+     <field name="model_id"    ref="001_purchase_requisition.model_purchase_requisition"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>	 	 
+<record id="pr_chairman" model="ir.model.access">
+     <field name="name">pr_chairman</field>
+     <field name="group_id"    ref="chairman"/>
+     <field name="model_id"    ref="001_purchase_requisition.model_purchase_requisition"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+
+<!-- 120308 -->
+<record id="me_buyer" model="ir.model.access">
+     <field name="name">me_buyer</field>
+     <field name="group_id"    ref="pr_buyer"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_materiel_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="1"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="me_purchaser" model="ir.model.access">
+     <field name="name">me_purchaser</field>
+     <field name="group_id"    ref="pr_purchaser"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_materiel_evaluation"/>
+     <field name="perm_create" eval="0"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="me_generalmanager" model="ir.model.access">
+     <field name="name">me_generalmanager</field>
+     <field name="group_id"    ref="generalmanager"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_materiel_evaluation"/>
+     <field name="perm_create" eval="0"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="me_quality_IQC" model="ir.model.access">
+     <field name="name">me_iqc</field>
+     <field name="group_id"    ref="quality_IQC"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_materiel_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="me_technology_user" model="ir.model.access">
+     <field name="name">me_tech</field>
+     <field name="group_id"    ref="technology_user"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_materiel_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="me_technology_manager" model="ir.model.access">
+     <field name="name">me_techmanager</field>
+     <field name="group_id"    ref="technology_manager"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_materiel_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="me_quality_user" model="ir.model.access">
+     <field name="name">me_inspector</field>
+     <field name="group_id"    ref="quality_user"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_materiel_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="me_quality_manager" model="ir.model.access">
+     <field name="name">me_qualitymanager</field>
+     <field name="group_id"    ref="quality_manager"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_materiel_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="me_generalmanager" model="ir.model.access">
+     <field name="name">me_generalmanager</field>
+     <field name="group_id"    ref="generalmanager"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_materiel_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="equipment_director" model="ir.model.access">
+     <field name="name">equipment_director</field>
+     <field name="group_id"    ref="director"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_equipment_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="1"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="equipment_supervisor" model="ir.model.access">
+     <field name="name">equipment_supervisor</field>
+     <field name="group_id"    ref="supervisor"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_equipment_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="equipment_technology_user" model="ir.model.access">
+     <field name="name">equipment_tech</field>
+     <field name="group_id"    ref="technology_user"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_equipment_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="equipment_maintain" model="ir.model.access">
+     <field name="name">equipment_maintain</field>
+     <field name="group_id"    ref="production_maintain"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_equipment_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="equipment_generalmanager" model="ir.model.access">
+     <field name="name">equipment_generalmanager</field>
+     <field name="group_id"    ref="generalmanager"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_equipment_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>   
+<record id="equipment_pr_purchaser" model="ir.model.access">
+     <field name="name">equipment_purchaser</field>
+     <field name="group_id"    ref="pr_purchaser"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_equipment_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="equipment_supervisor" model="ir.model.access">
+     <field name="name">equipment_supervisor</field>
+     <field name="group_id"    ref="supervisor"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_equipment_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="equipment_technology_manager" model="ir.model.access">
+     <field name="name">equipment_techmanager</field>
+     <field name="group_id"    ref="technology_manager"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_equipment_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="equipment_quality_manager" model="ir.model.access">
+     <field name="name">equipment_qualitymanager</field>
+     <field name="group_id"    ref="quality_manager"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_equipment_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="equipment_production_maintain" model="ir.model.access">
+     <field name="name">equipment_maintain</field>
+     <field name="group_id"    ref="production_maintain"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_equipment_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>  
+<record id="equipment_generalmanager" model="ir.model.access">
+     <field name="name">equipment_generalmanager</field>
+     <field name="group_id"    ref="generalmanager"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_equipment_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="equipment_chairman" model="ir.model.access">
+     <field name="name">equipment_chairman</field>
+     <field name="group_id"    ref="chairman"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_equipment_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="outsource_production_outsource" model="ir.model.access">
+     <field name="name">outsource_outsource</field>
+     <field name="group_id"    ref="production_outsource"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_outsource_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="1"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="outsource_supervisor" model="ir.model.access">
+     <field name="name">outsource_supervisor</field>
+     <field name="group_id"    ref="supervisor"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_outsource_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="outsource_generalmanager" model="ir.model.access">
+     <field name="name">outsource_generalmanager</field>
+     <field name="group_id"    ref="generalmanager"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_outsource_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="outsource_inspector" model="ir.model.access">
+     <field name="name">outsource_inspector</field>
+     <field name="group_id"    ref="quality_user"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_outsource_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="outsource_quality_IQC" model="ir.model.access">
+     <field name="name">outsource_iqc</field>
+     <field name="group_id"    ref="quality_IQC"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_outsource_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="outsource_development_laboratory" model="ir.model.access">
+     <field name="name">outsource_chemical</field>
+     <field name="group_id"    ref="development_laboratory"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_outsource_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="outsource_quality_supervisor" model="ir.model.access">
+     <field name="name">outsource_qualitysupervisor</field>
+     <field name="group_id"    ref="quality_supervisor"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_outsource_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="outsource_quality_manager" model="ir.model.access">
+     <field name="name">outsource_qualitymanager</field>
+     <field name="group_id"    ref="quality_manager"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_outsource_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="outsource_generalmanager" model="ir.model.access">
+     <field name="name">outsource_generalmanager</field>
+     <field name="group_id"    ref="generalmanager"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_outsource_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<!-- 120308 -->
+
+<!-- 120308 af t-->
+<record id="supplier_buyer" model="ir.model.access">
+     <field name="name">supplier_buyer</field>
+     <field name="group_id"    ref="pr_buyer"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_supply_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="1"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="supplier_production_outsource" model="ir.model.access">
+     <field name="name">supplier_outsource</field>
+     <field name="group_id"    ref="production_outsource"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_supply_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="1"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="supplier_human_structure" model="ir.model.access">
+     <field name="name">supplier_human_structure</field>
+     <field name="group_id"    ref="humanresources_structure"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_supply_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="supplier_quality_user" model="ir.model.access">
+     <field name="name">supplier_quality_user</field>
+     <field name="group_id"    ref="quality_user"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_supply_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="supplier_quality_manager" model="ir.model.access">
+     <field name="name">supplier_quality_manager</field>
+     <field name="group_id"    ref="quality_manager"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_supply_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="supplier_supervisor" model="ir.model.access">
+     <field name="name">supplier_supervisor</field>
+     <field name="group_id"    ref="supervisor"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_supply_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="supplier_general" model="ir.model.access">
+     <field name="name">supplier_generalmanager</field>
+     <field name="group_id"    ref="generalmanager"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_supply_evaluation"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="price_pr_buyer" model="ir.model.access">
+     <field name="name">price_pr_buyer</field>
+     <field name="group_id"    ref="pr_buyer"/>
+     <field name="model_id"    ref="001_price_change.model_price_change"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="1"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="price_pr_purchaser" model="ir.model.access">
+     <field name="name">price_pr_purchaser</field>
+     <field name="group_id"    ref="pr_purchaser"/>
+     <field name="model_id"    ref="001_price_change.model_price_change"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="price_generalmanager" model="ir.model.access">
+     <field name="name">price_generalmanager</field>
+     <field name="group_id"    ref="generalmanager"/>
+     <field name="model_id"    ref="001_price_change.model_price_change"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="0"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="unsupplier_pr_buyer" model="ir.model.access">
+     <field name="name">unsupplier_pr_buyer</field>
+     <field name="group_id"    ref="pr_buyer"/>
+     <field name="model_id"    ref="001_basic_evaluation.model_unofficial_supplier"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="1"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<record id="material_usage_statistics_supervisor" model="ir.model.access">
+     <field name="name">material_usage_statistics_supervisor</field>
+     <field name="group_id"    ref="supervisor"/>
+     <field name="model_id"    ref="001_material_usage_statistics.model_material_usage_statistics"/>
+     <field name="perm_create" eval="1"/>
+     <field name="perm_read"   eval="1"/>
+     <field name="perm_unlink" eval="1"/>
+     <field name="perm_write"  eval="1"/>
+</record>
+<!-- 120308 aft -->
+
+
+
+
+
+        
+</data>
+</openerp>

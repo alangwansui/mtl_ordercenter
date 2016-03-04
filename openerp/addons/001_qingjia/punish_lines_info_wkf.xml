@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+	<record model='workflow' id='wkf_lines'>
+		<field name='name'>punish.lines.info.workflow</field>
+		<field name='osv'>punish.lines.info</field>
+	</record>
+	
+	<!-- activity:w_responsible,w_director,w_dpt_confirm,done,cancel -->
+	<record id="act_draft_li" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_lines"/>
+           <field name="flow_start">True</field>
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">draft</field>
+           <field name="action">updata_line_state('draft')</field>
+           <field name="kind">function</field>
+    </record>
+	
+	<record id="act_w_dpt_confirm_li" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_lines"/>
+        	<!--<field name="flow_start">True</field>-->
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">w_dpt_confirm</field>
+           <field name="action">updata_line_state('w_dpt_confirm')</field>
+           <field name="kind">function</field>
+    </record>
+    
+	<record id="act_w_responsible_li" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_lines"/>
+        	<!--<field name="flow_start">True</field>-->
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">w_responsible</field>
+           <field name="action">updata_line_state('w_responsible')</field>
+           <field name="kind">function</field>
+    </record>
+    
+	<record id="act_w_punish_li" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_lines"/>
+       <!-- <field name="flow_start">True</field>    -->
+        <!--<field name="flow_stop">True</field>  -->
+           <field name="name">w_punish</field>
+           <field name="action">updata_line_state('w_punish')</field>
+           <field name="kind">function</field>
+    </record> 
+    
+    <record id="act_w_dpt_manager_li" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_lines"/>
+        	<!-- <field name="flow_start">True</field> -->
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">w_dpt_confirm</field>
+           <field name="action">updata_line_state('w_dpt_manager')</field>
+           <field name="kind">function</field>
+    </record>
+    
+     <record id="act_done_li" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_lines"/>
+        	<!-- <field name="flow_start">True</field> -->
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">done</field>
+           <field name="action">updata_line_state('done')</field>
+           <field name="kind">function</field>
+    </record>
+    
+    
+    <!-- trans:,w_dpt_confirm,w_responsible,w_director,w_dpt_lead,done,cancel-->
+    
+	
+ 	 <record id="trans_act_draft_li2w_responsible_li" model="workflow.transition">
+          <field name="act_from" ref="act_draft_li"/>
+          <field name="act_to" ref="act_w_responsible_li"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<!-- <field name="condition"></field> -->
+    </record>
+	
+ <!--	<record id="trans_w_responsible_li2act_w_punish_li" model="workflow.transition">
+          <field name="act_from" ref="act_w_responsible_li"/>
+          <field name="act_to" ref="act_w_punish_li"/>
+          <field name="signal">button_approver</field>
+	  	<field name="group_id" ref="group_id"/>  
+   		<field name="condition"></field>  
+    </record>  --> 
+    
+	 <record id="trans_w_rewponsible_li2act_done_li" model="workflow.transition">
+          <field name="act_from" ref="act_w_responsible_li"/>
+          <field name="act_to" ref="act_done_li"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<!-- <field name="condition"></field>-->
+    </record>
+    
+ 	
+    	
+    <!-- return:w_director -->
+    <record id="trans_act_done_li2act_w_responsible_li" model="workflow.transition">
+          <field name="act_from" ref="act_done_li"/>
+          <field name="act_to" ref="act_w_responsible_li"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<!-- <field name="condition"></field>-->
+    </record>
+    <record id="trans_act_w_responsible_li2act_draft_li" model="workflow.transition">
+          <field name="act_from" ref="act_w_responsible_li"/>
+          <field name="act_to" ref="act_draft_li"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<!-- <field name="condition"></field>-->
+    </record>
+    
+</data>
+
+</openerp>

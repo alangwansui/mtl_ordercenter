@@ -1,0 +1,64 @@
+<?xml version='1.0'  encoding='utf-8'?>
+<openerp>
+<data>
+
+<record id="wkf_frame_sale_order" model="workflow">
+            <field name="name">frame_sale_order.workflow</field>
+            <field name="osv">frame.sale.order</field>
+         
+        </record>
+
+        <record id="act_frame_sale_order_draft" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_frame_sale_order"/>
+            <field name="flow_start">True</field>
+            <field name="name">draft</field>
+        </record>
+
+
+        <record id="act_frame_sale_order_wait_director" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_frame_sale_order"/>
+            <field name="name">wait_director</field>
+            <field name="kind">function</field>
+            <field name='action'>write({'state':'wait_director'})</field>
+        </record>
+        
+         <record id="act_frame_sale_order_wait_master" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_frame_sale_order"/>
+            <field name="name">wait_master</field>
+            <field name="kind">function</field>
+            <field name='action'>write({'state':'wait_master'})</field>
+        </record>
+
+
+
+		<record id="act_frame_sale_order_done" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_frame_sale_order"/>
+            <field name="name">done</field>
+            <field name="kind">function</field>
+            <field name='action'>write({'state':'done'})</field>
+        </record>
+
+
+
+	 	<record id="frame_sale_order_draft2act_frame_sale_order_wait_director" model="workflow.transition">
+            <field name="act_from" ref="act_frame_sale_order_draft"/>
+            <field name="act_to" ref="act_frame_sale_order_wait_director"/>
+            <field name="signal">button_approve</field>
+        </record>
+        
+        
+        <record id="act_frame_sale_order_wait_director2act_frame_sale_order_wait_master" model="workflow.transition">
+            <field name="act_from" ref="act_frame_sale_order_wait_director"/>
+            <field name="act_to" ref="act_frame_sale_order_wait_master"/>
+            <field name="signal">button_approve</field>
+        </record>
+
+        <record id="act_frame_sale_order_wait_master2act_frame_sale_order_done" model="workflow.transition">
+            <field name="act_from" ref="act_frame_sale_order_wait_master"/>
+            <field name="act_to" ref="act_frame_sale_order_done"/>
+            <field name="signal">button_approve</field>
+        </record>
+
+ 
+</data>
+</openerp>

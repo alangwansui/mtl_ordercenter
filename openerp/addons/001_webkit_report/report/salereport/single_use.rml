@@ -1,0 +1,768 @@
+<?xml version="1.0"?>
+<document filename="test.pdf">
+  <template pageSize="(595.0,842.0)" title="Test" author="Martin Simon" allowSplitting="20">
+    <pageTemplate id="first">
+      <frame id="first" x1="18.0" y1="42.0" width="535" height="758"/>
+    </pageTemplate>
+  </template>
+  <stylesheet>
+    <blockTableStyle id="Standard_Outline">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="&#x8868;&#x683C;1">
+      <blockTopPadding value="0"/>
+      <blockBottomPadding value="0"/>
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="&#x8868;&#x683C;2">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="4,0" stop="4,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="5,0" stop="5,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="6,0" stop="6,0"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="7,0" stop="7,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="7,0" stop="7,0"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,1" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="3,-1" stop="3,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="4,-1" stop="4,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="5,-1" stop="5,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="6,-1" stop="6,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="7,1" stop="7,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="7,-1" stop="7,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="&#x8868;&#x683C;3">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="4,0" stop="4,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="5,0" stop="5,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="6,0" stop="6,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="7,0" stop="7,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="8,0" stop="8,0"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="9,0" stop="9,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="9,0" stop="9,0"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,1" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="8,1" stop="8,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,2" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="6,2" stop="6,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,3" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="1,3" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,4" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="8,4" stop="8,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,5" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="6,5" stop="6,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,6" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="2,6" stop="2,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,7" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#ffffff" start="0,7" stop="0,7"/>
+      <lineStyle kind="LINEBELOW" colorName="#ffffff" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#ffffff" start="1,7" stop="1,7"/>
+      <lineStyle kind="LINEBELOW" colorName="#ffffff" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#ffffff" start="2,7" stop="2,7"/>
+      <lineStyle kind="LINEBELOW" colorName="#ffffff" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#ffffff" start="3,7" stop="3,7"/>
+      <lineStyle kind="LINEBELOW" colorName="#ffffff" start="3,-1" stop="3,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#ffffff" start="4,7" stop="4,7"/>
+      <lineStyle kind="LINEBELOW" colorName="#ffffff" start="4,-1" stop="4,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="5,7" stop="5,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#ffffff" start="5,7" stop="5,7"/>
+      <lineStyle kind="LINEBELOW" colorName="#ffffff" start="5,-1" stop="5,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,8" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="3,8" stop="3,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,9" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="3,-1" stop="3,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="4,-1" stop="4,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="5,9" stop="5,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="5,-1" stop="5,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,10" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,10" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,10" stop="1,10"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,10" stop="2,10"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="3,10" stop="3,10"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="4,10" stop="4,10"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="5,10" stop="5,10"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="6,10" stop="6,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="6,10" stop="6,10"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,11" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="3,-1" stop="3,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="4,-1" stop="4,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="5,11" stop="5,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="5,-1" stop="5,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,12" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,12" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,12" stop="1,12"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,12" stop="2,12"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="3,12" stop="3,12"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="4,12" stop="4,12"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="5,12" stop="5,12"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="6,12" stop="6,12"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="7,12" stop="7,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="7,12" stop="7,12"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="5,13" stop="5,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,14" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="2,14" stop="2,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,15" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#ffffff" start="0,15" stop="0,15"/>
+      <lineStyle kind="LINEABOVE" colorName="#ffffff" start="1,15" stop="1,15"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="2,15" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#ffffff" start="2,15" stop="2,15"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,16" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="2,16" stop="2,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,17" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,17" stop="1,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="1,17" stop="1,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="&#x8868;&#x683C;4">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,1" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="0,1" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,2" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="0,2" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+    </blockTableStyle>
+    <initialize>
+      <paraStyle name="all" alignment="justify"/>
+    </initialize>
+    <paraStyle name="P1" fontName="Helvetica" fontSize="11.0" leading="14" alignment="LEFT"/>
+    <paraStyle name="P2" fontName="Helvetica" fontSize="11.0" leading="14" alignment="LEFT"/>
+    <paraStyle name="P3" fontName="Helvetica"/>
+    <paraStyle name="P4" fontName="Helvetica" fontSize="11.0" leading="14"/>
+    <paraStyle name="P5" fontName="Helvetica" fontSize="11.0" leading="14" alignment="CENTER"/>
+    <paraStyle name="P6" fontName="Helvetica" fontSize="11.0" leading="14" alignment="LEFT"/>
+    <paraStyle name="P7" fontName="Helvetica" fontSize="11.0" leading="14" alignment="CENTER"/>
+    <paraStyle name="P8" fontName="Helvetica" fontSize="11.0" leading="14" alignment="RIGHT"/>
+    <paraStyle name="P9" fontName="Helvetica" fontSize="11.0" leading="14" alignment="LEFT"/>
+    <paraStyle name="P10" fontName="Helvetica" fontSize="11.0" leading="14"/>
+    <paraStyle name="P11" fontName="Helvetica" fontSize="12.0" leading="15"/>
+    <paraStyle name="P12" fontName="Helvetica"/>
+    <paraStyle name="P13" fontName="Helvetica" fontSize="11.0" leading="14" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="Standard" fontName="Helvetica"/>
+    <paraStyle name="Text body" fontName="Helvetica" spaceBefore="0.0" spaceAfter="6.0"/>
+    <paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+    <paraStyle name="List" fontName="Helvetica" spaceBefore="0.0" spaceAfter="6.0"/>
+    <paraStyle name="Table Contents" fontName="Helvetica"/>
+    <paraStyle name="Table Heading" fontName="Helvetica" alignment="CENTER"/>
+    <paraStyle name="Caption" fontName="Helvetica" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+    <paraStyle name="Index" fontName="Helvetica"/>
+    <paraStyle name="Footer" fontName="Helvetica"/>
+    <paraStyle name="Horizontal Line" fontName="Helvetica" fontSize="6.0" leading="8" spaceBefore="0.0" spaceAfter="14.0"/>
+    <paraStyle name="terp_header" fontName="Helvetica-Bold" fontSize="12.0" leading="15" alignment="LEFT" spaceBefore="12.0" spaceAfter="6.0"/>
+    <paraStyle name="Heading 9" fontName="Helvetica-Bold" fontSize="75%" leading="NaN" spaceBefore="12.0" spaceAfter="6.0"/>
+    <paraStyle name="terp_tblheader_General" fontName="Helvetica-Bold" fontSize="8.0" leading="10" alignment="LEFT" spaceBefore="6.0" spaceAfter="6.0"/>
+    <paraStyle name="terp_tblheader_Details" fontName="Helvetica-Bold" fontSize="9.0" leading="11" alignment="LEFT" spaceBefore="6.0" spaceAfter="6.0"/>
+    <paraStyle name="terp_default_8" fontName="Helvetica" fontSize="8.0" leading="10" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="terp_default_Bold_8" fontName="Helvetica-Bold" fontSize="8.0" leading="10" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="terp_tblheader_General_Centre" fontName="Helvetica-Bold" fontSize="8.0" leading="10" alignment="CENTER" spaceBefore="6.0" spaceAfter="6.0"/>
+    <paraStyle name="terp_tblheader_General_Right" fontName="Helvetica-Bold" fontSize="8.0" leading="10" alignment="RIGHT" spaceBefore="6.0" spaceAfter="6.0"/>
+    <paraStyle name="terp_tblheader_Details_Centre" fontName="Helvetica-Bold" fontSize="9.0" leading="11" alignment="CENTER" spaceBefore="6.0" spaceAfter="6.0"/>
+    <paraStyle name="terp_tblheader_Details_Right" fontName="Helvetica-Bold" fontSize="9.0" leading="11" alignment="RIGHT" spaceBefore="6.0" spaceAfter="6.0"/>
+    <paraStyle name="terp_default_Right_8" fontName="Helvetica" fontSize="8.0" leading="10" alignment="RIGHT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="terp_default_Centre_8" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="terp_header_Right" fontName="Helvetica-Bold" fontSize="15.0" leading="19" alignment="LEFT" spaceBefore="12.0" spaceAfter="6.0"/>
+    <paraStyle name="terp_header_Centre" fontName="Helvetica-Bold" fontSize="12.0" leading="15" alignment="CENTER" spaceBefore="12.0" spaceAfter="6.0"/>
+    <paraStyle name="terp_default_address" fontName="Helvetica" fontSize="10.0" leading="13" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="terp_default_9" fontName="Helvetica" fontSize="9.0" leading="11" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="terp_default_Bold_9" fontName="Helvetica-Bold" fontSize="9.0" leading="11" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="terp_default_Centre_9" fontName="Helvetica" fontSize="9.0" leading="11" alignment="CENTER" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="terp_default_Right_9" fontName="Helvetica" fontSize="9.0" leading="11" alignment="RIGHT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="terp_default_Bold_9_Right" fontName="Helvetica-Bold" fontSize="9.0" leading="11" alignment="RIGHT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="terp_default_8_Italic" fontName="Helvetica-Oblique" fontSize="8.0" leading="10" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="terp_default_2" fontName="Helvetica" fontSize="2.0" leading="3" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <images>
+      <image name="10000000000000680000005C08685A69.png">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
+</image>
+    </images>
+  </stylesheet>
+  <story>
+    <para style="P13">[[repeatIn(objects,'o')]]</para>
+    <para style="P13">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="84.0,468.0" style="&#x8868;&#x683C;1">
+      <tr>
+        <td>
+          <illustration height="58.0" width="71.0">
+            <image x="0" y="0" file="10000000000000680000005C08685A69.png" height="58.0" width="71.0"/>
+          </illustration>
+        </td>
+        <td>
+          <para style="P10">
+            <font face="Helvetica" size="12.0">深圳市牧泰莱电路技术有限公司</font>
+          </para>
+          <para style="P11"/>
+          <para style="P11">SHENZHEN MULTILAYER PCB TECHNOLOGY CO .,LTD </para>
+          <para style="P11"/>
+          <para style="P10">
+            <font face="Helvetica" size="12.0"/>
+            <font face="Helvetica" size="12.0"/>
+            <font face="Helvetica" size="12.0">用 户 单 </font>
+            <font face="Helvetica">序号：________</font>
+          </para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="Standard">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="62.0,70.0,60.0,112.0,61.0,86.0,56.0,45.0" style="&#x8868;&#x683C;2">
+      <tr>
+        <td>
+          <para style="P7">用户名称：</para>
+        </td>
+        <td>
+          <para style="P5">[[o.supplier_id.name]]</para>
+        </td>
+        <td>
+          <para style="P7">合同号：</para>
+        </td>
+        <td>
+          <para style="P5">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P8">联络人：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.supplier_id.address.name[0] ]]</para>
+        </td>
+        <td>
+          <para style="P8">电话：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.phone]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P7">档案号：</para>
+        </td>
+        <td>
+          <para style="P5">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P7">零件号：</para>
+        </td>
+        <td>
+          <para style="P5">[[o.custmer_goodscode]]</para>
+        </td>
+        <td>
+          <para style="P8">业务员：</para>
+        </td>
+        <td>
+          <para style="P5">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P8">传真：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.supplier_id.address.fax[0] ]]</para>
+        </td>
+      </tr>
+    </blockTable>
+    <blockTable colWidths="62.0,20.0,50.0,16.0,44.0,57.0,55.0,33.0,27.0,49.0,5.0,32.0,22.0,34.0,24.0,2.0,19.0" style="&#x8868;&#x683C;3">
+      <tr>
+        <td>
+          <para style="P7">技</para>
+          <para style="P7">术</para>
+          <para style="P7">标</para>
+          <para style="P7">准</para>
+        </td>
+        <td>
+          <para style="P5">1<font face="Helvetica">.基板材料：</font></para>
+        </td>
+        <td>
+          <para style="P7">板材型号：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.board_material]]</para>
+        </td>
+        <td>
+          <para style="P7">混压：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.mix_press]]</para>
+        </td>
+        <td>
+          <para style="P7">
+            <font color="white"> </font>
+          </para>
+          <para style="P7">抗阻：</para>
+          <para style="P7">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P7">[[o.impedance_id]]</para>
+        </td>
+        <td>
+          <para style="P7">基板厚度：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.basic_board_thickness]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P5">2<font face="Helvetica">. 成品：</font></para>
+        </td>
+        <td>
+          <para style="P7">层数：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.layer_count]]</para>
+        </td>
+        <td>
+          <para style="P7">厚度：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.finish_board_thickness]]</para>
+        </td>
+        <td>
+          <para style="P7">公差正：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.finish_tol_upper]]</para>
+        </td>
+        <td>
+          <para style="P7">公差负：</para>
+        </td>
+        <td>
+          <para style="P1">[[o.finish_tol_lower]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P5">3<font face="Helvetica">.表面涂覆：</font></para>
+        </td>
+        <td>
+          <para style="P7">表面处理：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.surface_treatment]]</para>
+        </td>
+        <td>
+          <para style="P7">金手指数：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.gold_finger_id]]</para>
+        </td>
+        <td>
+          <para style="P7">涂层要求：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.surface_treatment_request]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P5">4<font face="Helvetica">.特种工艺：</font></para>
+        </td>
+        <td>
+          <para style="P6">[[o.special_process]] <font face="Helvetica">说明：[[o.special_process_note]]</font></para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P5">5<font face="Helvetica">.阻焊类型：</font></para>
+        </td>
+        <td>
+          <para style="P7">阻焊颜色：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.solder_colour]]</para>
+        </td>
+        <td>
+          <para style="P7">型号：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.solder_colour]]</para>
+        </td>
+        <td>
+          <para style="P7">阻焊</para>
+          <para style="P7">类型 ：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.solder_type]]</para>
+        </td>
+        <td>
+          <para style="P7">过线孔阻焊：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.solder_via]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P5">6<font face="Helvetica">.字符类型：</font></para>
+        </td>
+        <td>
+          <para style="P7">字符颜色：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.silk_colour]]</para>
+        </td>
+        <td>
+          <para style="P7">型号：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.silk_variants]]</para>
+        </td>
+        <td>
+          <para style="P7">字符类型：</para>
+        </td>
+        <td>
+          <para style="P9">[[o.silk_type]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P6">7<font face="Helvetica">.外形加工：[[o.route_type]]</font></para>
+        </td>
+        <td>
+          <para style="P6">V<font face="Helvetica">-CUT度数：[[o.vcut_angle]]</font></para>
+        </td>
+        <td>
+          <para style="P9">金手指斜边：</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P9">8.通断测试：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.test_type]]</para>
+        </td>
+        <td>
+          <para style="P6">9.验收标准：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.accept_standard]]</para>
+        </td>
+        <td>
+          <para style="P6">10.标记要求：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.mark_request]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P7">11.包装要求：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.packing_request]]</para>
+        </td>
+        <td>
+          <para style="P5">12<font face="Helvetica">.附货要求：</font></para>
+        </td>
+        <td>
+          <para style="P6">[[o.request_with_goods]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P5">13<font face="Helvetica">.交货方式：</font></para>
+        </td>
+        <td>
+          <para style="P6">[[o.delivery_type]]</para>
+        </td>
+        <td>
+          <para style="P7">允许报废数量：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.allow_scrap_count]]</para>
+        </td>
+        <td>
+          <para style="P7">允许报废百分比：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.allow_scrap_percent]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P7">难</para>
+          <para style="P7">度</para>
+        </td>
+        <td>
+          <para style="P7">.最小线宽：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.min_line_width]]</para>
+        </td>
+        <td>
+          <para style="P7">最小间距：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.min_line_space]]</para>
+        </td>
+        <td>
+          <para style="P7">最小隔离环宽：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.min_line2pad]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P7">最小孔径：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.min_finish_hole]]</para>
+        </td>
+        <td>
+          <para style="P7">开槽数：[[o.pcs_slot_count]]</para>
+        </td>
+        <td>
+          <para style="P5">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P7">每cm2孔数：[[o.hoe_density]]</para>
+        </td>
+        <td>
+          <para style="P5">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P7">制</para>
+          <para style="P7">作</para>
+          <para style="P7">规</para>
+          <para style="P7">范</para>
+        </td>
+        <td>
+          <para style="P5">1<font face="Helvetica">. 制作</font></para>
+          <para style="P7"/>
+          <para style="P7">基准：</para>
+        </td>
+        <td>
+          <para style="P7">原文件名：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.source_file_name]]</para>
+        </td>
+        <td>
+          <para style="P7">软件及版本：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.soft_info]]</para>
+        </td>
+        <td>
+          <para style="P7">菲林张数：</para>
+        </td>
+        <td>
+          <para style="P6">[[o.plot_count]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P7">附页张数：</para>
+        </td>
+        <td>
+          <para style="P5">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P7">样板张数：</para>
+        </td>
+        <td>
+          <para style="P5">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P5">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P5">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P6">2<font face="Helvetica">.层次排列：</font></para>
+        </td>
+        <td>
+          <para style="P9">3.孔径：[[o.drill_density]]</para>
+        </td>
+        <td>
+          <para style="P9">4：有尺寸表注孔：</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P2">5.<font face="Helvetica">外形尺寸：[[o.outline_size_request]]</font></para>
+        </td>
+        <td>
+          <para style="P1">单件长：[[o.pcs_length]]</para>
+        </td>
+        <td>
+          <para style="P1">单件宽：[[o.pcs_width]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P6">6<font face="Helvetica">.拼版方式：[[o.panel_request]]</font></para>
+        </td>
+        <td>
+          <para style="P9">拼版长：[[o.unit_length]]</para>
+        </td>
+        <td>
+          <para style="P9">拼版宽：[[o.unit_width]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P7">特殊说明</para>
+        </td>
+        <td>
+          <para style="P9">[[o.special_indicate]]</para>
+        </td>
+      </tr>
+    </blockTable>
+    <blockTable colWidths="62.0,488.0" style="&#x8868;&#x683C;4">
+      <tr>
+        <td>
+          <para style="P12">审核</para>
+        </td>
+        <td>
+          <para style="P12">订单中心资料审核： 合格：_____ 不合格 ：_____ 日期：</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P12">工程部门资料审核： 合格：_____ 不合格 ：_____ 日期：</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P12">2007/12/08 Rev:C MTL-SR-006</para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P3">
+      <font color="white"> </font>
+    </para>
+  </story>
+</document>
+

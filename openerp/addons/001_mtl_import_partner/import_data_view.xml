@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+<record model="ir.ui.view" id="import_data_tree_view">
+    <field name="name">import.data.tree</field>
+    <field name="model">import.data</field>
+    <field name="type">tree</field>
+    <field name="arch" type="xml">
+        <tree string="import tree">
+           	<field name='name'/>
+           	<field name='model'/>
+            <field name='oe_table'/>
+            <field name="dosure_table_all"/>
+            <field name='server'/>
+            <field name='user'/>
+            <field name='password'/>
+           
+              
+        </tree>
+    </field>
+</record> 
+
+<record model="ir.ui.view" id="import_data_form_view">
+    <field name="name">import.data.form</field>
+    <field name="model">import.data</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+        <form string="import form">
+            <group colspan='4' col='4'>
+                <group colspan='2' col='2'>
+                    <field name='name'/>
+           			<field name='model'/>
+            		<field name='oe_table'/>
+            		<field name="dosure_table_all"/>
+                </group>
+             
+	           	<group colspan='2' col='2'>
+	           	    <field name='server'/>
+	            	<field name='user'/>
+	            	<field name='password'/>  
+	           	    <field name='w_untable'/>
+	           	  
+	           	</group>
+           	</group>
+           	<newline/>
+             <field name='related_table_info' colspan='4'/>
+             <newline/>
+             <group colspan='4' col='4'>
+                 <group colspan='3' col='2' expand='1'>
+                     <field name='dosure_line_ids' mode='tree,form' colspan='4' height='300'>
+		                 <tree string='dosure table info'>
+		                    <field name='table_name'/>
+		            		<field name='name'/>
+		            		<field name='field_description'/>
+		            		<field name='ttype'/>
+		            		<field name='relation_table_dosure'/>
+		            		<field name='relation_field_dosure'/>
+		            		<field name='required'/>
+		            		<field name='readonly'/>
+		                 </tree>
+		                 <form string='dosure table info'>
+		                     <field name='table_name'/>
+		            		<field name='name'/>
+		            		<field name='field_description'/>
+		            		<field name='ttype'/>
+		            		<field name='relation_table_dosure'/>
+		            		<field name='relation_field_dosure'/>
+		            		<field name='required'/>
+		            		<field name='readonly'/>
+		                 </form>
+		             </field>
+                 </group>
+                 <group colspan='1' col='2'>
+                 		<button name='import_reward'  string='import reward' icon=''  type='object'/>
+                     	<newline/>
+                     	<button name='import_punish'  string='import punsih' icon=''  type='object'/>
+                     	<newline/>
+                     	<button name='import_department'  string='import department' icon=''  type='object'/>
+                     	<newline/>
+                     	<button name='import_employee' string='import employee' icon='' type='object'/>
+                     	<newline/>
+                     	<button name='test_sql' string='wait unlink table query' icon='' type='object'/>
+                     	<newline/>
+                     	<button name='test_unlink' string='execute table unlink' icon='' type='object'/>
+                     	   <newline/> 
+                     	 <button name='create_users' string='create all users' icon='' type='object'/>
+                     	 <newline/>
+                     	<button name='get_table_all' string='get table all info' icon=''  type='object'/>
+                       <newline/>
+                       <button name='get_dosure_table' string='get dosure table info' icon=''  type='object'/>
+                 </group>
+             </group>
+             <separator colspan='4' string='create openerp model to dosure model map info'/>
+             <group colspan='4' col='4'>
+                 <group colspan='3' col='2' expand='1'>
+                     <field name='field_ids' mode='tree,form' colspan='4' height='300'>
+		                 <tree string='oe table info'>
+		                     <field name='name'/>
+		            		<field name='field_description'/>
+		            		<field name='ttype'/>
+		            		<field name='required'/>
+		            		<field name='readonly'/>
+		            		<field name='dosure_field_name'/>
+		            		<field name='dosure_field_description'/>
+		            		<field name='dosure_field_selection'/>
+		                 </tree>
+		                 <form string='oe table info'>
+		                    <field name='name'/>
+		            		<field name='field_description'/>
+		            		<field name='ttype'/>
+		            		<field name='required'/>
+		            		<field name='readonly'/>
+		            		<field name='dosure_field_name'/>
+		            		<field name='dosure_field_description'/>
+		            		<field name='dosure_field_selection'/>
+		                     
+		                 </form>
+		             </field>
+                 </group>
+                 <group colspan='1' col='2'>
+                          <button name='auto_create_map' string='auto create map' icon=''  type='object'/>
+          
+                 </group>
+             </group>
+             
+        </form>
+    </field>
+</record> 
+
+<record model='ir.actions.act_window' id='import_data_action'>
+    	<field name='name'>import.data.action</field>
+    	<field name='res_model'>import.data</field>
+    
+</record>
+
+<menuitem name="Mtl_import_data " parent="base.menu_tools" id="mtl_lmport_data_menu" action="import_data_action"/>
+
+
+</data>
+</openerp>

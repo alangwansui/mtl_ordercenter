@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="1">
+    <!--管理员-->
+    <record id="group_mtl_ceo" model="res.groups">
+        <field name="name">导入数据 / 管理员</field>
+    </record>
+    
+</data>
+</openerp>

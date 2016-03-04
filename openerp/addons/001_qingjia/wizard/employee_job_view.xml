@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+<data>
+   <record model='ir.ui.view' id='employee_job_form_view'>
+		<field name='name'>employee job form view</field>
+		<field name='model'>employee.job</field>
+		<field name='arch' type='xml'>
+			<form string='job form' version='7.0'>
+				<header>
+				</header>
+				<sheet>
+				    <field name='start_time'/>
+				    <field name='end_time'/>
+					<field name='job_line_ids' mode='tree,form'>
+						<tree string='job line'>
+							<field name='job_date'/>
+							<field name='count'/>
+						</tree>
+						<form string='job line'>
+							<field name='job_date'/>
+							<field name='count'/>
+						</form>
+					</field>
+					<newline/>
+					<button special="cancel" string="Close" icon="gtk-cancel" />
+	            	<button name="on_job_count" string="on job count" type="object" icon="gtk-ok"/>
+            	</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<record model='ir.actions.act_window' id='act_employee_job'>
+	    <field name='name'>employee job action</field>
+	    <field name='type'>ir.actions.act_window</field>
+	    <field name='view_type'>form</field>
+	    <field name='view_mode'>form</field>
+	    <field name='target'>new</field>
+	    <field name='res_model'>employee.job</field>
+	</record>
+	
+	<menuitem id='employee_job_menu' name='Count on_job' parent='hr_holidays.menu_open_ask_holidays' action='act_employee_job'/>
+    
+
+
+
+<!--  <record model='ir.actions.act_window' id='act_employee_info_update'>
+	    <field name='name'>employee info update action</field>
+	    <field name='type'>ir.actions.act_window</field>
+	    <field name='view_type'>form</field>
+	    <field name='view_mode'>form</field>
+	    <field name='target'>new</field>
+	    <field name='res_model'>employee.info.update</field>
+	</record>
+
+<menuitem id='employee_info_update_menu' name='employe info update' parent='hr.menu_hr_main' action='act_employee_info_update'/>-->
+<wizard id="employee_info_update_id"
+            menu="False" 
+            model="hr.employee" 
+            name="employee_info_update_wiz" 
+            string="Employee info update"/>
+
+        <menuitem  id="menu_wizard_employee_update"
+          
+            action="employee_info_update_id"  
+            parent="hr.menu_hr_main" 
+            name="Employee info update"
+            type="wizard"/>
+
+</data>
+</openerp>

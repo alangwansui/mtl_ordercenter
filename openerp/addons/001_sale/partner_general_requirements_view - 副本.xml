@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+    <data>
+      
+ 		<record id="view_partner_inherit_form" model="ir.ui.view">
+            <field name="name">res.partners.form</field>
+            <field name="model">res.partners</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="001_res_partners.res_partners_form_view"/>
+            <field name="arch" type="xml">
+                <page string="基本资料" position="after"> 
+                <page string='客户通用信息'>
+                    <group colspan='4' col='4'>
+                        <group>
+                        	<button string='新增客户通用信息' name="%(action_res_partneres_general_wizard)d" type="action"/> 
+                        </group>
+						<group>
+                    		<field name='partner_general_id'/>
+				    		
+                    	</group>
+                    </group>
+                 </page>
+                </page>
+            </field>
+    	</record>
+        
+  		<record id="view_partner_general_requirements_tree" model="ir.ui.view">
+            <field name="name">partner_general_requirements_tree</field>
+            <field name="model">partner.general.requirements</field>
+            <field name="arch" type="xml">
+                <tree string='partner general tree'>
+                    <field name='partner_id'/>
+                    <field name='name'/>
+                    
+                </tree>
+            </field>
+        </record>
+    	
+       <record model='ir.ui.view' id='partner_general_requirements_form_view'>
+    			<field name='name'>partner_general_requirements_form</field>
+    			<field name='model'>partner.general.requirements</field>
+    			<field name='arch' type='xml'>
+    			  <form string="partner general form" version='7.0'>
+		        	<notebook colspan="4">
+		            	<page string="技术标准1">
+		            	  	<group colspan='4' col='8'  width='1000'>
+		        				<group colspan='1' col='2'>
+		        					<field name='partner_id'/>
+		        					<field name='product_id'/>
+		        					<field name='custmer_goodscode'/>
+		        					<field name='responsible_id'/>
+		        					<field name='create_time'/>
+							
+		        				</group>
+		           				<group colspan='1' col='2'>
+		           				    	<field name='name'/>
+										<field name='layer_count'/>  
+		            					<field name='standard_days'/>
+										<field name='provide_gerber'/>
+				        			
+		            			</group>
+		            			<group colspan='1' col='2'>
+		            					
+		           		 				<field name="mix_press"/>
+		           		 				<field name='impedance_id'/>
+		           		 				<field name='add_delivery_chapter'/>
+		        						<field name='provide_steel_net'/>
+		        						<field name='confirm_gerber'/>
+		            					
+		   						</group>
+		   						<group colspan='1' col='2'>
+		   								<field name='basic_board_thickness'/>  
+		           				 		<field name='finish_board_thickness'/> 
+		           				 		<field name='finish_tol_upper' on_change='onchange_tol_upper(finish_tol_upper)'/> 
+		            					<field name='finish_tol_lower'/>
+		            					<field name='pcs_unit_count'/>
+		            			</group>
+		            				
+		            		</group>
+		            		<separator colspan='1'/>
+		            	  	<group colspan='4' col='8' width='1000'>
+		            	  		<group colspan='1' col='2'>
+		        					<field name='solder_colour' widget='selection'/>
+		        					<field name='solder_variants' widget='selection'/>
+		         					<field name='solder_type' widget='selection'/>
+		         					<field name='solder_via' widget='selection'/>
+									<field name='test_point_density'/>
+		                            <field name='test_point_count'/>
+			            		</group>
+			            		<group colspan='1' col='2'>
+		          					<field name='silk_colour' widget='selection'/>
+		      						<field name='silk_variants' widget='selection'/>
+		     						<field name= 'silk_type' widget='selection'/>
+		                            <field name='allow_scrap_count'/>
+		       						<field name='allow_scrap_percent'/>							
+		       					</group>
+			            			
+		            	  		<group colspan='1' col='2'>
+		          				 	<field name='surface_treatment' widget='selection'/>  
+		           					<field name='surface_treatment_request'/> 
+		           					<field name='gold_finger_id'/>
+									<field name= 'vcut_angle' widget='selection'/>
+								
+		            				<field name='delivery_type'/>
+		            			</group>
+		            		</group>
+		            		
+		            		<separator colspan='1'/>
+		            		<group colspan='4' expand='1'>
+								<field name='special_process_note'/>
+								<field name='packing_note'/>
+								<field name='delivery_order_request'/>
+								<field name='partner_special_request'/>
+							</group>  -->
+		            	</page>
+						
+					 	<page string='技术标准2'>
+		            		<group colspan='4' col='6'  width='1000'>
+		           				<group colspan='1' col='2'>
+		                            <field name='board_material_ids' widget='many2many' width='220'/> 						
+		      						<field name='accept_standard_ids' widget='many2many' width='220'/>
+		       						<field name='mark_request_ids' widget='many2many' width='220'/>
+		       					
+		           				</group>
+		           				<group colspan='1' col='2'>
+		                            <field name='route_type_ids'  widget='many2many' width='220'/>						
+		          					<field name='request_with_goods_ids' widget='many2many' width='220'/>
+		          					<field name='special_process_ids' widget='many2many' width='220'/>
+		           				</group>	
+		           				<group colspan='1' col='2'>		
+		          					<field name='test_type_ids' widget='many2many' width='220'/> 
+		          					<field name='packing_type_ids' widget='many2many' width='220'/>
+		           				</group>	
+		            		</group>
+						</page>
+					</notebook>
+				</form>
+    		</field>
+    	</record>
+    	
+        
+        
+   <record model="ir.actions.act_window" id="act_partner_general_requirements">
+		<field name="name">客户通用信息</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">partner.general.requirements</field>
+	</record>  
+
+	<menuitem  id="menu_partner_general_requirements"  groups="base.group_no_one" name="客户通用信息"  parent="001_res_partners.menu_partner_manager"   action="act_partner_general_requirements" sequence='3'/>
+
+        
+        
+          
+        
+        
+        
+        
+    
+        
+ </data>
+</openerp>        

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+    
+    
+    
+    
+<record model="ir.ui.view" id="object_name_tree_view">
+    <field name="name">objectname.tree</field>
+    <field name="model">objectname</field>
+    <field name="type">tree</field>
+    <field name="arch" type="xml">
+        <tree string="tree_string" editable="top">
+            <field name="name"/>
+        </tree>
+    </field>
+</record>    
+    
+    
+<record model="ir.ui.view" id="object_name_form_view">
+    <field name="name">objectname.form</field>
+    <field name="model">objectname</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+        <form string="form_string">
+            <field name="name" select="1"/>
+        </form>
+    </field>
+</record>
+
+<record model="ir.actions.act_window" id="act_">
+		<field name="name">Material standard</field>
+		<field name="res_model">class.name</field>
+</record>  
+<menuitem  id="menu_"  groups="base.group_no_one" name="The memun name"  parent="purchase.menu_procurement_management"   action="act_"/>
+    
+    
+    
+    
+
+    
+    
+</data>
+</openerp>

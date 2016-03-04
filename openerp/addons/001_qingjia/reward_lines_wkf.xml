@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+	<record model='workflow' id='wkf_reward'>
+		<field name='name'>reward.lines.workflow</field>
+		<field name='osv'>reward.lines</field>
+		<field name='on_create'>True</field>
+	</record>
+	
+	<!-- activity:draft,w_director,w_quality_manager,w_personnel,w_gmanager,done -->
+	<record id="act_draft_re" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_reward"/>
+           <field name="flow_start">True</field>
+           <field name="name">draft</field>
+        
+    </record>
+    
+    
+    <record id="act_w_dpt_director_re" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_reward"/>
+           <field name="name">w_dpt_director</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_dpt_director'})</field>
+           
+    </record>
+    
+    
+	<record id="act_w_director_re" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_reward"/>
+           <field name="name">w_director</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_director'})</field>
+           
+    </record>
+    
+	<record id="act_w_quality_manage_re" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_reward"/>
+           <field name="name">w_quality_manager</field>
+            <field name="kind">function</field>
+           <field name="action">write({'state':'w_quality_manager'})</field>
+          
+    </record>
+    
+	<record id="act_w_personnel_re" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_reward"/>
+           <field name="name">w_personnel</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_personnel'})</field>
+           
+    </record>
+    
+	<record id="act_w_gmanage_re" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_reward"/>
+           <field name="name">w_gmanager</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_gmanager'})</field>
+           
+    </record>
+    
+   <record id="act_w_reward_re" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_reward"/>
+           <field name="name">w_reward</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_reward'})</field>
+           
+    </record>   
+    
+	<record id="act_done_re" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_reward"/>
+           <field name="name">done</field>
+           <field name="action">write({'state':'done'})</field>
+           <field name="kind">function</field>
+           <field name="flow_stop">True</field>
+	       <field name="join_mode">AND</field>  
+    </record>
+    
+	
+    
+	<record id="act_cancel_re" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_reward"/>
+        	<!-- <field name="flow_start">True</field> -->
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">cancel</field>
+           <field name="action">updata_state('cancel')</field>
+           <field name="kind">function</field>
+    </record>
+    
+	<!-- trans:draft,w_dpt_director,w_director,w_quality_manager,w_personnel,w_gmanager,done -->
+	
+    <record id="trans_draft_re2w_dpt_director_re" model="workflow.transition">
+          <field name="act_from" ref="act_draft_re"/>
+          <field name="act_to" ref="act_w_dpt_director_re"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<field name="condition">re_exist_position([True,True,None])</field>
+    </record>
+    
+    <record id="trans_draft_re2w_director_re" model="workflow.transition">
+          <field name="act_from" ref="act_draft_re"/>
+          <field name="act_to" ref="act_w_director_re"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<field name="condition">re_exist_position([True,None,True])</field>
+    </record>
+	
+	<record id="trans_w_dpt_director_re2w_director_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_dpt_director_re"/>
+          <field name="act_to" ref="act_w_director_re"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   	 <field name="condition">re_exist_position([None,True,True])</field>
+    </record>
+    
+    <record id="trans_w_dpt_director_re2w_quality_manage" model="workflow.transition">
+          <field name="act_from" ref="act_w_dpt_director_re"/>
+          <field name="act_to" ref="act_w_quality_manage_re"/>
+          <field name="signal">button_approver</field>  
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		 <field name="condition">check_eng_question() and re_exist_position([None,True,False])</field>
+    </record>
+    
+    <record id="trans_w_dpt_director_re2w_personnel_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_dpt_director_re"/>
+          <field name="act_to" ref="act_w_personnel_re"/>
+          <field name="signal">button_approver</field>  
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		 <field name="condition">not check_eng_question() and re_exist_position([None,True,False])</field>
+    </record>
+    
+	 <record id="trans_w_director_re2w_quality_manage" model="workflow.transition">
+          <field name="act_from" ref="act_w_director_re"/>
+          <field name="act_to" ref="act_w_quality_manage_re"/>
+          <field name="signal">button_approver</field>  
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		 <field name="condition">check_eng_question() and re_exist_position([None,None,True])</field>
+    </record>
+    
+	  <record id="trans_w_director_re2w_personnel_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_director_re"/>
+          <field name="act_to" ref="act_w_personnel_re"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		 <field name="condition">not check_eng_question() and re_exist_position([None,None,True])</field> 
+    </record>
+    
+	 <record id="trans_w_quality_manage_re2w_personnel_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_quality_manage_re"/>
+          <field name="act_to" ref="act_w_personnel_re"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		  <field name="condition">check_eng_question(cre_pun=True)</field>
+    </record>
+    
+	 <record id="trans_w_personnel_re2w_gmanage_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_personnel_re"/>
+          <field name="act_to" ref="act_w_gmanage_re"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		 <field name="condition">check_amount()</field>
+    </record>
+    
+	 <record id="trans_w_personnel_re2act_w_done_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_personnel_re"/>
+          <field name="act_to" ref="act_done_re"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		 <field name="condition">not check_amount()</field>
+    </record>
+    
+   
+    
+	 <record id="trans_w_gmanage_re2act_done_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_gmanage_re"/>
+          <field name="act_to" ref="act_done_re"/>
+          <field name="signal">button_approver</field>
+	     <!--  <field name="group_id" ref="group_id"/>  -->
+   		 <!--  <field name="condition"></field> -->
+    </record> 
+    
+	 <!-- cancel:w_director,w_quality_manager,w_personnel,w_gmanager -->
+	  <record id="trans_w_dpt_director_re2act_cancel_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_dpt_director_re"/>
+          <field name="act_to" ref="act_cancel_re"/>
+          <field name="signal">button_cancel</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<!-- <field name="condition"></field>-->
+    </record>
+    
+    <record id="trans_w_dpt_director_re2act_cancel_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_dpt_director_re"/>
+          <field name="act_to" ref="act_cancel_re"/>
+          <field name="signal">button_cancel</field> 
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			 <!-- <field name="condition"></field> -->
+    </record>
+    
+	 <record id="trans_w_director_re2act_cancel_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_director_re"/>
+          <field name="act_to" ref="act_cancel_re"/>
+          <field name="signal">button_cancel</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<!-- <field name="condition"></field>-->
+    </record>
+    
+	  <record id="trans_w_quality_manager_re2act_cancel_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_quality_manage_re"/>
+          <field name="act_to" ref="act_cancel_re"/>
+          <field name="signal">button_cancel</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<!-- <field name="condition"></field>-->
+    </record>
+    
+	  <record id="trans_w_personnel_re2act_cancel_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_personnel_re"/>
+          <field name="act_to" ref="act_cancel_re"/>
+          <field name="signal">button_cancel</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<!-- <field name="condition"></field>-->
+    </record>
+    
+	  <record id="trans_w_gmanager_re2act_cancel_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_gmanage_re"/>
+          <field name="act_to" ref="act_cancel_re"/>
+          <field name="signal">button_cancel</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<!-- <field name="condition"></field>-->
+    </record>
+    
+    <!-- return:w_director,w_quality_manage,w_personnel -->
+    <record id="trans_w_quality_manage_re2w_director_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_quality_manage_re"/>
+          <field name="act_to" ref="act_w_director_re"/>
+        <field name="signal">button_return</field> 
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<field name="condition">check_eng_question() and re_exist_position([None,None,True])</field>
+    </record>
+    
+    <record id="trans_w_quality_manage_re2w_dpt_director_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_quality_manage_re"/>
+          <field name="act_to" ref="act_w_dpt_director_re"/>
+        <field name="signal">button_return</field> 
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<field name="condition">check_eng_question() and re_exist_position([None,True,False])</field>
+    </record>
+    
+    <record id="trans_w_personnel_re2w_quality_manage_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_personnel_re"/>
+          <field name="act_to" ref="act_w_quality_manage_re"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		 <field name="condition">check_eng_question()</field> 
+    </record>
+	 
+	  <record id="trans_w_personnel_re2w_director_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_personnel_re"/>
+          <field name="act_to" ref="act_w_director_re"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		 <field name="condition">not check_eng_question() and re_exist_position([None,None,True])</field> 
+    </record>
+    
+     <!--  <record id="trans_w_personnel_re2w_dpt_director_re" model="workflow.transition"> -->
+     <!--      <field name="act_from" ref="act_w_personnel_re"/>  -->
+     <!--       <field name="act_to" ref="act_w_dpt_director_re"/>  -->
+     <!--       <field name="signal">button_return</field>   -->
+	      <!-- <field name="group_id" ref="group_id"/> -->
+     <!--  		 <field name="condition">not check_eng_question() and re_exist_position([None,True,False])</field>   -->
+     <!--	</record>  -->
+    
+	 <record id="trans_w_director_re2act_w_dpt_director_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_director_re"/>
+          <field name="act_to" ref="act_w_dpt_director_re"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<field name="condition">re_exist_position([None,True,True])</field> 
+    </record>
+	 
+	<record id="trans_w_dpt_director_re2act_draft_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_dpt_director_re"/>
+          <field name="act_to" ref="act_draft_re"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<field name="condition">re_exist_position([None,True,None])</field>
+    </record>
+    
+    <record id="trans_w_director_re2act_draft_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_director_re"/>
+          <field name="act_to" ref="act_draft_re"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<field name="condition">re_exist_position([None,False,True])</field>
+    </record>
+    
+    <record id="trans_w_gmanage_re2w_personnel_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_gmanage_re"/>
+          <field name="act_to" ref="act_w_personnel_re"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<!-- <field name="condition"></field>  -->
+    </record>
+    
+    <record id="trans_act_done_re2w_personnel_re" model="workflow.transition">
+          <field name="act_from" ref="act_done_re"/>
+          <field name="act_to" ref="act_w_personnel_re"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<field name="condition">not check_amount()</field> 
+    </record>
+    
+    <record id="trans_act_done_re2w__gmanager_re" model="workflow.transition">
+          <field name="act_from" ref="act_done_re"/>
+          <field name="act_to" ref="act_w_gmanage_re"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<field name="condition">check_amount()</field>
+    </record>
+    
+    <!-- 
+    
+    	 <record id="trans_w_gmanage_re2act_w_reward_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_gmanage_re"/>
+          <field name="act_to" ref="act_w_reward_re"/>
+          <field name="signal">button_approver</field>
+	      <field name="group_id" ref="group_id"/>
+   		 <field name="condition"></field>  
+    </record>   
+    
+    <record id="trans_w_reward_re2act_done_re" model="workflow.transition">
+          <field name="act_from" ref="act_w_reward_re"/>
+          <field name="act_to" ref="act_done_re"/>
+          <field name="signal">button_approver</field>
+	     <field name="group_id" ref="group_id"/>
+   		 <field name="condition"></field>
+    </record>   
+    
+    
+     -->
+</data>
+</openerp>

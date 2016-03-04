@@ -1,0 +1,827 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="reward_lines_search_view">
+       	<field name="name">reward.lines.search</field>
+       	<field name="model">reward.lines</field>
+       	<field name="type">search</field>
+       	<field name="arch" type="xml">
+       	    <search string='reward search'>
+       	    	<field name='state'/>
+       	    	<field name='dpt_id' widget='selection'/>
+       	    	<field name='finish_date'/>
+       	       <field name='create_date'/>
+       	        <field name='reward_number'/>
+       	        <field name='applicant_id'/>
+       	         <field name='product_description'/>
+       	         <field name='reward_info'/>
+       	     <!--  <field name='name' widget='selection'/>  -->  
+       	        <field name='reward_type'/>
+       	        
+       	     	<newline/>
+       	        <group expand="0" string="Group By..." colspan="11" col="11" groups="base.group_extended">
+                        <filter name='name' string="Reward name" icon="" domain="[('state','=','done')]" context="{'group_by':'name'}"/>
+                        <filter name='product_description' string="Product" icon='' domain="[('state','=','done')]" context="{'group_by':'product_description'}"/>
+                 </group>
+       	    </search>
+       </field>
+</record>
+
+<record model="ir.ui.view" id="punish_lines_search_view">
+       	<field name="name">punish.lines.search</field>
+       	<field name="model">punish.lines</field>
+       	<field name="type">search</field>
+       	<field name="arch" type="xml">
+       	    <search string='punish search'>
+       	    	<field name='state'/>
+       	    	<field name='dpt_id' widget='selection'/>
+       	    	 <field name='punish_number'/>
+       	    	 <field name='applicant_id'/>
+       	    	 <field name='product_description'/>
+       	    	 <field name='responsible_info'/>
+       	    	 <field name='finish_date'/>
+       	        <field name='create_date'/>
+       	        <field name='punish_type'/>
+       	        <field name='approver_sel'/>
+       	     	<newline/>
+       	        <group expand="0" string="Group By..." colspan="11" col="11" groups="base.group_extended">
+                        <filter name='product_description' string="Product" icon='' domain="[('state','=','done')]" context="{'group_by':'product_description'}"/>
+                      
+                 
+                 </group>
+       	    </search>
+       </field>
+</record>
+
+<record model="ir.ui.view" id="reward_lines_tree_view">
+       	<field name="name">reward.lines.tree</field>
+       	<field name="model">reward.lines</field>
+       	<field name="type">tree</field>
+       	<field name="arch" type="xml">
+       		<tree string='reward tree'>
+       			<field name='reward_number'/>
+       			<field name='product_description'/>
+       			<field name='reward_type'/>
+       			<field name='reward_name'/>
+       		<!-- 	<field name="name"/>   -->
+       		<!--	<field name='reality_reward_amount'/>-->
+       		<!--	<field name='reward_amount'/>-->
+       			<field name='dpt_id'/>
+       			<field name='applicant_id'/>
+       			<field name='state'/>
+       			<field name='event_note'/>
+       		<!--	<field name='workcenter_id'/>-->
+       		<!--	<field name="job_id"/>-->
+       		<!--	<field name="in_factory"/>-->
+       			
+       	    <!-- <field name='reward_state'/>  -->
+       			<field name='event_time'/>
+       			
+       			<field name="event_site"/>
+       			<field name='create_date'/> 
+       			<field name='finish_date'/>
+       			<field name='is_wapprover'  invisible='1'/>
+       			<field name='reward_info' invisible='1'/>
+       		</tree>
+       	</field>       
+</record>
+
+<record model="ir.ui.view" id="reward_lines_form_view">
+       	<field name="name">reward.lines.form</field>
+       	<field name="model">reward.lines</field>
+       	<field name="arch" type="xml">
+       		<form string='reward form' version="7.0">
+       		    <header>
+       		    
+		        <button name="button_approve" string="approve line" state='draft' class="oe_highlight"/>
+		       
+		        <field name="state" widget="statusbar" statusbar_visible="draft,w_dpt_director,w_director,w_quality_manager,w_personnel,w_gmanager" statusbar_colors='{"draft":"red","w_director":"blue"}' readonly="1"/>
+		    	</header>
+   	   			<sheet>  
+   	   		    <!--  <h1>
+   	   		    	</h1> -->	
+		       			<group colspan='4' col='6' >
+		       		  <!--  <group colspan='4' col='6' attrs="{'readonly':[('state','!=','draft')]}">  -->
+		       				<group colspan='1' col='2'>
+		       					<field name='reward_number'/>
+		       				   
+				       			<field name='workcenter_id' invisible='1'/>
+				       			<field name='type' readonly='1' invisible='1'/>
+				       			<field name='dpt_id' readonly='0'/>
+				       		  <!-- 	<field name='rewdpt_id'/> -->
+				       			<field name='reward_type' attrs="{'readonly':[('state','!=','draft')]}"/>
+				       			<field name='reward_amount'/>
+				       			<field name='product_description' colspan='4'/>
+				       			<field name='event_time'/>
+			       				<field name="event_site"/>
+				       			<field name='event_note'/>
+				       		</group>
+				       		<group colspan='1' col='2'>
+				       			<field name='applicant_id'/>
+				       			<field name='create_date'/>  
+				       			<field name='punish_lines_id' readonly='1'/>
+				       			<field name='reward_clause_amount' readonly='1'/>
+				       			<field name='reward_category_id' widget='selection'/>
+			       				<field name='reward_config'  on_change="onchange_reward_punish_clause(reward_config)"  domain="[('category_id','=',reward_category_id)]"/>
+				       			 <field name='reward_clause'/>
+				       		</group>
+				       		<group colspan='1' col='2'>
+				       			<field name='directly' attrs="{'readonly':['|',('state','!=','draft'),('not_dieectly','=',True)]}"/>
+						       	<field name='not_dieectly' attrs="{'readonly':['|',('state','!=','draft'),('directly','=',True)]}"/>
+			       				<field name='if_material_reward'/>
+			       			<!-- <field name='reward_state' attrs="{'readonly':[('state','!=','w_reward')]}"/>  -->
+			       			
+				       		</group>
+				       		
+				       		
+				     	</group>
+				        
+			       		<group colspan='4' col='4'  expand='1'>
+			       		   
+			       		    	<group colspan='1' col='1' expand='1'>	 
+			       		    		<separator string='reward people info' colspan='2'/>
+			       		    	 	
+										<newline/>-->
+									
+					       		    	<field name='reward_lines_info_ids' nolabel='1' colspan='4' context="{'dpt_id':dpt_id,'reward_id':active_id,'lines_ids':reward_lines_info_ids}">
+					       		    	    <tree string='reward info'>
+					       		    	       <field name='name'/>
+					       		    	       <field name='reward_amount'/>
+					       		    	       <field name='reality_reward_amount'/>
+					       		    	       <field name='if_alter_amount' />
+					       		    	         <field name='reward_state' invisible='1'/>
+					       		    	    </tree>
+					       		    	    <form string='reward info'>
+					       		    	       <field name="name" domain="[('department_id','=',context.get('dpt_id'))]" attrs="{'readonly':[('reward_state','in',['w_dpt_director','w_director','w_quality_manager','w_personnel','w_gmanager','done'])]}"/>
+					       		    	       <field name='reality_reward_amount' attrs="{'readonly':[('edit_state','=',False),('reward_state','!=',False)],'invisible':[('reward_state','in',[False,'draft'])]}"/>
+							       				<field name='reward_amount' attrs="{'readonly':['|',('if_confirm','=',True),('reward_state','in',['w_dpt_director','w_director','w_quality_manager','w_personnel','w_gmanager','done'])]}" on_change="onchange_reward_punish_amount(reward_amount)"/>
+					       		    	       <field name='if_alter_amount' on_change="onchange_alter_amount(if_alter_amount,reward_lines_id)" attrs="{'readonly':[('reward_state','=','draft')]}"/>
+					       		    	       <field name='reward_state' invisible='1'/>
+					       		    	       <field name='if_confirm' invisible='1'/>
+					       		    	       <field name='edit_state' invisible='1'/>
+					       		    	       <field name='reward_lines_id' invisible='1'/>
+					       		    	    </form>
+					       		    	</field>
+					       		    </group> 
+					       		    
+					       		 
+					       
+					       	
+					       		<group colspan='3' col='3' expand='1'>
+			       		  		  <separator string='leader approver info' colspan='2'/>
+									<newline/> -->
+		       						<field name='reward_approver_lines_ids' nolabel='1' colspan='4'>
+		       						    <tree string='approver lines' colors="red: if_wapprover==True" editable='top'>
+								 		    <field name='approver_dpt' readonly='1'/>
+								 		    <field name='approver_name' readonly='1'/>
+								 		    <field name='approver_note'/>
+								 		    <field name='approver_sel' />
+								 		    <field name='approver_time' readonly='1'/>
+								 		    <field name='if_wapprover' invisible='1'/>
+								 		</tree>
+								 		<form string='approver lines'>
+								 		    <field name='approver_dpt' readonly='1'/>
+								 		    <field name='approver_name' readonly='1'/>
+								 		    <field name='approver_time' readonly='1'/>
+								 		    <field name='approver_sel' attrs="{'readonly':[('if_wapprover','=',False)]}"/>
+								 		    <field name='if_alter_amount' invisible='1'/>
+								 		    <field name='approver_state' invisible='1'/>
+								 		    <field name='reward_state' invisible='1'/>
+								 		    <field name='if_wapprover' invisible='1'/>
+								 		     <newline/>
+								 		     <separator colspan='4' string='Alter reality reward amount info:'/>
+								 		    <group colspan='4' col='4'>
+												<group colspan='3' col='3'>
+													<field name='alter_note' readonly='1'/>
+													
+												</group>
+											</group>
+								 		      <separator colspan='4' string='lead approver info record:'/>
+								 		      <group colspan='4' col='4' expand='1'>
+								 		      	<field name='approver_note'/>
+								 		      </group>
+						 		   
+						 				</form>
+						 		</field>
+						 	 </group>  
+						
+						 
+       				</group>
+       			
+       			<newline/>
+<!--       			<field name='state'/>
+       			<button name='button_approver' string='Approver' states='w_reward,draft,w_dpt_director,w_director,w_quality_manager,w_personnel,w_gmanager' icon='gtk-jump-to' attrs="{'readonly':['|',('responsible_sel','=','disagree'),('dpt_sel','=','disagree')]}"/>
+       			<button name='reward_button_cancel' string='Cancel'  states='w_director,w_dpt_director' icon='gtk-cancel' type='object'/>
+       			<button name='button_return' string='Return' states='w_dpt_director,w_director,w_quality_manager,w_personnel,done' icon='gtk-go-back'/>-->  
+       			</sheet>
+       		</form> 
+       	</field>       
+</record>
+
+
+
+<record model="ir.ui.view" id="punish_lines_tree_view">
+       	<field name="name">punish.lines.tree</field>
+       	<field name="model">punish.lines</field>
+       	<field name="type">tree</field>
+       	<field name="arch" type="xml">
+       		<tree string='punish tree'>
+       			<field name='punish_number'/>
+       			<field name='product_description'/>	
+       			<field name='punish_type'/>
+       			<field name='responsible_name'/>
+       			<!-- 	<field name='responsible_info'/>   -->
+       			<field name='total_amount'/>
+       			<field name='dpt_id'/>
+       			<field name='state'/>
+       			<field name='applicant_id'/>
+       			<field name='result_description'/>
+       			<field name='event_time'/>
+       			<field name="event_site"/>
+       			<field name='reward_lines_id'/>
+       		
+	       		<field name='create_date'/> 
+	       		<field name='finish_date'/>
+	       		<field name='responsible_info' invisible='1'/>
+       			<field name='is_wapprover' invisible='1'/>
+       			<field name='make_name'/>
+       			<field name='review_name'/>
+       		<!-- 	<field name='approver_sel'/>  -->
+       		</tree>
+       		
+       		
+       	</field>       
+</record>
+
+<record model="ir.ui.view" id="punish_lines_form_view">
+       	<field name="name">punish.lines.form</field>
+       	<field name="model">punish.lines</field>
+       	<field name="arch" type="xml">
+       		<form string='punish form' version='7.0'>
+       		    <header>
+       		         
+		        	<button name="button_approve" string="approve line" state='draft' class="oe_highlight"/>
+		        	<field name="state" widget="statusbar" statusbar_visible="draft,w_dpt_confirm,top_responsible,w_director,w_dpt_manager,w_personnel,w_gmanager" statusbar_colors='{"draft":"red","w_director":"blue"}' readonly="1"/>
+       		    </header>
+       		    <sheet>
+       		<!--      <h1>
+       		    </h1> -->
+       		    <group colspan='4' col='6' >
+       				<group colspan='1' col='2' attrs="{'readonly':[('state','!=','draft')]}">
+       					<field name='punish_number'/>
+       				   
+		       			<!--<field name='workcenter_id' invisible='1'/>-->
+		       			<field name='type' readonly='1' invisible='1'/>
+		       			<field name='dpt_id'/>
+		       			<field name='punish_type'/> 
+		       			<field name='total_amount' attrs="{'readonly':[('state','in',('w_dpt_confirm','w_responsible','w_director','w_dpt_manager'))]}"/>
+		       			<field name='product_description' attrs="{'readonly':[('state','!=','draft')]}"/>
+		       			<field name='event_time' attrs="{'readonly':[('state','!=','draft')]}"/>
+		       			<field name="event_site" attrs="{'readonly':[('state','!=','draft')]}"/>
+		       			<field name='result_description' colspan='4' attrs="{'readonly':[('state','!=','draft')]}"/>
+		       		</group>
+		       		
+		       		<group colspan='1' col='2'>
+		       			 <field name='applicant_id'/>
+		       			<field name='create_date'/> 
+		       			
+		       			<field name='reward_lines_id' readonly='1'/>
+		       			<field name='punish_clause_amount' attrs="{'readonly':[('state','!=','draft')]}"/> 
+		       			<field name='is_responsible' invisible='1'/>
+		       			<field name='punish_category_id' widget='selection'/>
+		       			
+		       			<field name='punish_config'  on_change="onchange_reward_punish_clause(punish_config)"  domain="[('category_id','=',punish_category_id)]"/>
+		       			<field name='punish_clause'/> 
+		       		</group>
+		       		<group colspan='2' col='2'>
+		       			<field name='result_economic_losses' attrs="{'readonly':['|',('state','!=','draft'),('not_result_losses','=',True)]}"/>
+		       			<field name='not_result_losses' attrs="{'readonly':['|',('state','!=','draft'),('result_economic_losses','=',True)]}"/>
+       					<field name='if_economic_compensate'  attrs="{'readonly':[('state','!=','draft')]}"/>
+		       			<field name='if_personnel_punish'  attrs="{'readonly':[('state','!=','draft')]}"/>
+		       			<field name="uncheck_one" attrs="{'readonly':[('state','!=','draft')]}"/>
+		       			<field name="uncheck_two" attrs="{'readonly':[('state','!=','draft')]}"/>
+		       			<field name="uncheck_three" attrs="{'readonly':[('state','!=','draft')]}"/>
+		       		</group>
+		       		
+		       		<group colspan='2' col='2'>
+		       			<field name="mistake_one" attrs="{'readonly':[('state','!=','top_responsible')]}"/>
+		       			<field name="mistake_two" attrs="{'readonly':[('state','!=','top_responsible')]}"/>
+		       			<field name="mistake_three" attrs="{'readonly':[('state','!=','top_responsible')]}"/>
+		       			<field name="reproduction" attrs="{'readonly':[('state','!=','top_responsible')]}"/>
+		       			<field name='punish_description' colspan='4'  attrs="{'readonly':[('state','!=','draft')]}" invisible='1'/>
+		       		
+		       		</group>
+
+		     	</group>
+		     	
+		     	
+			     	<group colspan='4' col='4' attrs="{'readonly':[('state','=','draft')]}" expand='1'>
+			     		
+			     		<group colspan='1' col='1' expand='1'>
+			     		    <separator string='punish people info' colspan='2'/>
+			     			<newline/>
+				     		<field name='punish_lines_info_ids' nolabel='1' colspan='4' context="{'dpt_id':dpt_id,'lines_ids':punish_lines_info_ids,'punish_id':active_id}" >
+				     			<tree string='line tree' >
+				     				<field name='without_responsible'/>
+					       			<field name="name" widget='selection' attrs="{'readonly':[('state','!=','draft')]}"/>
+					       			<!-- 	<field name="job_id"/> 
+					       					<field name="in_factory"/>  
+					       					<field name='if_economic_compensate'/>-->
+					       			<field name='compensate_amount' />
+					      <!--  		<field name='reality_punish_amount'/> --> 	
+					       			<field name='responsible_sel'/>
+				       				<field name='responsible_idea'/>
+				       				<field name='state'/>
+				       			<!-- 	<field name='punish_state' attrs="{'readonly':[('state','!=','w_punish')]}"/>  -->
+				       				<field name='without_reason'/>
+					       		<!-- 	<field name='create_date'/>   -->
+								</tree>
+								<form string='line form'>
+									<group colspan='4' col='4'>
+					       				<group colspan='3' col='2' attrs="{'invisible':[('without_responsible','=','not_have')]}">
+					       					<field name="name"  domain="[('department_id','=',context.get('dpt_id'))]" attrs="{'readonly':[('state','!=','draft'),('state','!=','w_responsible')]}"/>
+					       					<field name="job_id"/>
+					       					<field name="in_factory"/>
+					       					<field name='edit_state' invisible='1'/>
+					       					
+					       				</group>
+					       				<group colspan='1' col='2' attrs="{'invisible':[('without_responsible','=','not_have')]}">
+					       					<!--  <field name='workcenter_id'/> -->
+					       					<!--	<field name='if_economic_compensate'/> -->
+					       					<field name='reality_punish_amount' attrs="{'readonly':[('edit_state','=',False),('state','!=','draft')],'invisible':[('state','=','draft')]}"/>
+					       					<field name='compensate_amount' attrs="{'readonly':[('state','!=','draft')]}" on_change="onchange_reward_punish_amount(compensate_amount)"/>
+					       					<!-- <field name='create_date'/>  -->
+					       					<field name='if_have_reviewer' attrs="{'invisible':[('dpt_code','!=','E')],'readonly':[('org_state','in',['w_personnel','w_gmanager'])]}"/>
+					       					<field name='responsible_des' attrs="{'invisible':[('dpt_code','!=','E')],'readonly':[('org_state','in',['w_personnel','w_gmanager'])]}"/>
+					       					<field name='responsible_sel' attrs="{'readonly':[('state','!=','w_responsible'),('without_responsible','!=','not_have')]}"/>
+				       						<field name='is_responsible' invisible='1'/>
+				       						<!-- 	<field name='punish_state' attrs="{'readonly':[('state','!=','w_punish')]}"/>-->
+					       				</group>
+					       			</group>
+					       			<newline/>
+					       		
+				       				<group colspan='4' col='4'>
+				       					<field name='without_responsible' attrs="{'readonly':[('name','!=',False)]}" on_change="onchange_without_res(without_responsible,'without_responsible')" width='20'/>
+				       					<newline/>
+				       					<field name='without_reason' attrs="{'readonly':[('without_responsible','=','have')]}"/>
+				       					<newline/>
+				       					<field name='responsible_idea' attrs="{'readonly':[('state','!=','w_responsible')]}" colspan='4'/>
+				       					
+				       				</group>
+				       				<field name='org_state' invisible='1'/>
+				       				<field name='state'/>
+				       				<button name='button_return' string='Return' states='done' invisible='1'/>
+				       				<button name='button_approver' string='Approver' states='draft,w_dpt_confirm,w_responsible,w_director,w_dpt_manager,' icon='gtk-jump-to' attrs="{'readonly':['|',('org_state','=','w_dpt_confirm'),('is_responsible','=',False)]}"/>
+	       						</form>
+							</field>
+						</group>
+						
+						<group colspan='3' col='3' >
+						    <separator string='leader approver info' colspan='2'/>
+							<newline/>
+						    <field name='punish_approver_lines_ids' nolabel='1'>
+						 		<tree string='approver lines' colors="red: if_wapprover==True" editable='top'>
+						 		    <field name='approver_dpt'/>
+						 		    <field name='approver_name'/>
+						 		    <field name='approver_note'/>
+						 		    <field name='approver_sel'/>
+						 		    <field name='approver_time' readonly='1'/>
+						 		    
+						 		 		<!--       <field name='top_responsible_sel'/>
+						 		    <field name='director_sel'/>
+						 		    <field name='responsible_dpt_sel'/>
+						 		    <field name='personnel_sel'/>
+						 		    <field name='gmanager_sel'/>   
+						 			<field name='top_responsible_idea'/>
+						 		    <field name='director_idea'/>
+						 		    <field name='responsible_director_idea'/>
+						 		    <field name='personnel_idea'/>
+						 		    <field name='gmanager_idea'/> -->
+						 		    <field name='if_wapprover' invisible='1'/>
+						 		</tree>
+						 		<form string='approver lines'>
+						 		    <field name='approver_dpt' readonly='1'/>
+						 		    <field name='approver_name' readonly='1'/>
+						 		    <field name='approver_time' readonly='1'/>
+						 		    <field name='approver_sel' attrs="{'readonly':[('if_wapprover','=',False)]}"/>
+						 		    <field name='if_alter_amount'/>
+						 		    <field name='approver_state' invisible='1'/>
+						 		    <field name='punish_state' invisible='1'/>
+						 		    <field name='if_wapprover' invisible='1'/>
+						 		    <separator colspan='4' string='Alter reality punish amount info:'/>
+						 		    <group colspan='4' col='4'>
+										<group colspan='3' col='3'>
+											<field name='alter_note' readonly='1'/>
+										</group>
+									</group>
+						 		     <newline/>
+						 		     <separator colspan='4' string='lead approver info record:'/>
+						 		     <group colspan='4' col='4' expand='1'>
+						 		     	<field name='approver_note'/>
+						 		     </group>
+						 		  <!--   	<group colspan='4' col='4'>
+										<group colspan='3' col='3'>
+											<field name='top_responsible_idea' attrs="{'readonly':['|',('punish_state','!=','top_responsible'),('if_wapprover','=',False)],}"/>
+											
+										</group>
+									
+			      					</group>
+			      					<newline/>
+									<group colspan='4' col='4'>
+										<group colspan='3' col='3'>
+											<field name='director_idea' attrs="{'readonly':['|',('punish_state','!=','w_director'),('if_wapprover','=',False)],'invisible':[('approver_state','in',['top_responsible'])]}"/>
+										</group>
+										<group colspan='1' col='1'>
+										
+			      						</group>
+			      					</group>
+			      					<newline/>	
+									<group colspan='4' col='4'>
+										<group colspan='3' col='3'>
+											<field name='responsible_director_idea' attrs="{'readonly':['|',('punish_state','!=','w_dpt_manager'),('if_wapprover','=',False)],'invisible':[('approver_state','in',['top_responsible','w_director'])]}"/>
+				       					</group>
+				       					<group colspan='1' col='1'>
+				       					
+			      						</group>
+			      					</group>
+			      					<newline/>
+			      					<group colspan='4' col='4'>
+										<group colspan='3' col='3'>
+				       						<field name='personnel_idea' attrs="{'readonly':['|',('punish_state','!=','w_personnel'),('if_wapprover','=',False)],'invisible':[('approver_state','in',['top_responsible','w_director','w_dpt_manager'])]}"/>
+				       					</group>
+				       					<group colspan='1' col='1'>
+				       					
+				       					</group>
+				       				</group>
+				       				<newline/>
+				       				<group colspan='4' col='4'>
+										<group colspan='3' col='3'>
+				       					 	<field name='gmanager_idea' attrs="{'readonly':['|',('punish_state','!=','w_gmanager'),('if_wapprover','=',False)],'invisible':[('approver_state','in',['top_responsible','w_director','w_dpt_manager','w_personnel'])]}"/>
+				       					</group>
+				       					<group colspan='1' col='1'>
+			      						
+			      						
+			      						</group>
+			      					</group>-->
+		      					
+						 		 </form>
+						 	</field>
+				
+						 		<!--  <group colspan='4' col='4'>
+									<group colspan='3' col='3'>
+										<field name='top_responsible_idea' attrs="{'readonly':[('state','!=','top_responsible')]}"/>
+									</group>
+									<group colspan='1' col='1'>
+										<field name='top_responsible_sel' attrs="{'readonly':[('state','!=','top_responsible')]}" nolabel='1' width='20'/>
+		      						</group>
+		      					</group>
+		      					<newline/>
+								<group colspan='4' col='4'>
+									<group colspan='3' col='3'>
+										<field name='director_idea' attrs="{'readonly':[('state','!=','w_director')]}"/>
+									</group>
+									<group colspan='1' col='1'>
+										<field name='director_sel' attrs="{'readonly':[('state','!=','w_director')]}" nolabel='1' width='20'/>
+		      						</group>
+		      					</group>
+		      					<newline/>	
+								<group colspan='4' col='4'>
+									<group colspan='3' col='3'>
+										<field name='responsible_director_idea' attrs="{'readonly':[('state','!=','w_dpt_manager')]}"/>
+			       					</group>
+			       					<group colspan='1' col='1'>
+			       						<field name='responsible_dpt_sel' attrs="{'readonly':[('state','!=','w_dpt_manager')]}" nolabel='1' width='20'/>
+		      						</group>
+		      					</group>
+		      					<newline/>
+		      					<group colspan='4' col='4'>
+									<group colspan='3' col='3'>
+			       						<field name='personnel_idea' attrs="{'readonly':[('state','!=','w_personnel')]}"/>
+			       					</group>
+			       					<group colspan='1' col='1'>
+			       						<field name='personnel_sel' attrs="{'readonly':[('state','!=','w_personnel')]}" nolabel='1' width='20'/>
+		      					
+			       					</group>
+			       				</group>
+			       				<newline/>
+			       				<group colspan='4' col='4'>
+									<group colspan='3' col='3'>
+			       						<field name='gmanager_idea' attrs="{'readonly':[('state','!=','w_gmanager')]}"/>
+			       					</group>
+			       					<group colspan='1' col='1'>
+		      							<field name='gmanager_sel' attrs="{'readonly':[('state','!=','w_gmanager')]}" nolabel='1' width='20'/>
+		      						</group>
+		      					</group>
+		      				</field>  -->
+		      				</group> 	
+		      			</group> 
+		      			
+		     
+ <!--        			<field name='state'/>
+       			<button name='button_approver' string='Approver' states='draft,w_dpt_confirm,top_responsible,w_director,w_dpt_manager,w_personnel,w_gmanager,w_punish' 
+       				
+       				 icon='gtk-jump-to'/>
+       			<button name='button_return' string='Return' states='w_responsible,w_dpt_manager,top_responsible,w_personnel,w_gmanager,w_director,done' icon='gtk-go-back'/>-->
+       			</sheet>
+       		</form> 
+       	</field>       
+</record>
+
+
+
+<record model="ir.ui.view" id="punish_lines_info_tree_view">
+       	<field name="name">punish.lines.info.tree</field>
+       	<field name="model">punish.lines.info</field>
+       	<field name="type">tree</field>
+       	<field name="arch" type="xml">
+       		<tree string='punish lines tree'>
+       		
+       			<field name='punish_lines_id'/>
+       			<field name='product_description'/>
+       			<field name='punish_type'/>
+       			<field name="name"/>
+       			<field name='compensate_amount'/>
+       			<field name='reality_punish_amount'/>
+       			<field name='responsible_sel'/>
+       			<field name='dpt_id'/>
+       			<field name="job_id"/>
+       			<field name='org_state'/>
+       			<field name='state'/>
+       			<field name='applicant_id'/>
+       			<!-- 	<field name="in_factory"/> -->
+       			<field name='result_description'/>
+       		<field name='if_economic_compensate'/>
+       		
+       			
+       		<!-- 	<field name='punish_state'/>   -->
+       			<field name='pu_create_date'/>
+       			<field name='finish_date'/>
+       		<!--  	<button name='button_approver' string='Approver' states='w_responsible,w_director,w_dpt_manager,' icon='gtk-jump-to'/>
+       			<button name='button_cancel' string='Cancel'  states='w_director,w_dpt_manager,' icon='gtk-cancel'/>  -->
+       		 	<!--	<button name='check_have_punish' string='If have punsih' states='done' type='object' attrs="{'readonly':[('punish_state','=','have_punish')]}"/> -->
+       		</tree>
+       	</field>       
+</record>
+
+<record model="ir.ui.view" id="punish_lines_info_form_view">
+       	<field name="name">punish.lines.info.form</field>
+       	<field name="model">punish.lines.info</field>
+       	<field name="arch" type="xml">
+       		<form string='punish lines form' version='7.0'>
+       		    <header>
+       		    </header>
+       		    <sheet>
+       		        
+       		   
+	       			<group colspan='4' col='4' attrs="{'readonly':'True'}">
+	       				<group colspan='2' col='2'>
+	       					<field name='punish_lines_id'/>
+	       					<field name='org_state'/>
+	       					<field name="name"/>
+	       					<field name='dpt_id'/>
+	       					<field name="job_id"/>
+	       					<field name="in_factory"/>
+	       				</group>
+	       				<group colspan='2' col='2'>
+	       					<field name='workcenter_id'/>
+	       					<field name='if_economic_compensate'/>
+	       				<!--<field name='punish_state'/>   -->
+	       					<field name='compensate_amount' attrs="{'invisible':[('if_economic_compensate','=',False)]}"/>
+	       					<field name='reality_punish_amount'/>
+	       					<field name='pu_create_date'/>
+	       					<field name='finish_date'/>
+	       					<field name='responsible_sel'/>
+	       				</group>
+	       			</group>
+	       			<newline/>
+	       			<group colspan='4' col='4' attrs="{'readonly':'True'}">
+	       				<group colspan='2' col='2'>
+	       					
+	       					
+	       					<field name='responsible_idea'  colspan='4'/>
+	       					
+	       					
+	       				</group>
+	       			
+	       			</group>
+	       			<field name='state'/>
+       	 		 </sheet>
+       		</form>
+       	</field>       
+</record>
+
+<record model="ir.ui.view" id="punish_lines_info_search_view">
+       	<field name="name">punish.lines.info.search</field>
+       	<field name="model">punish.lines.info</field>
+       	<field name="type">search</field>
+       	<field name="arch" type="xml">
+       	    <search string='lines search'>
+       	    	<field name='punish_lines_id'/>
+       	    	<field name='org_state'/>
+       	        <field name='name' widget='selection'/>
+       	        <field name='dpt_id' widget='selection'/>
+       	        <field name='finish_date'/>
+       	    	<newline/>
+       	        <field name='state'/>
+       	        <field name='pu_create_date'/>
+       	        <field name='responsible_sel'/>
+       	        <newline/>
+       	        <group expand="0" string="Group By..." colspan="11" col="11" groups="base.group_extended">
+                        <filter name='name' string="Punish name" icon="" domain="[]" context="{'group_by':'name'}"/>
+                        
+                 </group>
+       	    </search>
+       </field>
+</record>
+
+<record model="ir.ui.view" id="reward_lines_info_tree_view">
+       	<field name="name">reward.lines.info.tree</field>
+       	<field name="model">reward.lines.info</field>
+       	<field name="type">tree</field>
+       	<field name="arch" type="xml">
+       		<tree string='reward lines tree'>
+       			<field name='reward_lines_id'/>
+       			<field name='product_description'/>
+       			<field name='reward_type'/>
+       			<field name="name"/>
+       			<field name='applicant_id'/>
+       			<field name='reward_amount'/>
+       			<field name='reality_reward_amount'/>
+       			<field name='dpt_id'/>
+       			<field name="job_id"/>
+       			<field name="in_factory"/>
+       			<field name='event_note'/>
+       			<field name='reward_state'/>
+       			<!-- <field name='create_date'/> -->
+       			<field name='reward_date'/>
+       			<field name="finish_date"/>
+       		</tree>
+       	</field>       
+</record>
+
+<record model="ir.ui.view" id="reward_lines_info_form_view">
+       	<field name="name">reward.lines.info.form</field>
+       	<field name="model">reward.lines.info</field>
+       	<field name="arch" type="xml">
+       		<form string='reward lines form' version='7.0'>
+       		    <header>
+       		        
+       		    </header>
+       		    <sheet>
+	       			<group colspan='4' col='4' attrs="{'readonly':'True'}">
+	       				<group colspan='2' col='2'>
+	       					<field name='reward_lines_id'/>
+	       					<field name='product_description'/>
+	       					<field name='reward_type'/>
+	       					<field name="name"/>
+	       					<field name='reward_amount'/>
+	       					<field name='reality_reward_amount'/>
+	       					<field name='dpt_id'/>
+	       					<field name="job_id"/>
+	       					<field name="in_factory"/>
+	       					<field name='event_note'/>
+	       					<field name='reward_state'/>
+	       					<!--  <field name='create_date' readonly='1'/>  -->
+	       					<field name='reward_date'/>
+	       					<field name="finish_date"/>
+	       				</group>
+	       				
+	       			</group>
+       			</sheet>
+       		</form>
+       	</field>       
+</record>
+
+<record model="ir.ui.view" id="reward_punish_category_tree_view">
+       	<field name="name">reward.punish.category.tree</field>
+       	<field name="model">reward.punish.category</field>
+       	<field name="type">tree</field>
+       	<field name="arch" type="xml">
+       		<tree string='category tree'>
+       		    <field name='name'/>
+       		    <field name='create_date'/>
+       		</tree>
+       	</field>
+</record>
+
+<record model="ir.ui.view" id="reward_punish_category_form_view">
+       	<field name="name">reward.punish.category.form</field>
+       	<field name="model">reward.punish.category</field>
+       	<field name="arch" type="xml">
+       		<form string='category tree' version='7.0'>
+       		    <header>
+       		        
+       		    </header>
+       		    <sheet>
+	       		    <field name='name'/>
+	       		    <field name='create_date'/>
+	       		    <group colspan='4' expand='1'>
+		       		    <field name='config_ids' nolabel='1'>
+		       		        <tree string='caluse config'>
+		       		             <field name='name'/>
+				       		    <field name='description'/>
+				       		    <field name='amount'/>
+				       		    <field name='type'/>
+		       		    		<field name='create_date'/>
+		       		        </tree>
+		       		    	<form string='caluse config'>
+		       		    	    <group colspan='2'>
+		       		    			<field name='name'/>
+				       		    	<field name='amount'/>
+				       		    	<field name='type'/>
+				       		    	<field name='create_date'/>
+				       		   	 	<newline/>
+				       				<field name='description' colspan='4'/>
+				       			</group>
+				       		</form>
+				       	</field>
+				    </group>
+			    </sheet>
+       		</form>
+       	</field>
+</record>
+
+<record model="ir.ui.view" id="reward_punish_config_tree_view">
+       	<field name="name">reward.punish.config.tree</field>
+       	<field name="model">reward.punish.config</field>
+       	<field name="type">tree</field>
+       	<field name="arch" type="xml">
+       		<tree string='config tree'>
+       		    <field name='category_id'/>
+       		    <field name='name'/>
+       		    <field name='description'/>
+       		    <field name='amount'/>
+       		    <field name='type'/>
+       		
+       		    <field name='create_date'/>
+       		</tree>
+       	</field>
+</record>
+
+<record model="ir.ui.view" id="reward_punish_config_form_view">
+       	<field name="name">reward.punish.config.form</field>
+       	<field name="model">reward.punish.config</field>
+       	<field name="arch" type="xml">
+       		<form string='config form' version='7.0'>
+       		    <header>
+       		        
+       		    </header>
+       		    <sheet>
+	       		    <field name='name'/>
+	       		    <field name='category_id'/>
+	       		    <field name='amount'/>
+	       		    <field name='type'/>
+	       		    <field name='create_date'/>
+	       		    <newline/>
+	       			<field name='description' colspan='4'/>
+       			</sheet>
+       		</form>
+       	</field>
+</record>
+
+<record model='ir.actions.act_window' id='reward_punish_category_action'>
+    <field name='name'>reward.punish.category.action</field>
+    <field name='res_model'>reward.punish.category</field>
+</record>
+
+<record model='ir.actions.act_window' id='reward_punish_config_action'>
+    <field name='name'>reward.punish.config.action</field>
+    <field name='res_model'>reward.punish.config</field>
+</record>
+
+<record model='ir.actions.act_window' id='punish_lines_action'>
+    <field name='name'>punish.lines.action</field>
+    <field name='res_model'>punish.lines</field>
+    <field name='domain'>[('type','=','punish')]</field>
+</record>
+
+<record model='ir.actions.act_window' id='reward_lines_action'>
+    <field name='name'>reward.lines.action</field>
+    <field name='res_model'>reward.lines</field>
+    <field name='domain'>[('type','=','reward')]</field>
+   
+    <field name="search_view_id" ref="reward_lines_search_view"/>
+</record>
+
+<record model='ir.actions.act_window' id='punish_lines_info_action'>
+    <field name='name'>punish.lines.info.action</field>
+    <field name='res_model'>punish.lines.info</field>
+    <field name="search_view_id" ref="punish_lines_info_search_view"/>
+</record>
+
+<record model='ir.actions.act_window' id='reward_lines_info_action'>
+    <field name='name'>reward.lines.info.action</field>
+    <field name='res_model'>reward.lines.info</field>
+    
+</record>
+
+<menuitem id='reward_punish_menu' name='Reward and Punish' groups='base.group_no_one' parent='hr.menu_hr_main' sequence=''/>
+<menuitem id='reward_line_menu' name='Reward apply table' groups='base.group_no_one' parent='reward_punish_menu' action='reward_lines_action' sequence=''/>
+<menuitem id='punish_line_menu' name='Punish apply table' groups='base.group_no_one' parent='reward_punish_menu' action='punish_lines_action' sequence=''/>
+<menuitem id='punish_line_info_menu' name='Punish lines info' groups='base.group_no_one' parent='reward_punish_menu' action='punish_lines_info_action' sequence=''/>
+<menuitem id='reward_line_info_menu' name='Reward lines info' groups='base.group_no_one' parent='reward_punish_menu' action='reward_lines_info_action' sequence=''/>
+<menuitem id='reward_punish_category_menu' name='Reward Punish category' groups='base.group_no_one' parent='reward_punish_menu' action='reward_punish_category_action' sequence=''/> 
+<!--<menuitem id='reward_punish_config_menu' name='Reward Punish clause config' parent='reward_punish_menu' action='reward_punish_config_action' sequence=''/> -->
+</data>
+</openerp>

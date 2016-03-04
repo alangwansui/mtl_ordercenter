@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+<record model="ir.ui.view" id="res_partnets_tree_view">
+    <field name="name">res.partners.tree</field>
+	<field name="model">res.partners</field>
+	<field name="arch" type="xml">
+		<tree string="Res Partners">
+			<field name='name'/>
+			<field name='partner_code'/>
+			<field name='user_id'/>
+			<field name='responsible_name'/>
+			<field name='date'/>
+			<field name='customer'/>
+			<field name='supplier'/>
+			<field name='state'/>
+		</tree>
+		
+	</field>
+</record>
+		
+<record model="ir.ui.view" id="res_partners_form_view">
+	<field name="name">res.partners.form</field>
+	<field name="model">res.partners</field>
+	<field name="arch" type="xml">
+		<form string=" Res Partners" version="7.0">
+		<header>
+		    <button name='import_data' string='导入客户'  type='object' class='oe_highlight'/>
+		    <button name='import_partner_general_data' string='导入客户通用信息'  type='object' class='oe_highlight'/>
+          	<button name='button_approves'  string='审批' class='oe_highlight'/>
+            <button name='button_refuse'  string='作废' type='object' class='oe_highlight'/>
+            <field name='state' widget="statusbar" statusbar_visible="draft,done,cancel" statusbar_colors='{"done":"blue"}'/>
+        </header>
+		<sheet>
+			<group colspan='4' col='4'>
+				<group>		    
+					<field name='name'/>
+					<field name='responsible_name'/>
+					<field name='dept_id'/>
+					<field name='date'/>
+					<field name='manage_type'/>
+					<field name='credit_class'/>
+					<field name='redemption_name'/>
+					<field name='saleman_note'/>
+				</group>
+				<group>
+					<field name='partner_code'/>
+					<field name='user_id'/>
+					<field name='customer'/>
+					<field name='supplier'/>
+					<field name='enterprise_eare'/>
+					<field name='sale_company'/>
+					<field name='sale_money'/>
+					<field name='enterprise_type'/>
+					<field name='sale_dpt'/>
+				</group>	
+				<group>
+					<field name='english_customer'/>
+					<field name='customer_type'/>
+					<field name='postcode'/>
+					<field name='source_business'/>
+					<field name='publicity'/>
+					<field name='redemption_money'/>
+					<field name='register_money'/>
+					<field name='note'/>
+					
+				</group>
+				<group>
+				
+					
+					<field name='sale_state'/>
+					<field name='product_type'/>
+					<field name='first_time'/>
+					<field name='finance_state'/>
+					<field name='employee_quantity'/>
+					<field name='market_power'/>
+					<field name='carriage'/>
+					<field name='sale_company'/>
+					<field name='production_company'/>
+					
+				
+				</group>
+				
+				
+			</group>
+			<notebook colspan="4">
+				<page string="基本资料">
+					<group colspan='4' col='4'>
+						<group>
+							<field name='street'/>
+							<field name='street2'/>
+							<field name='city'/>
+							
+						</group>
+				   		<group>
+				   			<field name='pur_contact'/>
+							<field name='pur_phone'/>
+				   			<field name='eng_contact'/>
+							<field name='eng_phone'/>
+				   		</group>
+						<group>
+							<field name='email'/>
+							<field name='phone'/>
+							<field name='fax'/>
+							<field name='mobile'/>
+							
+						</group>
+					</group>
+					<field name='res_partner_contact_ids' >
+						<tree string="res partner contact ids tree" editable="bottom">
+					
+							<field name='sequence'/>
+							<field name="contact"/>
+							<field name='gender'/>
+							<field name='type'/>
+							<field name='company_name'/>
+							<field name='street3'/>
+							<field name="mobile"/>
+							<field name='fax'/>
+							
+							<field name='defualt_connact'/>
+						</tree>
+						<form string="res partner contact ids form">
+					
+							<field name='sequence'/>
+							<field name="contact"/>
+							<field name='gender'/>
+							<field name='type'/>
+							<field name='company_name'/>
+							<field name="mobile"/>
+							<field name='email'/>
+							<field name='street3'/>
+							<field name='defualt_connact'/>
+						</form>
+					</field>		
+				</page>
+				<page string='特别注意'>
+					<group colspan='4' col='4'>
+						<group>
+							<field name='special_note'/>
+						</group>
+						<group>
+							<field name='user_note'/> 
+						</group>
+					</group>
+				</page>
+				<page string='会计'>
+				    <group colspan='4' col='4'>
+						<group>
+							<field name='payment'/>
+							<field name='tax'/>
+							<field name='credit_limit'/>
+							
+						</group>
+				   
+						<group>
+					        <field name='settle'/>
+							<field name='credit'/>
+							<field name='currency'/>
+						</group>
+					</group>
+				    
+				</page>
+			</notebook>
+	
+		</sheet>
+		</form>
+	</field>
+</record>
+		
+		    
+<record model="ir.actions.act_window" id="act_res_partners">
+	<field name="name">客户资料</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">res.partners</field>
+		
+</record>  
+
+<menuitem  id="menu_sale" name="销售"    sequence="0" /> 
+<menuitem  id="menu_partner_manager" name="客户管理"  parent="menu_sale"  sequence="1" /> 
+
+<menuitem  id="menu_res_partners"  groups="base.group_no_one" name="客户资料"  parent="menu_partner_manager"   action="act_res_partners" sequence='0'/>
+ 
+
+
+
+<record id="view_res_partners_filter" model="ir.ui.view">
+	<field name="name">res.partners.select</field>
+    <field name="model">res.partners</field>
+    <field name="arch" type="xml">
+    	<search string="Search Partner">
+             <field name="name"
+                       filter_domain="[('name','ilike',self)]"/>
+             <field name='partner_code' filter_domain="[('partner_code','ilike',self)]"/>
+             <field name="user_id"/>
+             <field name='responsible_name'/>
+  
+            
+		</search>
+	</field>
+</record>
+
+
+
+
+<record model="ir.ui.view" id="res_partner_contact_tree_view">
+    <field name="name">res.partner.contact.tree</field>
+	<field name="model">res.partner.contact</field>
+	<field name="arch" type="xml">
+		 <tree string="res partner contact ids tree">
+		    <field name='res_partner_contact_id'/>
+			<field name='sequence'/>
+			<field name="contact"/>
+			<field name='gender'/>
+			<field name='type'/>
+			<field name='company_name'/>
+			
+			<field name="mobile"/>
+			<field name='email'/>
+			<field name='street3'/>
+			<field name='defualt_connact'/>
+		</tree>
+		
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="res_partner_contact_form_view">
+    <field name="name">res.partner.contact.form</field>
+	<field name="model">res.partner.contact</field>
+	<field name="arch" type="xml">
+		<form string="res_partner_contact form">
+		    <field name='res_partner_contact_id'/>
+			<field name='sequence'/>
+			<field name="contact"/>
+			<field name='gender'/>
+			<field name='type'/>
+			<field name='company_name'/>
+			<field name="mobile"/>
+			<field name='email'/>
+			<field name='street3'/>
+			<field name='defualt_connact'/>
+		</form>
+	</field>
+</record>
+
+
+
+<record model="ir.actions.act_window" id="act_res_partner_contact">
+	<field name="name">客户联系人</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">res.partner.contact</field>
+		
+</record>  
+
+<menuitem  id="menu_res_partner_contact"  groups="base.group_no_one" name="客户联系人"  parent="menu_partner_manager"   action="act_res_partner_contact" sequence='1'/>
+
+
+<record id="view_res_partner_contact_filter" model="ir.ui.view">
+	<field name="name">res.partners.contact.select</field>
+    <field name="model">res.partner.contact</field>
+    <field name="arch" type="xml">
+    	<search string="Search Partner  contact">
+             <field name="res_partner_contact_id"/>
+             
+             <field name="contact"/>
+             <field name='company_name'/>
+  
+            
+		</search>
+	</field>
+</record>
+
+</data>
+</openerp>

@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+    <data>
+      
+ 		<record id="view_partner_inherit_form" model="ir.ui.view">
+            <field name="name">res.partners.form</field>
+            <field name="model">res.partners</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="001_res_partners.res_partners_form_view"/>
+            <field name="arch" type="xml">
+                <page string="特别注意" position="after"> 
+                <page string='标准用户单信息'>
+                    <group colspan='4' col='4'>
+                        <group>
+                      		<button string='新增标准用户单信息' name="%(action_res_partneres_general_wizard)d" type="action"/>
+                        </group>
+						<group>
+                    		<field name='partner_general_id'/>
+				    		
+                    	</group>
+                    </group>
+                 </page>
+                </page>
+            </field>
+    	</record>
+        
+  		<record id="view_partner_general_requirements_tree" model="ir.ui.view">
+            <field name="name">partner_general_requirements_tree</field>
+            <field name="model">partner.general.requirements</field>
+            <field name="arch" type="xml">
+                <tree string='partner general tree'>
+                    <field name='partner_id'/>
+                    <field name='ref'/>
+                    <field name='name'/>
+                    
+                </tree>
+            </field>
+        </record>
+    	
+       <record model='ir.ui.view' id='partner_general_requirements_form_view'>
+    			<field name='name'>partner_general_requirements_form</field>
+    			<field name='model'>partner.general.requirements</field>
+    			<field name='arch' type='xml'>
+    			  <form string="partner general form" version='7.0'>
+					<header>
+						<button name='button_approve'  string='审批' states='draft' class='oe_highlight'/>
+						<button name='import_data'  string='导入标准用户单信息' type='object' class='oe_highlight'/>
+						<button name='set_draft'  string='修改' states='draft,done' class='oe_highlight'/>
+						<field name='state' widget="statusbar" statusbar_visible="draft,done" statusbar_colors='{"done":"blue"}'/>
+					</header>
+					<sheet>
+						<notebook colspan="4">
+							<page string="标准用户单信息">
+								<group colspan='4' col='4'>
+									<group colspan='1' col='2'>
+										<field name='partner_id'/>
+										<field name='responsible_id'/>
+										<field name='create_date'/>
+									</group>
+									<group colspan='1' col='2'>
+											<field name='provide_gerber'/>
+											<field name='provide_steel_net'/>
+											<field name='confirm_gerber'/>
+											<field name='add_delivery_chapter'/>
+									</group>
+								</group>
+								
+								<group colspan='4' col='4'>
+									<group colspan='1' col='2'>
+										<!--  <field name='solder_colour' widget='selection' on_change="onchange_silk_solder_colour('solder_variants',solder_colour)"/>
+										<field name='solder_variants' widget='selection'/>
+										<field name='solder_type' widget='selection'/>
+										<field name='solder_via' widget='selection'/>-->
+										<field name='solder_colour'/>
+										<field name='solder_variants'/>
+										<field name='solder_type'/>
+										<field name='solder_via'/>
+									</group>
+									<group colspan='1' col='2'>
+										<!-- <field name='silk_colour' widget='selection' on_change="onchange_silk_solder_colour('silk_variants',silk_colour)"/>
+										<field name='silk_variants' widget='selection'/>
+										<field name= 'silk_type' widget='selection'/> -->
+										<field name='silk_colour'/>
+										<field name='silk_variants'/>
+										<field name= 'silk_type'/>
+										<field name='per_quantity'/>
+									</group>
+								</group>
+								
+								<separator colspan='1'/>
+								<group colspan='4' expand='4'>
+									<group colspan='1' col='2'>
+										<field name='normal_order_note'/>
+										<field name='packing_note'/>
+										<field name='delivery_order_request'/>
+									</group>
+									<group colspan='1' col='2'>
+										<field name='partner_special_request'/>
+										<field name='eng_note'/>
+										<field name='delivery_note'/>
+									</group>
+								</group>
+								<group colspan='4' col='4'>
+									<group colspan='1' col='2'>
+										<field name='partner_general_requirements_ids_one'>
+											<tree string='标准用户单信息' editable='bottom'>
+												<field name='mark_label'/>
+												<field name='goods_label'/>
+												<field name='packing_label'/>
+											</tree>
+										</field>
+									</group>
+								</group>
+							</page>
+					
+						</notebook>
+					</sheet>
+				</form>
+    		</field>
+    </record>
+    	
+    <record id="view_partner_general_requirements_filter" model="ir.ui.view">
+		<field name="name">partner.general.requirements.select</field>
+	    <field name="model">partner.general.requirements</field>
+	    <field name="arch" type="xml">
+	    	<search string="Search Partner general">
+	             
+	             <field name='partner_id' filter_domain="[('partner_id','ilike',self)]"/>
+	             <field name='ref' filter_domain="[('ref','ilike',self)]"/>
+	             
+	  
+	            
+			</search>
+		</field>
+	</record>
+        
+        
+   <record model="ir.actions.act_window" id="act_partner_general_requirements">
+		<field name="name">标准用户单信息</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">partner.general.requirements</field>
+	</record>  
+
+	<menuitem  id="menu_partner_general_requirements"  groups="base.group_no_one" name="标准用户单信息"  parent="001_res_partners.menu_partner_manager"   action="act_partner_general_requirements" sequence='3'/>
+
+        
+        
+          
+        
+        
+        
+        
+    
+        
+ </data>
+</openerp>        

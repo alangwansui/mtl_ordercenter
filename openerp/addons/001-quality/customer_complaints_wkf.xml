@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+<data>
+   		<record model='workflow' id='wkf_complaints'>
+				<field name='name'>customer complaints workflow</field>
+				<field name='osv'>customer.complaints</field>
+		</record>
+		
+		<!--draft,sale_manager, cs_supervisor_i,cs_engineer_i,
+		cs_supervisor_ii,w_response,w_dpt_leed,cs_engineer_ii,
+		w_quality_manager,sale_engineer,w_gmanager'-->
+		
+		<!-- activity -->
+		<record id="actcom_draft" model="workflow.activity">
+		        <field name="wkf_id" ref="wkf_complaints"/>
+		        <field name="flow_start">True</field>
+		        <field name="name">draft</field>
+		       
+       </record>
+       
+       <record id="actcom_sale_manager" model="workflow.activity">
+		        <field name="wkf_id" ref="wkf_complaints"/>
+		        <field name="name">sale_manager</field>
+		        <field name="action">write({'state':'sale_manager'})</field>
+		        <field name="kind">function</field>
+       </record>
+       
+       <record id="actcom_w_confirm" model="workflow.activity">
+		        <field name="wkf_id" ref="wkf_complaints"/>
+		        <!--<field name="flow_start">True</field>  -->
+		        <!--<field name="flow_stop">True</field>-->
+		        <field name="name">w_confirm</field>
+		        <field name="action">write({'state':'w_confirm'})</field>
+		        <field name="kind">function</field>
+       </record>
+       
+   <!--     <record id="actcom_w_plan" model="workflow.activity">
+		        <field name="wkf_id" ref="wkf_complaints"/>
+		        <field name="name">w_plan</field>
+		        <field name="action">write('w_plan')</field>
+		        <field name="kind">function</field>
+       </record>
+       
+       <record id="actcom_w_engineer" model="workflow.activity">
+		        <field name="wkf_id" ref="wkf_complaints"/>
+		        <field name="name">w_engineer</field>
+		        <field name="action">write('w_engineer')</field>
+		        <field name="kind">function</field>
+       </record>
+       
+       <record id="actcom_w_quality" model="workflow.activity">
+		        <field name="wkf_id" ref="wkf_complaints"/>
+		        <field name="name">w_quality</field>
+		        <field name="action">write('w_quality')</field>
+		        <field name="kind">function</field>
+       </record>
+       
+       <record id="actcom_w_order" model="workflow.activity">
+		        <field name="wkf_id" ref="wkf_complaints"/>
+		        <field name="name">w_order</field>
+		        <field name="action">write('w_order')</field>
+		        <field name="kind">function</field>
+       </record>
+       
+        <record id="actcom_w_sale" model="workflow.activity">
+		        <field name="wkf_id" ref="wkf_complaints"/>
+		        <field name="name">w_sale</field>
+		        <field name="action">write('w_sale')</field>
+		        <field name="kind">function</field>
+       </record>
+       
+       
+        <record id="actcom_w_other" model="workflow.activity">
+		        <field name="wkf_id" ref="wkf_complaints"/>
+		        <field name="name">w_other</field>
+		        <field name="action">write('w_other')</field>
+		        <field name="kind">function</field>
+       </record> -->
+
+       
+       
+        <record id="actcom_w_quality_manager" model="workflow.activity">
+		        <field name="wkf_id" ref="wkf_complaints"/>
+		       <!--  <field name="flow_start">True</field> -->
+		        <!--<field name="flow_stop">True</field>-->
+		        <field name="name">w_quality_manager</field>
+		        <field name="action">write({'state':'w_quality_manager'})</field>
+		        <field name="kind">function</field>
+       </record>
+       
+        <record id="actcom_sale_engineer" model="workflow.activity">
+		        <field name="wkf_id" ref="wkf_complaints"/>
+		       <!--  <field name="flow_start">True</field> -->
+		        <!--<field name="flow_stop">True</field>-->
+		        <field name="name">sale_engineer</field>
+		        <field name="action">write({'state':'sale_engineer'})</field>
+		        <field name="kind">function</field>
+       </record>
+       
+       <record id="actcom_w_gmanager" model="workflow.activity">
+		        <field name="wkf_id" ref="wkf_complaints"/>
+		       <!--  <field name="flow_start">True</field> -->
+		        <!--<field name="flow_stop">True</field>-->
+		        <field name="name">w_gmanager</field>
+		        <field name="action">write({'state':'w_gmanager'})</field>
+		        <field name="kind">function</field>
+       </record>
+       
+       <record id="actcom_done" model="workflow.activity">
+		        <field name="wkf_id" ref="wkf_complaints"/>
+		       <!--  <field name="flow_start">True</field> -->
+		        <field name="flow_stop">True</field>
+		        <field name="name">done</field>
+		        <field name="action">write({'state':'done'})</field>
+		        <field name="kind">function</field>
+       </record>
+       
+       <!--draft,sale_manager, cs_supervisor_i,cs_engineer_i,
+		cs_supervisor_ii,w_response,w_dpt_leed,cs_engineer_ii,
+		w_quality_manager,sale_engineer,w_gmanager'-->
+		
+		<!--trans-->
+		<record id="trans_actcom_draft2actcom_sale_manager" model="workflow.transition">
+	          <field name="act_from" ref="actcom_draft"/>
+	          <field name="act_to" ref="actcom_sale_manager"/>
+	          <field name="signal">button_approve</field>
+		      <!-- <field name="group_id" ref="group_id"/> -->
+	          <!-- <field name="condition">condition_function</field> -->
+    	</record>
+    	
+    	<record id="trans_actcom_sale_manager2actcom_w_confirm" model="workflow.transition">
+	          <field name="act_from" ref="actcom_sale_manager"/>
+	          <field name="act_to" ref="actcom_w_confirm"/>
+	          <field name="signal">button_approve</field>
+		      <!-- <field name="group_id" ref="group_id"/> -->
+	          <!-- <field name="condition">condition_function</field> -->
+    	</record>
+    	
+    <!--  	<record id="trans_actcom_w_confirm2actcom_w_plan" model="workflow.transition">
+	          <field name="act_from" ref="actcom_w_confirm"/>
+	          <field name="act_to" ref="actcom_w_plan"/>
+	          <field name="signal">button_approve</field>
+		  
+    	</record>
+    	
+    	<record id="trans_actcom_w_plan2actcom_cs_supervisor_ii" model="workflow.transition">
+	          <field name="act_from" ref="actcom_cs_engineer_i"/>
+	          <field name="act_to" ref="actcom_cs_supervisor_ii"/>
+	          <field name="signal">button_approve</field>
+		    
+    	</record>
+    	
+    	<record id="trans_actcom_cs_supervisor_ii2w_response" model="workflow.transition">
+	          <field name="act_from" ref="actcom_cs_supervisor_ii"/>
+	          <field name="act_to" ref="actcom_w_response"/>
+	          <field name="signal">button_approve</field>
+		   
+    	</record>
+    	
+    	<record id="trans_actcom_w_response2actcom_w_dpt_leed" model="workflow.transition">
+	          <field name="act_from" ref="actcom_w_response"/>
+	          <field name="act_to" ref="actcom_w_dpt_leed"/>
+	          <field name="signal">button_approve</field>
+		     
+    	</record>
+    	
+    	<record id="trans_actcom_w_dpt_leed2actcomcs_engineer_ii" model="workflow.transition">
+	          <field name="act_from" ref="actcom_w_dpt_leed"/>
+	          <field name="act_to" ref="actcom_cs_engineer_ii"/>
+	          <field name="signal">button_approve</field>
+		     
+    	</record>-->
+    	
+    	<record id="trans_actcom_w_confirm2actcomw_quality_manager" model="workflow.transition">
+	          <field name="act_from" ref="actcom_w_confirm"/>
+	          <field name="act_to" ref="actcom_w_quality_manager"/>
+	          <field name="signal">button_approve</field>
+		   	    <!-- <field name="group_id" ref="group_id"/> -->
+	          <field name="condition">update_name()</field>
+    	</record>
+    	
+    	<record id="trans_actcom_w_quality_manager2actcom_sale_engineer" model="workflow.transition">
+	          <field name="act_from" ref="actcom_w_quality_manager"/>
+	          <field name="act_to" ref="actcom_sale_engineer"/>
+	          <field name="signal">button_approve</field>
+		    	
+    	</record>
+    	
+    	<record id="trans_actcom_sale_engineer2actcom_w_gmanager" model="workflow.transition">
+	          <field name="act_from" ref="actcom_sale_engineer"/>
+	          <field name="act_to" ref="actcom_w_gmanager"/>
+	          <field name="signal">button_approve</field>
+		    
+    	</record>
+    	
+    	<record id="trans_actcom_w_gmanager2actcom_done" model="workflow.transition">
+	          <field name="act_from" ref="actcom_w_gmanager"/>
+	          <field name="act_to" ref="actcom_done"/>
+	          <field name="signal">button_approve</field>
+		     
+    	</record>
+    	
+    	<!-- refuse: -->
+    	
+ <!--  	<record id="trans_actcom_cs_supervisor_ii2actcom_cs_engineer_i" model="workflow.transition">
+	          <field name="act_from" ref="actcom_cs_supervisor_ii"/>
+	          <field name="act_to" ref="actcom_cs_engineer_i"/>
+	          <field name="signal">button_refuse</field>
+		    
+   		 </record>
+   		 
+   		 <record id="trans_actcom_w_quality_manager2actcom_w_dpt_leed" model="workflow.transition">
+	          <field name="act_from" ref="actcom_w_quality_manager"/>
+	          <field name="act_to" ref="actcom_w_dpt_leed"/>
+	          <field name="signal">button_refuse</field>
+		
+   		 </record> -->  
+</data>
+</openerp>

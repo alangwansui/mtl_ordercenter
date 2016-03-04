@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<openerp>
+	<data>
+	
+		<report
+			id="pcb_info_odt_report"
+			name="pcb_info_report"
+			model="pcb.info"
+			file="001_report/report/pcb_info_report.odt"
+			string="用户单"
+			report_type='odt'
+			auto="False"
+			header="False"/>
+			
+		
+		<report
+		    id='price_sheet_odt_report'
+		    name="price_sheet_report"
+		    model="price.sheet"
+		    file="001_report/report/price_sheet_report.odt"
+		    string="报价单"
+			report_type='odt'
+			auto="False"
+			header="False"/>
+	
+<!--深圳销售合同-->
+		<report
+		    id='sale_order_new_odt_report'
+		    name="sale_order_new_report"
+		    model="sale.order.new"
+		    file="001_report/report/sale_order_new_report.odt"
+		    string="销售合同"
+			report_type='odt'
+			auto="False"
+			header="False"/>
+
+<!--长沙销售合同-->
+		<report
+		    id='sale_order_new_odt_report_cs'
+		    name="sale_order_new_report_cs"
+		    model="sale.order.new"
+		    file="001_report/report/sale_order_new_report_cs.odt"
+		    string="长沙销售合同"
+			report_type='odt'
+			auto="False"
+			header="False"/>	
+						
+<!--101客户销售合同-->
+		<report
+		    id='sale_order_new_odt_report_101'
+		    name="sale_order_new_report_101"
+		    model="sale.order.new"
+		    file="001_report/report/sale_order_new_report_101.odt"
+		    string="101客户销售合同"
+			report_type='odt'
+			auto="False"
+			header="False"/>
+			
+<!--1349客户销售合同-->
+		<report
+		    id='sale_order_new_odt_report_1349'
+		    name="sale_order_new_report_1349"
+		    model="sale.order.new"
+		    file="001_report/report/sale_order_new_report_1349.odt"
+		    string="1349客户销售合同"
+			report_type='odt'
+			auto="False"
+			header="False"/>
+			
+<!--867客户销售合同-->
+		<report
+		    id='sale_order_new_odt_report_867'
+		    name="sale_order_new_report_867"
+		    model="sale.order.new"
+		    file="001_report/report/sale_order_new_report_867.odt"
+		    string="867客户销售合同"
+			report_type='odt'
+			auto="False"
+			header="False"/>
+			
+<!--2219客户销售合同-->
+		<report
+		    id='sale_order_new_odt_report_2219'
+		    name="sale_order_new_report_2219"
+		    model="sale.order.new"
+		    file="001_report/report/sale_order_new_report_2219.odt"
+		    string="2219客户销售合同"
+			report_type='odt'
+			auto="False"
+			header="False"/>	
+
+<!--1675客户销售合同-->
+		<report
+		    id='sale_order_new_odt_report_1675'
+		    name="sale_order_new_report_1675"
+		    model="sale.order.new"
+		    file="001_report/report/sale_order_new_report_1675.odt"
+		    string="1675客户销售合同"
+			report_type='odt'
+			auto="False"
+			header="False"/>	
+
+<!--深圳报废合同-->
+		<report
+		    id='sale_order_new_odt_report_scrap'
+		    name="sale_order_new_report_scrap"
+		    model="sale.order.new"
+		    file="001_report/report/sale_order_new_report_scrap.odt"
+		    string="深圳报废合同"
+			report_type='odt'
+			auto="False"
+			header="False"/>
+
+<!--长沙报废合同-->
+		<report
+		    id='sale_order_new_odt_report_cs_scrap'
+		    name="sale_order_new_report_cs_scrap"
+		    model="sale.order.new"
+		    file="001_report/report/sale_order_new_report_cs_scrap.odt"
+		    string="长沙报废合同"
+			report_type='odt'
+			auto="False"
+			header="False"/>
+			
+<!--非常规合同评审记录-->
+		<report
+		    id='unconventional_review_odt_report'
+		    name="unconventional_review_report"
+		    model="unconventional.review"
+		    file="001_report/report/unconventional_review_report.odt"
+		    string="非常规合同评审记录"
+			report_type='odt'
+			auto="False"
+			header="False"/>
+			
+<!--合同投产通知单-->
+	  <report
+		    id='mrp_production_new_odt_report'
+		    name="mrp_production_new_report"
+		    model="mrp.production.new"
+		    file="001_report/report/mrp_production_new_report.odt"
+		    string="合同投产通知单"
+			report_type='odt'
+			auto="False"
+			header="False"/>
+			
+			
+			
+<!--合同更改通知单-->
+	  <report
+		    id='sale_order_change_odt_report'
+		    name="sale_order_change_report"
+		    model="sale.order.change"
+		    file="001_report/report/sale_order_change_report.odt"
+		    string="合同更改通知单"
+			report_type='odt'
+			auto="False"
+			header="False"/>
+			
+
+	</data>
+</openerp>

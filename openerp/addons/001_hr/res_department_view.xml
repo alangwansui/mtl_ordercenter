@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="res_department_tree_view">
+            <field name="name">res.department.tree</field>
+            <field name="model">res.department</field>
+            <field name="arch" type="xml">
+                <tree string="Department information">
+                    <field name="complete_name"/>
+                    <field name="responsiblename"/>            
+                    <field name="link_phone"/>
+                    <field name="department_address"/>
+                    
+                </tree>                    
+            </field>
+        </record>
+     
+      <record model="ir.ui.view" id="res_department_form_view">
+          <field name="name">res.department.form</field>
+          <field name="model">res.department</field>
+          <field name="arch" type="xml">
+           
+              <form string="department information" version="7.0">
+                  <header>
+                      <button name='res_department_import'  string='导入数据' type='object' class='oe_highlight'/>
+                  </header>
+                  <sheet>
+                      <group colspan="8" col="6">
+	                       <group>
+		                    	<field name="name"/>
+		                    	<field name="responsiblename"/> 
+	                       </group>
+	                       <group>
+		                    	<field name="link_phone"/>
+		                    	<field name="department_address"/> 	
+	                       </group>
+	                       <group>
+		                    	<field name="parent_id"/>
+	                       </group>
+	               		</group>
+                   </sheet>   
+              </form>
+ 
+          </field>
+      </record>
+     
+	 <record model="ir.actions.act_window" id="act_res_department">
+		<field name="name">部门</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">res.department</field>		
+	</record>  
+
+<menuitem  id="menu_res_department"  groups="base.group_no_one" name="部门"  parent="menu_parameter_id"   action="act_res_department" sequence='3'/> 
+    </data>
+</openerp>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+    <record model="workflow" id="wkf_apply">
+      <field name="name">outsource_apply</field>
+      <field name="osv">outsource.apply</field>
+      <field name="on_create">True</field>
+    </record>
+      
+      <!-- active:draft,process_director,plan_director,test_director,w_quality,w_gmanager,w_outsource,w_receive,done -->
+     <record id="act_draft_app" model="workflow.activity">
+       <field name="wkf_id" ref="wkf_apply"/>
+       <field name="flow_start">True</field>
+       <field name="name">draft</field>
+     </record>
+     
+     <record id="act_w_director_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+           <field name="name">w_director</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_director'})</field>
+    </record>
+    
+     <record id="act_w_supervisor_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+           <field name="name">w_supervisor</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_supervisor'})</field>
+    </record>
+    
+    <record id="act_w_quality_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+           <field name="name">w_quality</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_quality'})</field>
+    </record>
+     
+    <record id="act_plan_director_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+           <field name="name">plan_director</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'plan_director'})</field>
+    </record>
+    
+    
+     <record id="act_w_outsource_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+           <field name="name">w_outsource</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_outsource'})</field>
+    </record>
+    
+     <record id="act_w_gmanager_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+           <field name="name">w_gmanager</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_gmanager'})</field>
+    </record>
+     
+     <record id="act_w_receive_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+           <field name="name">w_receive</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_receive'})</field>
+     </record>
+     
+    <record id="act_done_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+           <field name="name">done</field>
+           <field name="action">write({'state':'done'})</field>
+           <field name="kind">function</field>
+           <field name="flow_stop">True</field>
+           <field name="join_mode">AND</field>
+    </record>
+    
+    <!-- trans:draft,process_director,plan_director,test_director,w_gmanager,w_outsource,w_receive=>done -->
+
+    <record id="act_draft_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+          
+           <field name="name">draft</field>
+           <field name="action">updata_state('draft')</field>
+           <field name="kind">function</field>
+    </record>
+    
+    
+    <record id="act_w_director_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+          
+           <field name="name">w_director</field>
+           <field name="action">updata_state('w_director')</field>
+           <field name="kind">function</field>
+    </record>
+    
+    <record id="act_w_supervisor_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+          
+           <field name="name">w_supervisor</field>
+           <field name="action">updata_state('w_supervisor')</field>
+           <field name="kind">function</field>
+    </record>
+    
+	<record id="act_w_quality_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+          
+           <field name="name">w_quality</field>
+           <field name="action">updata_state('w_quality')</field>
+           <field name="kind">function</field>
+    </record>
+	
+	<record id="act_plan_director_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+          
+           <field name="name">plan_director</field>
+           <field name="action">updata_state('plan_director')</field>
+           <field name="kind">function</field>
+    </record>
+    
+     <record id="act_w_gmanager_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+         
+           <field name="name">w_gmanager</field>
+           <field name="action">updata_state('w_gmanager')</field>
+           <field name="kind">function</field>
+    </record>
+    
+     <record id="act_w_outsource_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+          
+           <field name="name">w_outsource</field>
+           <field name="action">action_outsource_process()</field>
+           <field name="kind">function</field>
+    </record>
+     
+     <record id="act_w_receive_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+         
+           <field name="name">w_receive</field>
+           <field name="action">updata_state('w_receive')</field>
+           <field name="kind">function</field>
+     </record>
+     
+    <record id="act_done_app" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_apply"/>
+           
+           <field name="name">done</field>
+           <field name="action">updata_state('done')</field>
+           <field name="kind">function</field>
+    </record>      
+  
+    
+    <!-- trans:draft,process_director,plan_director,test_director,w_gmanager,w_outsource,w_receive=>done -->
+   		 <record id="act_draft2act_w_director_app" model="workflow.transition">
+          <field name="act_from" ref="act_draft_app"/>
+          <field name="act_to" ref="act_w_director_app"/>
+          <field name="signal">button_approve</field>
+         <!--   <field name="condition">check_approve_position('Director',True)</field> -->
+        </record>
+   		
+   		 
+   		  <record id="act_w_director2act_plan_director_app" model="workflow.transition">
+          <field name="act_from" ref="act_w_director_app"/>
+          <field name="act_to" ref="act_plan_director_app"/>
+          <field name="signal">button_approve</field>
+          <field name="condition">check_approve_position('Director')</field>
+        </record>
+        
+   		  <record id="act_w_director2act_w_supervisor_app" model="workflow.transition">
+          <field name="act_from" ref="act_w_director_app"/>
+          <field name="act_to" ref="act_w_supervisor_app"/>
+          <field name="signal">button_approve</field>
+          <!-- <field name="condition"></field> -->
+        </record>
+        
+        
+        <record id="act_w_director2act_w_quality_app" model="workflow.transition">
+          <field name="act_from" ref="act_w_director_app"/>
+          <field name="act_to" ref="act_w_quality_app"/>
+          <field name="signal">button_approve</field>
+          <!-- <field name="condition"></field> -->
+        </record>
+        
+        <record id="act_w_supervisor2act_w_quality_app" model="workflow.transition">
+          <field name="act_from" ref="act_w_supervisor_app"/>
+          <field name="act_to" ref="act_w_quality_app"/>
+          <field name="signal">button_approve</field>
+          <!-- <field name="condition"></field> -->
+        </record>
+        
+   	
+        
+   		  <record id="act_w_quality2act_plan_director_app" model="workflow.transition">
+          <field name="act_from" ref="act_w_quality_app"/>
+          <field name="act_to" ref="act_plan_director_app"/>
+          <field name="signal">button_approve</field>
+         <!--   <field name="condition">check_approve_position</field> -->
+        </record>
+        
+   		<record id="act_plan_director2act_w_outsource_app" model="workflow.transition">
+          <field name="act_from" ref="act_plan_director_app"/>
+          <field name="act_to" ref="act_w_outsource_app"/>
+          <field name="signal">button_approve</field>
+          <field name="condition">check_outsource_type</field>
+        </record>
+        
+        
+   		<record id="act_plan_director2act_w_gmanager_app" model="workflow.transition">
+          <field name="act_from" ref="act_plan_director_app"/>
+          <field name="act_to" ref="act_w_gmanager_app"/>
+          <field name="signal">button_approve</field>
+          <field name="condition">check_product_cost</field>
+        </record>
+        
+        
+   		<record id="act_w_gmanager2act_w_outsource_app" model="workflow.transition">
+          <field name="act_from" ref="act_w_gmanager_app"/>
+          <field name="act_to" ref="act_w_outsource_app"/>
+          <field name="signal">button_approve</field>
+           <field name="condition">check_product_cost and check_gmanager_sel()</field> 
+        </record>
+        
+        <record id="act_w_outsource2act_w_receive_app" model="workflow.transition">
+          <field name="act_from" ref="act_w_outsource_app"/>
+          <field name="act_to" ref="act_w_receive_app"/>
+          <field name="signal">button_approve</field>
+         <!--  <field name="condition">condition_function</field>  --> 
+        </record>
+        
+          <record id="act_w_receive2act_done_app" model="workflow.transition">
+          <field name="act_from" ref="act_w_receive_app"/>
+          <field name="act_to" ref="act_done_app"/>
+          <field name="signal">button_approve</field>
+          <!-- <field name="condition">condition_function</field> -->
+        </record>
+       
+    
+        <!-- return: -->
+
+        
+        
+        
+
+   
+	</data>
+</openerp>
+

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="inherit_product_tree_view">
+       	<field name="name">inherit_tree_view.tree</field>
+       	<field name="model">product.product</field>
+       	<field name="type">tree</field>
+       	<field name="inherit_id" ref="product.product_product_tree_view"/>
+       	<field name="arch" type="xml">
+       		<field name="name" position="after">
+       			<field name="board_thickness"/>
+       			<field name='board_thickness_unit'/>
+       			<field name="cu_thickness"/>
+       			<field name='product_info'/>
+       		</field>
+       	</field>       
+</record>
+
+<record model="ir.ui.view" id="product_form_view">
+	<field name="name">product.product.inherit.form</field>
+    <field name="model">product.product</field>
+    <field name="type">form</field>
+    <field name="inherit_id" ref="product.product_normal_form_view"/>
+    <field name="arch" type="xml">      
+   		<page string="Descriptions" position="after">
+   			<page string="Expand_product">
+   				<group colspan="4" col="6">
+   					<group colspan="2" col="2">
+   						<field name='board_thickness'/>
+   						<field name='board_thickness_unit'/>
+   					</group>
+					<group colspan="2" col="2">
+						<field name='include_cu'/>
+						<field name='cu_thickness'/>
+					</group>
+					<group colspan="3" col='1'>
+						<field name="er"/>
+						<field name='medium_thickness'/>
+						<field name='resin_percent'/> 
+					</group>  
+					<group  colspan="3" col="2">
+						<field name='length'/>
+						<field name='width'/>
+						<field name='size_unit'/>
+					</group>               				
+          		</group>
+          				
+          	</page>
+          	<page string="PCB info" attrs="{'invisible':[('supply_method','!=','produce')]}">
+          		<field name='pcb_info_id'/>  
+          	</page>
+          	
+        </page>  
+        <field name="ean13" groups="base.group_extended" position='after'>
+            <button name='create_default_code' string='create_default_code' type='object'/>
+        </field>
+	</field>
+</record>
+
+<record model='ir.ui.view' id='inherit_product_search_view_update'>
+	<field name='name'>inherit product search view</field>
+	<field name="model">product.product</field>
+	<field name='type'>search</field>
+	<field name='inherit_id' ref='product.product_search_form_view'/>
+	<field name='arch' type='xml'>
+		 <field name="categ_id" widget="selection" position='after'>
+		 	<field name='product_info'/>
+		 </field>
+	</field>
+
+
+</record>
+
+<record model="ir.ui.view" id="product_category_inherit_form_view">
+	<field name="name">product.category.inherit.form</field>
+    <field name="model">product.category</field>
+    <field name="type">form</field>
+    <field name="inherit_id" ref="product.product_category_form_view"/>
+    <field name="arch" type="xml">      
+		<field name="type" position='after'>
+		    <field name='code'/>
+		 </field>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="product_category_inherit_tree_view">
+	<field name="name">product.category.inherit.tree</field>
+    <field name="model">product.category</field>
+ 
+    <field name="type">tree</field>
+    <field name="inherit_id" ref="product.product_category_list_view"/>
+    <field name="arch" type="xml">      
+		<field name="complete_name" position='after'>
+		    <field name='code'/>
+		 </field>
+	</field>
+</record>
+		    
+</data>	
+</openerp>		
+
+<!-- 
+
+
+
+ -->														

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+    
+
+
+
+
+	<record model="ir.actions.act_window" id="act_select_selection">
+			<field name="name">act_select_selection</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">select.selection</field>
+		
+	</record>  
+
+
+	<menuitem  id="menu_select_selection" name="select_selection" parent="menu_exam_manager"  action="act_select_selection"/>
+
+
+
+
+    
+    
+    
+	</data>
+</openerp>
+

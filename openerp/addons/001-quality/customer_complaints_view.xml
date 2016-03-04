@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+	<record model="ir.ui.view" id="customer_complaints_tree_view">
+		<field name="name">customer.complaints.tree</field>
+		<field name="model">customer.complaints</field>
+		<field name="arch" type="xml">
+			<tree string="customer complaints tree"> 
+				<field name='name'/>
+	    		<field name='partner_id'/>
+				<field name='ref'/>
+				<field name='product_id'/>
+				<field name='customer_name'/>
+				<field name='date'/>
+				<field name='code'/>
+			 	<field name='production_id'/>
+				<field name='ng_number'/>
+				<field name='dpt_id'/>
+				<field name='user_id'/>
+				<field name='request'/>
+				<field name='reply_time'/>
+				<field name='state'/>
+			</tree>
+		</field>
+	</record>   
+	<record model="ir.ui.view" id="customer_complaints_form_view">
+		<field name="name">customer.complaints.form</field>
+		<field name="model">customer.complaints</field>
+		<field name="arch" type="xml">
+			<form string="customer complaints form" version='7.0'>
+				<header>
+						
+               		<button name='button_approve' string='审批' class='oe_highlight'/>
+	           		<button name='button_refuse' string='作废' class='oe_highlight'/>
+	           		<field name='state' widget='statusbar' statusbar_visible="draft,sale_manager,w_confirm,w_quality_manager,sale_engineer,w_gmanager,done" statusbar_colors='{"sale_manager":"blue"}'/>
+	           	<!-- 	<field name='state' widget='statusbar' statusbar_visible="draft,sale_manager,w_confirm,w_plan,w_engineer,w_quality,w_order,w_sale,w_other,w_quality_manager,sale_engineer,w_gmanager,done" statusbar_colors='{"sale_manager":"blue"}'/> -->
+				</header>
+				<sheet>
+					<notebook colspan='4'>
+						<page string='投诉信息' attrs="{'readonly':['|',('state','=','draft'),('state','=','sale_manager')]}">
+							<group colspan='4' col='4'>
+								<group colspan='1' col='2'>
+									<field name='name'/>
+								    <field name='partner_id'/>
+								    <field name='product_id'/>
+									
+									<field name='code'/>
+									<field name='customer_number'/>
+								</group>
+								<group colspan='1' col='2'>
+								
+									<field name='production_id'/>
+								 	<field name='ref'/>
+								 	<field name='customer_name'/>
+									<field name='customer_stock_number'/>
+									<field name='request'/>
+								</group>
+								<group colspan='1' col='2'>
+									<field name='dpt_id'/>
+									<field name='user_id'/>
+									<field name='delivery_count'/>
+									<field name='online_quantity'/>
+									<field name='stock_quantity'/>
+								</group>
+								<group colspan='1' col='2'>
+									<field name='date'/>
+									<field name='reply_time'/>
+									<field name='delivery_date'/>
+									<field name='ng_number'/>
+									<field name='sale_manager'/>
+								</group>
+								
+							</group>
+							<h3>客户要求采取措施:</h3>
+							<group colspan='4' col='4'>	
+								<group>
+									<field name='return_goods'/>
+									<field name='other'/>
+								</group>
+								<group>
+									<field name='replenish_goods'/>
+								</group>
+								<group>
+									<field name='repair_goods'/>
+								</group>
+								<group>
+									<field name='recive_goods'/>
+								</group>
+									
+							</group>
+							<h3>请在以下期限完成改善措施回复客户:</h3>	
+							<group colspan='4' col='4'>	
+								<group>
+									<field name='one_day'/>
+								</group>	
+								<group>
+									<field name='three_days'/>
+								</group>
+								<group>
+									<field name='others'/>
+								</group>
+							</group>	
+						</page>
+					 
+						<page string='投诉确认' attrs="{'readonly':[('state','!=','w_confirm')]}">
+							<h3>投诉内容:</h3>	
+							<group colspan='4' col='4'>
+								<group>
+									<field name='unreally'/>
+								</group>	
+								<group>
+									<field name='really'/>
+								</group>
+								<group>
+									<field name='really_one'/>
+								</group>
+							</group>
+							<h3>责任部门:</h3>		
+							<group colspan='4' col='4'>
+								<group>
+									<field name='plan_dpt'/>
+									<field name='order_dpt'/>
+									<field name='customer_result'/>
+									<field name='confirm_name'/>
+								</group>
+								<group>
+									<field name='eng_dpt'/>
+									<field name='sale_dpt'/>
+									<field name='process_type'/>
+								 	<field name='confirm_time'/>
+								</group>
+								<group>
+									<field name='qulity_dpt'/>
+									<field name='other_dpt'/>
+									<field name='stock_type'/>
+								</group>
+							</group>
+						</page>
+						<page string='责任部门整改意见' attrs="{'readonly':[('state','!=','w_confirm')]}">
+							<field name='customer_complaints_lines'>
+								<tree string='complaints line' editable='bottom'>
+									<field name='dpt_name'/>
+									<field name='approve_name'/>
+									<field name='approve_time'/>
+									<field name='reason_report'/>
+									<field name='request_report'/>
+									<field name='lead_report'/>
+									
+
+								</tree>
+							
+							</field>
+						</page>
+						<page string='验证' attrs="{'readonly':[('state','!=','w_quality_manager')]}">
+							<group>
+								<field name='note'/>
+							</group>
+						
+						</page>
+						<page string='结案' attrs="{'readonly':['|',('state','!=','sale_engineer'),('state','!=','w_gmanager')]}">
+							<group colspan='4' col='4'>	
+								<group>
+									<field name='finish_time'/>
+									<field name='project_note'/>
+								</group>
+								<group>
+									<field name='require'/>
+								</group>
+								<group>
+									<field name='unrequire'/>
+								</group>
+							</group>
+						</page>
+						
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<record model='ir.actions.act_window' id='action_customer_complaints'>
+		<field name='name'>客户投诉单</field>
+		<field name='res_model'>customer.complaints</field>
+	</record>
+	
+	<menuitem id='menu_quality' name='品质' sequence='3'/>
+	<menuitem id='menu_quality_manager' parent="menu_quality"  name='品质管理' sequence='1'/>
+	<menuitem id='menu_customer_complaints' name='客户投诉单' groups="base.group_no_one"   parent="menu_quality_manager"   action="action_customer_complaints" sequence='1'/>
+	
+
+</data>
+</openerp>

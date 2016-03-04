@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+<record model='ir.ui.view' id='impdance_info_tree_view'>
+	<field name='name'>impdance_info_tree</field>
+    <field name='model'>impdance.info</field>
+    <field name='arch' type='xml'>
+		<tree string='impdance info tree' editable="bottom">
+	        	<field name='name'/>
+	            <field name='ref'/>
+	            <field name='partner_id'/>
+	            <field name='user_id'/>
+	            <field name='file_name'/>
+	            <field name='product_id'/>
+	            <field name='impdance_type'/>
+	            <field name='layer_count'/>
+	            <field name='line_width'/>
+	            <field name='interval'/>
+	            <field name='cu_thickness'/>
+	            <field name='reference_layer'/>
+	            <field name='impdance_value'/>
+	            <field name='tolerance'/>
+	            <field name='adjust_content'/>
+	    </tree>
+	 </field>
+</record>
+	       
+ <!--   <record model='ir.ui.view' id='impdance_info_form_view'>
+        <field name='name'>impdance_info_form</field>
+        <field name='model'>impdance.info</field>
+        <field name='arch' type='xml'>
+	    	<form string='impdance info form'>
+	        	<header>
+	                   
+	            </header>
+	            <sheet>
+	                <field name='name'/>
+	                <field name='ref'/>
+	                <field name='partner_id'/>
+	                <field name='user_id'/>
+	                <field name='file_name'/>
+	                 <field name='product_id'/>
+	                <group colspan='4' col='4'>
+	                    <group colspan='1' col='2'>
+			                <field name='impdance_type'/>
+			                <field name='layer_count'/>
+			                <field name='line_width'/>
+			                <field name='interval'/>
+			                <field name='cu_thickness'/>
+		                </group>
+		                <group colspan='1' col='2'>
+			                <field name='reference_layer'/>
+			                <field name='impdance_value'/>
+			                <field name='tolerance'/>
+			                <field name='adjust_content'/>
+		                </group>
+	              </group>
+	            </sheet>
+	    	</form>
+		</field>
+	</record>  -->
+	
+<record  model='ir.actions.act_window'  id='action_impdance_info'>
+        <field name='name'>阻抗信息</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name='res_model'>impdance.info</field>
+</record>
+<menuitem id='impdance_info_menu' name='阻抗信息' groups='base.group_no_one' parent="menu_sale_config_manager"   action="action_impdance_info" sequence="5"/>
+</data>
+</openerp>
+   

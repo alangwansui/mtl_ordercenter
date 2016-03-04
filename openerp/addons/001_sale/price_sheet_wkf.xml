@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+    <data>
+    	
+		<record model='workflow' id='wkf_price_sheet'>
+			<field name='name'>price.sheet.workflow</field>
+			<field name='osv'>price.sheet</field>
+		</record>
+	<!-- 'draft','wait_order_supervisor ','wait_sale_manager','wait_torder','done','refuse' -->	
+	<!-- activity -->	
+		<record id="act_draft_price" model="workflow.activity">
+           	<field name="wkf_id" ref="wkf_price_sheet"/>
+           	<field name="flow_start">True</field>
+          	<field name="name">draft</field>
+        </record>
+        
+        <record id="act_wait_order_supervisor_price" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_price_sheet"/>
+           <!--<field name="flow_start">True</field>-->
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">wait_order_supervisor</field>
+           <field name="action">write({'state':'wait_order_supervisor'})</field>
+           <field name="kind">function</field>
+    	</record>
+    	
+    	<record id="act_wait_sale_manager_price" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_price_sheet"/>
+           <field name="name">wait_sale_manager</field>
+           <field name="action">write({'state':'wait_sale_manager'})</field>
+           <field name="kind">function</field>
+    	</record>
+    	
+    	<record id='act_done_price' model='workflow.activity'>
+    		<field name='wkf_id' ref='wkf_price_sheet'/>
+    		<field name='name'>done</field>
+    		<field name='action'>write({'state':'done'})</field>
+    		<field name="flow_stop">True</field>
+    		<field name='kind'>function</field>
+    	</record>
+    	
+    	<record id='act_refuse_price' model='workflow.activity'>
+    		<field name='wkf_id' ref='wkf_price_sheet'/>
+    		<field name='name'>refuse</field>
+    		<field name='action'>updata_state('refuse')</field>
+    		<field name="flow_stop">True</field>
+    		<field name='kind'>function</field>
+    	</record>
+           
+      <!-- 'draft','wait_order_supervisor ','wait_sale_manager','wait_torder','done','refuse' -->	
+	<!-- transtion -->
+	
+		<record id="trans_draft2wait_order_supervisor_price" model="workflow.transition">
+          <field name="act_from" ref="act_draft_price"/>
+          <field name="act_to" ref="act_wait_order_supervisor_price"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <field name="condition">_check_delivery_date() and approve_type()</field>
+    	</record>	
+    	
+    	 <record id="trans_wait_order_supervisor2wait_sale_manager_price" model="workflow.transition">
+          <field name="act_from" ref="act_wait_order_supervisor_price"/>
+          <field name="act_to" ref="act_wait_sale_manager_price"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <!-- <field name="condition">condition_function</field> -->
+    	</record>
+    	
+
+    	
+        <record id="trans_wait_sale_manager2done_price" model="workflow.transition">
+          <field name="act_from" ref="act_wait_sale_manager_price"/>
+          <field name="act_to" ref="act_done_price"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <!-- <field name="condition">condition_function</field> -->
+   		 </record>
+		 
+		 
+   		 
+   	  <!-- refuse -->
+   	     <record id="trans_wait_order_supervisor2refuse_price" model="workflow.transition">
+          <field name="act_from" ref="act_wait_order_supervisor_price"/>
+          <field name="act_to" ref="act_refuse_price"/>
+          <field name="signal">button_refuse</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <!-- <field name="condition">condition_function</field> -->
+    	</record>
+    	
+    	<record id="trans_wait_sale_manager2refuse_price" model="workflow.transition">
+          <field name="act_from" ref="act_wait_sale_manager_price"/>
+          <field name="act_to" ref="act_refuse_price"/>
+          <field name="signal">button_refuse</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <!-- <field name="condition">condition_function</field> -->
+    	</record>
+    	
+    </data>
+</openerp>

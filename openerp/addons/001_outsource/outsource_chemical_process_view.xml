@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- chemical_process:化学镍金  -->
+		<record model='ir.ui.view' id='chemical_process_tree_view'>
+			<field name='name'>outsource_chemical_process_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='cost chemical process tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					
+					<field name='price_units' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='board_thickness' />
+					<field name='pd_thickness'/>
+					<field name='nickel_thickness' />
+					<field name='gold_thickness' />
+					<field name='default_lowest_cost' />
+
+					<field name='note' />
+				</tree>
+			</field>
+		</record>
+
+		<!-- <record model='ir.ui.view' id='chemical_process_form_view'> <field 
+			name='name'>outsource_chemical_process_form</field> <field name='model'>outsource.cost.argument</field> 
+			<field name='type'>form</field> <field name='arch' type='xml'> <form string='cost 
+			chemical process form'> <field name='outsource_partner_id' widget='selection' 
+			width='100'/> <field name='process_category'/> <field name='process_type'/> 
+			<field name='price_units'/> <field name='account_tax_id' widget='selection'/> 
+			<field name='if_have_tax'/> <field name='if_without_tax'/> <field name='board_thickness'/> 
+			<field name='nickel_thickness'/> <field name='gold_thickness'/> <field name='default_width_reduce'/> 
+			<field name='default_length_reduce'/> <field name='note'/> </form> </field> 
+			</record> -->
+
+		<record model='ir.actions.act_window' id='act_outsource_chemical_process'>
+			<field name='name'>outsource_chemical_process</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='chemical_process_tree_view' />
+			<field name='domain'>[('process_category','=','chemical_process_c')]
+			</field>
+		</record>
+
+		<!--outsource process:sink_sn 沉锡 -->
+		<record model='ir.ui.view' id='sink_sn_process_tree_view'>
+			<field name='name'>outsource_sink_sn_process_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='sink sn tree' editable='bottom'>
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='board_type_new'/>
+					<field name='price_units' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='min_sn_thick'/>
+	         		<field name='max_sn_thick'/>
+					<field name='red_tape_price' />
+					<field name='default_lowest_cost' />
+					<field name='note' />
+				</tree>
+			</field>
+		</record>
+
+
+		<!--outsource process: OSP -->
+		<record model='ir.ui.view' id='osp_process_tree_view'>
+			<field name='name'>outsource_osp_process_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='osp tree' editable='bottom'>
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='osp_type'/>
+					<field name='board_type_new' />
+					<field name='price_units' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='red_tape_price' />
+					<field name='default_lowest_cost' />
+					<field name='note' />
+				</tree>
+			</field>
+		</record>
+
+
+
+
+		<!--outsource process:spray_sn 喷锡 -->
+		<record model='ir.ui.view' id='spray_sn_process_tree_view'>
+			<field name='name'>outsource_spray_sn_process_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='spray sn tree' editable='bottom'>
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='sink_sn_type' />
+
+					<field name='price_units' />
+					<field name='price_min'/>
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+
+					<field name='red_tape_price' />
+
+
+					<field name='note' />
+				</tree>
+			</field>
+		</record>
+
+		<!--outsource process:sink_silver沉银 -->
+		<record model='ir.ui.view' id='sink_silver_process_tree_view'>
+			<field name='name'>outsource_sink_silver_process_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='sink silver tree' editable='bottom'>
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='board_type_new'/>
+					<field name='sink_sliver_type'/>
+					<field name='price_units' />
+					<field name='min_silver_thick' />
+					<field name='max_silver_thick' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='red_tape_price' />
+					<field name='default_lowest_cost'/>
+					<field name='note' />
+				</tree>
+			</field>
+		</record>
+
+		<!-- <record model='ir.ui.view' id='sink_sn_process_form_view'> <field 
+			name='name'>outsource_sink_sn_process_form</field> <field name='model'>outsource.cost.argument</field> 
+			<field name='type'>tree</field> <field name='arch' type='xml'> <form string='sink 
+			sn form'> <field name='outsource_partner_id' widget='selection' width='100'/> 
+			<field name='process_category'/> <field name='process_type'/> <field name='sink_sn_type'/> 
+			<field name='price_units'/> <field name='account_tax_id' widget='selection'/> 
+			<field name='if_have_tax'/> <field name='if_without_tax'/> <field name='red_tape_price'/> 
+			<field name='default_width_reduce'/> <field name='default_length_reduce'/> 
+			<field name='note'/> </form> </field> </record> -->
+
+		<record model='ir.actions.act_window' id='act_outsource_spray_sn_process'>
+			<field name='name'>outsource_spray_sn_process</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='spray_sn_process_tree_view' />
+			<field name='domain'>[('process_category','=','chemical_process_b'),('process_type','=','sink_Sn')]
+			</field>
+
+		</record>
+
+		<record model='ir.actions.act_window' id='act_outsource_sink_sn_process'>
+			<field name='name'>outsource_sink_sn_process</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='sink_sn_process_tree_view' />
+			<field name='domain'>[('process_category','=','chemical_process'),('process_type','=','sink_Sn')]
+			</field>
+
+		</record>
+
+		<record model='ir.actions.act_window' id='act_outsource_osp_process'>
+        	<field name='name'>outsource_osp_process</field>
+        	<field name='res_model'>outsource.cost.argument</field>
+        	<field name='view_type'>form</field>
+        	<field name='view_mode'>tree</field>
+       	 	<field name='view_id'  ref='osp_process_tree_view'/>
+    		<field name='domain'>[('process_category','=','chemical_process_d'),('process_type','=','OSP')]</field>
+    	</record>
+
+
+
+
+
+		<record model='ir.actions.act_window' id='act_outsource_sink_silver_process'>
+			<field name='name'>outsource_sink_silver_process</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='sink_silver_process_tree_view' />
+			<field name='domain'>[('process_category','=','chemical_process_a'),('process_type','=','sink_silver')]
+			</field>
+
+		</record>
+		<menuitem  id="menu_outsource" name="outsource"    sequence="15" /> 
+		<menuitem  id="menu_outsource_process_management" name="outsource process managerment"  parent="menu_outsource"  sequence="10" /> 
+		<menuitem id='outsource_process_argument_menu' name='Outsource argument config'
+			groups='base.group_no_one' parent='menu_outsource_process_management'
+			sequence='' />
+		<menuitem id='outsource_chemical_process_menu' name='Sink_gold(silver) args config'
+			parent='outsource_process_argument_menu' action='act_outsource_chemical_process' />
+		<menuitem id='outsource_spray_sn_menu' name='Spray_Sn args config'
+			parent='outsource_process_argument_menu' action='act_outsource_spray_sn_process' />
+		<menuitem id='outsource_sink_sn_menu' name='Sink_Sn args config'
+			parent='outsource_process_argument_menu' action='act_outsource_sink_sn_process' />
+		<menuitem id='outsource_sink_silver_menu' name='Sink_silver args config'
+			parent='outsource_process_argument_menu' action='act_outsource_sink_silver_process' />
+		<menuitem id='outsource_osp_menu' name='OSP args config' parent='outsource_process_argument_menu' action='act_outsource_osp_process'/>
+
+		<!--gold_finger_process:镀金手指;镀金 ; -->
+		<record model='ir.ui.view' id='gold_finger_process_tree_view'>
+			<field name='name'>outsource_gold_finger_process_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='cost gold finger process tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+
+					<field name='price_units' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='au_thick_min' />
+					<field name='au_thick_max' />
+					<field name='finger_count_min' />
+					<field name='finger_count_max' />
+					<field name='note' />
+					<!-- <field name='finger_count'/> <field name='pcs_unit_count'/> -->
+				</tree>
+			</field>
+		</record>
+
+		<!-- <record model='ir.ui.view' id='gold_finger_process_form_view'> <field 
+			name='name'>outsource_gold_finger_process_form</field> <field name='model'>outsource.cost.argument</field> 
+			<field name='type'>form</field> <field name='arch' type='xml'> <form string='cost 
+			gold finger process form' > <field name='outsource_partner_id' widget='selection' 
+			width='100'/> <field name='process_category'/> <field name='process_type'/> 
+			<field name='workcenter_id'/> <field name='layer_count'/> <field name='price_units'/> 
+			<field name='au_thick_min'/> <field name='au_thick_max'/> <field name='finger_count_min'/> 
+			<field name='finger_count_max'/> </form> </field> </record> -->
+
+		<record model='ir.actions.act_window' id='act_outsource_gold_finger_process'>
+			<field name='name'>outsource_gold_finger_process</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='gold_finger_process_tree_view' />
+			<field name='domain'>[('process_category','=','gold_finger_process'),('process_type','=','gd_finger_plated')]
+			</field>
+		</record>
+		<menuitem id='outsource_gold_finger_process_menu' name='Gold finger args config'
+			parent='outsource_process_argument_menu' action='act_outsource_gold_finger_process' />
+
+		<!-- machine_process:钻孔; -->
+		<record model='ir.ui.view' id='machine_drill_process_tree_view'>
+			<field name='name'>outsource_machine_process_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='drill process tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='layer_count' />
+					<field name='price_units' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='min_board_thickness' />
+					<field name='max_board_thickness' />
+					<field name='min_hole_value' />
+					<field name='max_hole_value' />
+					<field name='hole_count' />
+					<field name='note' />
+					<!-- <field name='default_cost'/> <field name='drills_type'/> -->
+				</tree>
+			</field>
+		</record>
+
+		<!-- <record model='ir.ui.view' id='machine_process_form_view'> <field 
+			name='name'>outsource_machine_process_form</field> <field name='model'>outsource.cost.argument</field> 
+			<field name='type'>form</field> <field name='arch' type='xml'> <form string='cost 
+			machine process form'> <field name='outsource_partner_id' widget='selection' 
+			width='100'/> <field name='process_category'/> <field name='process_type'/> 
+			<field name='workcenter_id'/> <field name='layer_count'/> <field name='price_units'/> 
+			<field name='min_board_thickness'/> <field name='max_board_thickness'/> <field 
+			name='cu_thickness'/> <field name='min_hole_value'/> <field name='max_hole_value'/> 
+			<field name='hole_count'/> <field name='default_cost'/> <field name='drills_type'/> 
+			</form> </field> </record> -->
+
+		<record model='ir.actions.act_window' id='act_outsource_machine_drill_process'>
+			<field name='name'>outsource_machine_drill_process</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='machine_drill_process_tree_view' />
+			<field name='domain'>[('process_category','=','machine_process'),('process_type','=','drill_outsource'),('hole_count','=',1000)]
+			</field>
+		</record>
+
+		<menuitem id='outsource_machine_process_menu' name='Machine drill_hole args config'
+			parent='outsource_process_argument_menu' action='act_outsource_machine_drill_process' />
+
+		<!-- machine_process:激光钻孔; -->
+		<record model='ir.ui.view' id='machine_laser_drill_tree_view'>
+			<field name='name'>outsource_laser_drill_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='laser drill tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='board_material' />
+					<field name='price_units' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='min_larse_hole' />
+					<field name='max_larse_hole' />
+					<field name='hole_count' />
+					<field name='default_lowest_cost' />
+					<field name='note' />
+
+				</tree>
+			</field>
+		</record>
+
+		<!-- <record model='ir.ui.view' id='machine_laser_drill_form_view'> <field 
+			name='name'>outsource_laser_drill_form</field> <field name='model'>outsource.cost.argument</field> 
+			<field name='type'>form</field> <field name='arch' type='xml'> <form string='laser 
+			drill form'> <field name='outsource_partner_id' widget='selection' width='100'/> 
+			<field name='process_category'/> <field name='process_type'/> <field name='board_material'/> 
+			<field name='price_units'/> <field name='account_tax_id' widget='selection'/> 
+			<field name='if_have_tax'/> <field name='if_without_tax'/> <field name='min_larse_hole'/> 
+			<field name='max_larse_hole'/> <field name='hole_count'/> <field name='note'/> 
+			</form> </field> </record> -->
+
+		<record model='ir.actions.act_window' id='act_outsource_machine_laser_drill'>
+			<field name='name'>outsource_machine_laser_drill</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='machine_laser_drill_tree_view' />
+			<field name='domain'>[('process_category','=','machine_process'),('process_type','=','laser_drill'),('hole_count','=',1000)]
+			</field>
+		</record>
+
+		<menuitem id='outsource_laser_drill_menu' name='Machine laser_drill args config'
+			parent='outsource_process_argument_menu' action='act_outsource_machine_laser_drill' />
+
+		<!-- machine_process: 外形 V-Cut -->
+		<record model='ir.ui.view' id='machine_shape_vcut_tree_view'>
+			<field name='name'>outsource_machine_shape_vcut_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='shape vcut tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='board_type' />
+					<field name='price_cutter' />
+					<field name='price_units' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='min_board_thickness' />
+					<field name='max_board_thickness' />
+					<field name='default_lowest_cost' />
+					<field name='note' />
+				</tree>
+			</field>
+		</record>
+
+		<!-- <record model='ir.ui.view' id='machine_shape_vcut_form_view'> <field 
+			name='name'>outsource_machine_shape_vcut_form</field> <field name='model'>outsource.cost.argument</field> 
+			<field name='type'>form</field> <field name='arch' type='xml'> <form string='shape 
+			vcut form'> <field name='outsource_partner_id' widget='selection' width='100'/> 
+			<field name='process_category'/> <field name='process_type'/> <field name='board_type'/> 
+			<field name='price_cutter'/> <field name='price_units'/> <field name='account_tax_id' 
+			widget='selection'/> <field name='if_have_tax'/> <field name='if_without_tax'/> 
+			<field name='min_board_thickness'/> <field name='max_board_thickness'/> <field 
+			name='default_lowest_cost'/> <field name='note'/> </form> </field> </record> -->
+
+		<record model='ir.actions.act_window' id='act_outsource_shape_vcut'>
+			<field name='name'>outsource_shape_vcut_process</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='machine_shape_vcut_tree_view' />
+			<field name='domain'>[('process_category','=','machine_process'),('process_type','=','shape_VCUT')]
+			</field>
+		</record>
+		<menuitem id='outsource_shape_vcut_process_menu' name='Machine shape_VCUT args config'
+			parent='outsource_process_argument_menu' action='act_outsource_shape_vcut' />
+
+
+		<!-- machine_process:shape_gong_side外形锣边; -->
+		<record model='ir.ui.view' id='machine_shape_gong_side_tree_view'>
+			<field name='name'>outsource_machine_shape_gong_side_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='shape gong side tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='board_type' />
+
+					<field name='price_units' />
+					<field name='slot_price'/>
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='min_board_thickness' />
+					<field name='max_board_thickness' />
+					<field name='min_cutter_size' />
+					<field name='max_cutter_size' />
+					<field name='default_lowest_cost' />
+					<field name='note' />
+				</tree>
+			</field>
+		</record>
+
+		<!-- <record model='ir.ui.view' id='machine_shape_gong_side_form_view'> 
+			<field name='name'>outsource_machine_shape_gong_side_form</field> <field 
+			name='model'>outsource.cost.argument</field> <field name='type'>form</field> 
+			<field name='arch' type='xml'> <form string='shape gong side form'> <field 
+			name='outsource_partner_id' widget='selection' width='100'/> <field name='process_category'/> 
+			<field name='process_type'/> <field name='board_type'/> <field name='price_units'/> 
+			<field name='account_tax_id' widget='selection'/> <field name='if_have_tax'/> 
+			<field name='if_without_tax'/> <field name='min_board_thickness'/> <field 
+			name='max_board_thickness'/> <field name='min_cutter_size'/> <field name='max_cutter_size'/> 
+			<field name='default_lowest_cost'/> <field name='note'/> </form> </field> 
+			</record> -->
+
+		<record model='ir.actions.act_window' id='act_outsource_shape_gong_side'>
+			<field name='name'>outsource_shape_gong_side_process</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='machine_shape_gong_side_tree_view' />
+			<field name='domain'>[('process_category','=','machine_process'),('process_type','=','shape_gong_side')]
+			</field>
+		</record>
+		<menuitem id='outsource_shape_gong_side_menu' name='Machine shape_gong_side args config'
+			parent='outsource_process_argument_menu' action='act_outsource_shape_gong_side' />
+
+		<!-- machine_process:plasma_process等离子加工; -->
+		<record model='ir.ui.view' id='machine_plasma_process_tree_view'>
+			<field name='name'>outsource_machine_plasma_process_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='plasma process tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='board_type' />
+					<field name='price_units' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='default_lowest_cost' />
+					<field name='note' />
+				</tree>
+			</field>
+		</record>
+		<record model='ir.actions.act_window' id='act_outsource_plasma_process'>
+			<field name='name'>outsource_plasma_process</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='machine_plasma_process_tree_view' />
+			<field name='domain'>[('process_category','=','machine_process'),('process_type','=','plasma_process')]
+			</field>
+		</record>
+		<menuitem id='outsource_plasma_process_menu' name='Machine plasma_process args config'
+			parent='outsource_process_argument_menu' action='act_outsource_plasma_process' />
+
+		<!-- machine_process:flying_probe飞针测试 ; -->
+		<record model='ir.ui.view' id='flying_probe_process_tree_view'>
+			<field name='name'>outsource_flying_probe_process_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='flying test tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='sub_process_type' />
+					<field name='fly_board_type'/>
+					<field name='price_units' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='basic_cost' />
+
+					<field name='default_lowest_cost' />
+					<field name='if_retest_free' />
+					<field name='note' />
+
+				</tree>
+			</field>
+		</record>
+
+		<!-- <record model='ir.ui.view' id='flying_probe_process_form_view'> <field 
+			name='name'>outsource_flying_probe_process_form</field> <field name='model'>outsource.cost.argument</field> 
+			<field name='type'>form</field> <field name='arch' type='xml'> <form string='flying 
+			test tree'> <field name='outsource_partner_id' widget='selection' width='100'/> 
+			<field name='process_category'/> <field name='process_type'/> <field name='sub_process_type'/> 
+			<field name='price_units'/> <field name='account_tax_id' widget='selection'/> 
+			<field name='if_have_tax'/> <field name='if_without_tax'/> <field name='basic_cost'/> 
+			<field name='default_lowest_cost'/> <field name='if_retest_free'/> <field 
+			name='note'/> </form> </field> </record> -->
+
+		<record model='ir.actions.act_window' id='act_outsource_flying_probe_process'>
+			<field name='name'>outsource_flying_probe_process</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='flying_probe_process_tree_view' />
+			<field name='domain'>[('process_category','=','machine_process'),('process_type','=','flying_probe')]
+			</field>
+		</record>
+		<menuitem id='outsource_flying_probe_process_menu' name='Machine flying_test args config'
+			parent='outsource_process_argument_menu' action='act_outsource_flying_probe_process' />
+
+		<!-- machine_process:wire_drawing 拉丝; -->
+		<record model='ir.ui.view' id='wire_drawing_process_tree_view'>
+			<field name='name'>outsource_wire_drawing_process_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='wire drawing tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='wire_draw_type'/>
+					<field name='norms_mark' />
+					<field name='price_dm2' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='note' />
+					<!-- <field name='default_cost'/> <field name='drills_type'/> -->
+				</tree>
+			</field>
+		</record>
+
+		<record model='ir.actions.act_window' id='act_outsource_wire_drawing'>
+			<field name='name'>outsource_wire_drawing</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='wire_drawing_process_tree_view' />
+			<field name='domain'>[('process_category','=','machine_process'),('process_type','=','wire_drawing')]
+			</field>
+		</record>
+		<menuitem id='outsource_wire_drawing_process_menu' name='Machine wire drawing args config'
+			parent='outsource_process_argument_menu' action='act_outsource_wire_drawing' />
+
+		<!-- machine_process:bf_laminating_process 阳极氧化(层压前处理); -->
+		<record model='ir.ui.view' id='bf_laminating_process_tree_view'>
+			<field name='name'>outsource_bf_laminating_process_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='laminating tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='norms_mark' />
+					<field name='min_film_thickness' />
+					<field name='max_film_thickness' />
+					<field name='price_dm2' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='note' />
+
+				</tree>
+			</field>
+		</record>
+
+		<!-- <record model='ir.ui.view' id='bf_laminating_process_form_view'> <field 
+			name='name'>outsource_bf_laminating_process_tree</field> <field name='model'>outsource.cost.argument</field> 
+			<field name='type'>tree</field> <field name='arch' type='xml'> <form string='laminating 
+			tree'> <field name='outsource_partner_id' widget='selection' width='100'/> 
+			<field name='process_category'/> <field name='process_type'/> <field name='norms_mark'/> 
+			<field name='min_film_thickness'/> <field name='max_film_thickness'/> <field 
+			name='price_dm2'/> <field name='account_tax_id' widget='selection'/> <field 
+			name='if_have_tax'/> <field name='if_without_tax'/> <field name='note'/> 
+			</form> </field> </record> -->
+		<record model='ir.actions.act_window' id='act_outsource_bf_laminating'>
+			<field name='name'>outsource_bf_laminating</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='bf_laminating_process_tree_view' />
+			<field name='domain'>[('process_category','=','machine_process'),('process_type','=','bf_laminate_pre')]
+			</field>
+		</record>
+		<menuitem id='outsource_bf_laminating_process_menu' name='Machine bf_laminating_process args config'
+			parent='outsource_process_argument_menu' action='act_outsource_bf_laminating' />
+		
+		
+		
+		
+		<!-- machine_process:cutting 切割; -->
+		<record model='ir.ui.view' id='cutting_tree_view'>
+			<field name='name'>cutting_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='cutting tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='cutting_type'/>
+					<field name='price_units' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='default_lowest_cost'/>
+					<field name='note' />
+
+				</tree>
+			</field>
+		</record>
+		
+		
+		<record model='ir.actions.act_window' id='act_cutting'>
+			<field name='name'>cutting</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='cutting_tree_view' />
+			<field name='domain'>[('process_category','=','machine_process'),('process_type','=','cutting')]
+			</field>
+		</record>
+		<menuitem id='cutting_menu' name='Cutting args config'
+			parent='outsource_process_argument_menu' action='act_cutting'/>
+		
+		
+		<!-- machine_process:repair_gold 修金板    ; -->
+		<record model='ir.ui.view' id='repair_gold_tree_view'>
+			<field name='name'>repair_gold_tree</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='repair gold tree' editable='bottom'>
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type' />
+					<field name='repair_type'/>
+					<field name='board_type_new'/>
+					<field name='price_units' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='note' />
+				</tree>
+			</field>
+		</record>
+		
+		<record model='ir.actions.act_window' id='act_repair_gold'>
+			<field name='name'>repair.gold</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='repair_gold_tree_view' />
+			<field name='domain'>[('process_category','=','machine_process'),('process_type','=','repair_gold')]
+			</field>
+		</record>
+		<menuitem id='repair_gold_menu' name='repair gold args config'
+			parent='outsource_process_argument_menu' action='act_repair_gold' />
+		
+		
+		
+		<!-- machine_process:laminate 层压    ; -->
+		<record model='ir.ui.view' id='laminate_tree_view'>
+			<field name='name'>laminate</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='laminate tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type'/>
+					<field name='layer_count'/>
+					<field name='laminate_type'/>
+					<field name='price_units' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='default_lowest_cost'/>
+					<field name='note' />
+
+				</tree>
+			</field>
+		</record>
+		
+		
+		<record model='ir.actions.act_window' id='act_laminate'>
+			<field name='name'>laminate</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='laminate_tree_view' />
+			<field name='domain'>[('process_category','=','laminate_process'),('process_type','=','laminate')]
+			</field>
+		</record>
+		<menuitem id='laminate_menu' name='laminate args config'
+			parent='outsource_process_argument_menu' action='act_laminate' />
+		
+		
+		
+		
+		
+		<!-- AOI -->
+		<record model='ir.ui.view' id='aoi_tree_view'>
+			<field name='name'>aoi</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='aoi tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type'/>
+					<field name='aoi_type'/>
+					<field name='price_units' />
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='basic_cost' />
+					<field name='default_lowest_cost'/>
+					<field name='note' />
+
+				</tree>
+			</field>
+		</record>
+		
+		
+		<record model='ir.actions.act_window' id='act_aoi'>
+			<field name='name'>aoi</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='aoi_tree_view' />
+			<field name='domain'>[('process_category','=','machine_process'),('process_type','=','aoi')]
+			</field>
+		</record>
+		<menuitem id='aoi_menu' name='aoi args config'
+			parent='outsource_process_argument_menu' action='act_aoi' />
+		
+						
+		<!-- Sliver_plating -->
+		<record model='ir.ui.view' id='sliver_plating_tree_view'>
+			<field name='name'>sliver_plating</field>
+			<field name='model'>outsource.cost.argument</field>
+			<field name='type'>tree</field>
+			<field name='arch' type='xml'>
+				<tree string='sliver plating tree' editable='bottom'>
+
+					<field name='outsource_partner_id' widget='selection' width='100' />
+					<field name='process_category' />
+					<field name='process_type'/>
+					
+					<field name='price_units' />
+					<field name='nickel_thickness_min'/>
+					<field name='nickel_thickness_max'/>
+					<field name='min_silver_thick'/>
+					<field name='max_silver_thick'/>
+					<field name='area_min'/>
+					<field name='area_max'/>
+					<field name='account_tax_id' widget='selection' />
+					<field name='if_have_tax' />
+					<field name='if_without_tax' />
+					<field name='default_lowest_cost'/>
+					<field name='note' />
+
+				</tree>
+			</field>
+		</record>
+		
+		
+		<record model='ir.actions.act_window' id='act_sliver_plating'>
+			<field name='name'>sliver_plating</field>
+			<field name='res_model'>outsource.cost.argument</field>
+			<field name='view_type'>form</field>
+			<field name='view_mode'>tree</field>
+			<field name='view_id' ref='sliver_plating_tree_view' />
+			<field name='domain'>[('process_category','=','machine_process'),('process_type','=','sliver_plating')]
+			</field>
+		</record>
+		<menuitem id='sliver_plating_menu' name='sliver plating args config'
+			parent='outsource_process_argument_menu' action='act_sliver_plating' />		
+		
+		
+		
+		
+		
+		
+	</data>
+</openerp>

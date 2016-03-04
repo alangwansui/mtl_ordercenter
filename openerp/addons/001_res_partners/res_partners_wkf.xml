@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	 <record  model="workflow" id="wkf_res_partners">
+	      <field name="name">res_partners</field>
+	      <field name="osv">res.partners</field>
+	      <field name="on_create">True</field>
+	    </record>
+	      
+	      <!-- active:draft,w_director,w_receive,done -->
+	    <record id="act_draft" model="workflow.activity">
+	       <field name="wkf_id" ref="wkf_res_partners"/>
+	       <field name="flow_start">True</field>
+	        <field name="name">draft</field>
+	      
+	     </record>
+	 
+	   	<record id="act_nomal" model="workflow.activity">
+	       <field name="wkf_id" ref="wkf_res_partners"/>
+	        <field name="name">nomal</field>
+	      	<field name="action">write({'state':'nomal'})</field>
+	        <field name="kind">function</field>
+	        
+	     </record>
+
+	   
+	     
+	     
+	    <record id="act_done" model="workflow.activity">
+	           <field name="wkf_id" ref="wkf_res_partners"/>
+	           <field name="name">done</field>
+	           <field name="action">write({'state':'done'})</field>
+	           <field name="kind">function</field>
+	           <field name="flow_stop">True</field>
+	           <field name="join_mode">AND</field>
+	    </record>
+	    
+
+
+        
+       <record id="act_draft2act_nomal" model="workflow.transition">
+          <field name="act_from" ref="act_draft"/>
+          <field name="act_to" ref="act_nomal"/>
+          <field name="signal">button_approves</field>
+       </record>
+       
+       <record id="act_nomal2act_done" model="workflow.transition">
+          <field name="act_from" ref="act_nomal"/>
+          <field name="act_to" ref="act_done"/>
+          <field name="signal">button_approves</field>
+       </record>
+
+      
+ 
+
+
+    </data>
+</openerp>

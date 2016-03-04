@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+
+
+<data noupdate="1">
+<record id="sequence_sale_order_line_type" model="ir.sequence.type">
+    <field name="name">sale_order_line</field>
+    <field name="code">sale.order.line</field>
+</record>
+<record id="sequence_sale_order_line" model="ir.sequence">
+    <field name="name">sale_order_line</field>
+    <field name="code">sale.order.line</field>
+    <field name="prefix">SOL%(y)s%(month)s%(day)s</field>
+    <field name="padding">8</field>
+    <field name="number_next">100</field>
+    <field name="number_increment">1</field>
+</record>
+</data>
+
+
+
+
+
+<data>
+
+
+
+<record model="ir.ui.view" id="price_sheet_tree_view">
+    <field name="name">price_sheet.tree</field>
+    <field name="model">price.sheet</field>
+    <field name="arch" type="xml">
+        <tree string="price_sheet" colors="gray:state in ('done');red:state in('draft' or 'wait_change');blue:state in('wait_order_supervisor');green:state in('wait_sale_manager')">
+            <field name="name"/>
+            <field name='recive_type'/>
+            <field name="pcb_info_id"/>
+			<field name="partner_id"/>
+			<field name='product_id'/>
+			<field name='po_area'/>
+		    <field name="cost_all_o"/>
+		    <field name="responsible_id"/>
+			<field name="create_time"/>
+			<field name='delivery_date'/>
+			<field name="state"/>
+        </tree>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="price_sheet_form_view">
+    <field name="name">price_sheet.tree</field>
+    <field name="model">price.sheet</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+        <form string="price_sheet" version='7.0'>
+            <header>  
+			    <button name='button_approve' string='审批' states='draft,wait_customer_back' type="object" class='oe_highlight' groups='001_sale.sales_order'/>
+			   
+			   <button name='check_amount' string='审批' states='wait_order_supervisor' type="object" class='oe_highlight' groups='001_sale.sales_manager'/>
+			   <button name='button_approve_one' string='审批' states='wait_sale_manager' type="object" class='oe_highlight' groups='001_sale.sales_manager'/>
+			   <button name='button_general_manager' string='审批' states='wait_general_manager' type="object" class='oe_highlight' groups='001_sale.sales_manager'/>
+			    
+			    <button name='button_cancel' string='作废' states='draft,wait_order_supervisor,wait_sale_manager,wait_general_manager,wait_customer_back' type="object" class='oe_highlight'/>
+			    <button name="to_sale_order" string="生成订单" type="object" states="wait_customer_back" class='oe_highlight' groups='001_sale.sales_order'/>
+	           <button name="function_cost"  string="计算价格" type="object"  states='draft' icon="icon" class='oe_highlight' groups='001_sale.sales_order'/>
+	           
+			   <field name='state' widget="statusbar" statusbar_visible="draft,wait_order_supervisor,wait_sale_manager,wait_general_manager,wait_customer_back,done,wait_change,cancel" statusbar_colors='{"wait_order_supervisor":"blue"}'/>
+            </header>
+            <sheet>
+	            <notebook colspan='4'>
+	                <page string='报价单'>
+		        	<group colspan="4" col='8'>
+		        	 <group colspan='1' col='2'>
+						<field name='name'/>
+						<field name='pcb_info_id'/>
+						<field name='partner_id'/>
+						<field name='lead_id'/>
+						<field name='create_time'/>
+						<newline/>
+						<separator  string='标准报价信息' colspan='2' />
+					    <newline/>
+					    <field name='cost_ready_b'/>
+						<field name='cost_plot_b'/>
+						<field name='cost_test_b'/>
+						<field name='cost_other_b'/>
+						<field name='cost_pcs_b'/>
+						<field name='cost_base_b'/>
+						<field name='cost_mould_b'/>
+						<field name='cost_change_b'/>
+						<field name='cost_days_b'/>
+						<field name='cost_sqcm_b'/>
+						<field name='cost_gold_finger_b'/>
+						<field name='cost_all_b'/>
+					 </group>
+					 <group colspan='2' col='2'>	
+					 	<field name='recive_type'/>
+					 	<field name='responsible_id'/>
+					 	 <field name='product_number'/>
+					 	<field name='delivery_date'/>
+					 	 <field name='product_id'/>
+					 	<field name='standard_days'/>
+					 	<newline/>
+					 	<separator string='客户专用报价信息' colspan='2'/>
+					     <newline/>
+						<field name='cost_ready'/>
+						<field name='cost_plot'/>
+						<field name='cost_test'/>
+						<field name='cost_other'/>
+						<field name='cost_pcs'/>
+						<field name='cost_base'/>
+						<field name='cost_mould'/>
+						<field name='cost_change'/>
+						<field name='cost_days'/>
+						<field name='cost_sqcm'/>
+						<field name='cost_gold_finger'/>
+						<field name='cost_all'/>
+					 </group>
+					 <group colspan='4' col='2'>
+					     <field name='type'/>
+					 	<field name='po_area'/>
+						<field name='delivery_leadtime'/>
+						<field name='special_material_price'/>
+						<newline/>
+						<label string=' '/>
+						<button name="create_product_code" string="create_product_code" type="object" icon="icon" invisible='1'/>
+					 	<newline/>
+					 	<label string=' '/>	 
+					 	<newline/>
+					 	<button name="function_standard_days"  string="生成标准天数" type="object" icon="icon" class='oe_highlight'/>
+					 	<newline/>
+					 	<newline/>
+						<separator  string='实际价格' colspan='2' />
+					    <newline/>
+						<field name='cost_ready_s'/>
+						<field name='cost_plot_s'/>
+						<field name='cost_test_s'/>
+						<field name='cost_other_s'/>
+						<field name='cost_pcs_s'/>
+						<field name='cost_gold_finger_s'/>
+						<field name='cost_days_s'/>
+						<field name='discount'/>
+						<field name='cost_all_o'/>
+						<field name='mantissa'/>
+						<field name='cost_all_s'/>	
+						
+						<label string=' ' />
+						<newline/>
+					  
+					 </group>
+				  </group>  
+			    </page>
+			    <page string='基础报价信息'>
+			    	 <group colspan='4' col='4'>
+			    	 	<group>
+			    	 		<field name='bottom_price'/>
+			    	 		<field name='per_PNL_price'/>
+			    	 		<field name='density_price'/>
+			    	 		<field name='board_price'/>
+			    	 		<field name='min_hole_price'/>
+			    	 		<field name='privilege_price'/>
+			    	 	</group>	
+			        	<group>
+			        		<field name='upper_price'/>
+			    	 		<field name='cu_price'/>
+			    	 		<field name='ink_price'/>
+			    	 		<field name='buried_price'/>
+			    	 		<field name='pad_price'/>
+			    	 		
+			    	 		<field name='add_price'/>
+			        	</group>
+			        	<group>
+			        		<field name='material_price'/>
+			    	 		<field name='unit_price'/>
+			    	 		<field name='tg_price'/>
+			    	 		<field name='finger_price'/>
+			    	 		<field name='half_price'/>
+			    	 		<field name='test_price'/>
+			        	</group>
+			        	<group>
+			        		<field name='step_price'/>
+			    	 		<field name='surface_price'/>
+			    	 		<field name='special_price'/>
+			    	 		<field name='hole_line_price'/>
+			    	 		<field name='min_line_price'/>
+			    	 		<field name='impdance_price'/>
+			        	</group>
+			        	
+			        </group>
+			        <group>
+			        	<field name='note'/>
+			        </group>
+			    </page>
+			    <page string='报价计算信息'>
+			        <field name='price_calculate_info'/>
+			    </page>
+			    </notebook>
+		 	</sheet>
+		 </form>
+    </field>
+</record>
+
+
+<record model="ir.actions.act_window" id="action_price_sheet">
+	<field name="name">报价单</field>
+	<field name="res_model">price.sheet</field>
+	<field name="view_mode">tree,form</field>
+</record>  
+<menuitem  id="menu_price_sheet"  groups="base.group_no_one" name="报价单"  parent="menu_sale_manager"   action="action_price_sheet" sequence="3"/>
+
+
+</data>
+
+
+</openerp>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

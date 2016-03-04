@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="product_new_tree_view">
+       	<field name="name">product_new_view.tree</field>
+       	<field name="model">product.new</field>
+       	<field name="type">tree</field>
+       	<field name="arch" type="xml">
+       		<tree string='product new'>
+       			<field name="name"/>
+       			<field name='type'/>
+       			<field name='code'/>
+       	
+       		
+       		</tree>
+       	</field>       
+</record>
+
+<record model="ir.ui.view" id="product_new_form_view">
+        <field name="name">product_new.form</field>
+        <field name="model">product.new</field>
+        <field name="arch" type="xml">
+            <form  string="product new" version='7.0'>
+				<header>
+              		
+					
+				</header>
+				<sheet>
+				    <group  colspan="4" col='6'>
+                		<field name='name'/>
+                		<field name='type'/>
+       					<field name='code'/>
+       				</group>
+       				<group  colspan="4" col='6'>
+       					<group>
+       						<field name='first_type' options="{'limit':10,'create':false,'create_edit':false}"/>
+       						<field name='second_type' options="{'limit':10,'create':false,'create_edit':false}"/>
+       						<field name='third_type' options="{'limit':10,'create':false,'create_edit':false}"/>
+       						<field name='fourth_type' options="{'limit':10,'create':false,'create_edit':false}"/>
+       					</group>
+       					<button name='create_product_number' string='自动创建物料编码' type='object' class='oe_highlight'/>
+       				</group>
+       			</sheet>
+       		</form>
+       	</field>
+</record>
+                		
+<record model="ir.actions.act_window" id="act_product_new">
+		<field name="name">产品物料</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.new</field>
+</record>  
+  
+ 
+ 
+<menuitem  id="menu_product_new" name="产品物料"  parent="menu_product_manager"   action="act_product_new" sequence="2"/>
+
+  
+  
+</data>	
+</openerp>		
+
+												

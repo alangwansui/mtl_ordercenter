@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+    <record model="ir.ui.view" id="sale_order_change_tree_view">
+        <field name="name">sale.order.change.tree</field>
+        <field name="model">sale.order.change</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string=" sale order change tree"> 
+                <field name='name'/>
+             		
+                <field name='type'/>
+             	<field name='product_id'/>
+                <field name='response_id'/>
+                <field name='create_date'/>
+                <field name='change_order'/>
+                <field name='change_price'/>
+                <field name='change_pcb_info_id'/>
+                <field name='change_impedance'/>
+                <field name='state'/>
+            </tree>
+        </field>
+    </record>    
+    
+    <record model="ir.ui.view" id="sale_order_change_form_view">
+        <field name="name">sale.order.change.form</field>
+        <field name="model">sale.order.change</field>
+        <field name="arch" type="xml">
+            <form string=" sale order change form" version='7.0'>
+            	<header>
+
+                	<button name='write_dpt' string='审批' type='object'  class='oe_highlight'/>
+                	<field name='state' widget="statusbar" statusbar_visible="draft,wait_plan_clerk,wait_plan,wait_eng,'wait_tech','wait_stock','wait_purchase',wait_quality,wait_order_center,wait_order_manager,done,cancel" statusbar_colors='{"wait_project":"blue"}'/>
+            	</header>
+            	<sheet>
+					<group colspan='4' col='4'>
+						<group colspan='1' col='2'>
+								<field name='name'/>
+						  
+							
+								<field name='response_id'/>
+								
+								<field name='create_date'/>
+								<field name='type'/>
+							
+								<field name='pcb_info_id' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='partner_id'/>
+								<field name='sale_order_id'/>
+								
+								<field name='company'/>
+						</group>
+						<group colspan='1' col='2'>
+								<field name='stock_count' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='chang_temp' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='change_forerer' attrs="{'readonly':[('state','!=','draft')]}"/>
+								
+								<field name='stop_workcenter' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='renew_production' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='loss_amount'/>
+								
+								<field name='change_company'/>
+						</group>
+						<group colspan='1' col='2'>
+							
+								<field name='change_order' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='change_price' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='change_pcb_info_id' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='change_impedance' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='change_pcb_info'/>
+								<field name='change_sale_order_new'/>
+								<field name='product_id' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='mrp_production_id'/>
+								
+						</group>
+						<group colspan='1' col='2'>
+							<h3>审批部门:</h3>
+							<newline/>
+							<field name='wait_plan' attrs="{'readonly':[('state','!=','wait_eng')]}"/>
+							<field name='wait_tech' attrs="{'readonly':[('state','!=','wait_eng')]}"/>
+							<field name='wait_stock' attrs="{'readonly':[('state','!=','wait_eng')]}"/>
+							<field name='wait_purchase' attrs="{'readonly':[('state','!=','wait_eng')]}"/>
+							<field name='wait_quality' attrs="{'readonly':[('state','!=','wait_eng')]}"/>
+							<field name='delivery_date'/>
+						</group>
+					</group>
+					<group colspan='4' col='4'>
+						<field name='context' attrs="{'readonly':[('state','!=','draft')]}"/>
+						<field name='plan_process' attrs="{'readonly':[('state','!=','wait_plan_clerk')]}"/>
+						<field name='eng_process' attrs="{'readonly':[('state','!=','wait_eng')]}"/>
+						<field name='finally_note' attrs="{'readonly':[('state','!=','wait_order_manager')]}"/>
+					</group>
+					<notebook>
+						<page string='评审内容'>
+							<field name='so_change_lines_ids' widget='one2many_list'/>
+                       	</page>
+                    </notebook>
+              	</sheet>
+            </form>
+            
+        </field>
+    </record>  
+    
+    <record model='ir.ui.view' id='so_change_records_view_tree'>
+    		<field name='name'>so.change.records.tree</field>
+    		<field name='model'>so.change.records</field>
+    		<field name='arch' type='xml'>
+    			<tree string='so change records tree'> 
+    				 <field name='dpt_id'/>
+    				 <field name='is_sure'/>
+    				 <field name='note'/>
+    				 
+    				 <field name='change_loss'/>
+    				 <field name='deal_board'/>
+    				 <field name='tool_loss'/>
+    				 <field name='produt_loss'/>
+    				 <field name='rework_cost'/>
+    				 <field name='consultation'/>
+    				 
+    				 <field name='responsible_name'/>
+    				 <field name='finish_date'/>
+    				 <field name='state'/>
+    			</tree>
+    		</field>
+    </record>
+    
+    <record model='ir.ui.view' id='so_change_records_view_form'>
+    		<field name='name'>so.change.records.form</field>
+    		<field name='model'>so.change.records</field>
+    		<field name='arch' type='xml'>
+    			<form string='so change records form' version='7.0'>
+    			    <header>
+    			        
+    			    </header>
+    			    <sheet>
+	    			 <group>
+		    			 	<group>
+			    			 	<field name='dpt_id' attrs="{'readonly':1}"/>
+		    				    <field name='responsible_name' attrs="{'readonly':1}"/>
+		    				    <field name='finish_date' attrs="{'readonly':1}"/>
+		    				    <field name='state' attrs="{'readonly':1}"/>
+		    				</group>
+		    				<group>
+		    					<field name='is_sure' attrs="{'readonly':[('state','!=','draft')]}"/>
+	    				   	    <field name='note' attrs="{'readonly':[('state','!=','draft')]}"/>
+		    				</group>
+		    				
+		    				<group string='品质部需填信息'>
+		    					<field name='change_loss' attrs="{'readonly':[('state','!=','draft')]}"/>
+		    					<field name='deal_board' attrs="{'readonly':[('state','!=','draft')]}"/>
+		    				</group>
+		    				
+		    				<group string='订单中心需填信息'>
+		    					<field name='rework_cost' attrs="{'readonly':[('state','!=','draft')]}"/>
+		    					<field name='tool_loss' attrs="{'readonly':[('state','!=','draft')]}"/>
+		    					<field name='produt_loss' attrs="{'readonly':[('state','!=','draft')]}"/>
+		    					<field name='consultation' attrs="{'readonly':[('state','!=','draft')]}"/>
+		    				</group>
+	    			 </group>
+				</sheet>
+    		 </form>
+    	  </field>
+    </record>
+    
+    
+    <record model="ir.actions.act_window" id="action_sale_order_change">
+        <field name="name">合同更改单</field>
+        <field name="res_model">sale.order.change</field>
+        <field name="view_mode">tree,form</field>
+    </record>  
+    <menuitem  id="menu_sale_order_change"  groups="base.group_no_one" name="合同更改单" action='action_sale_order_change' parent="menu_sale_manager" sequence="7"/>   
+        
+
+</data>
+</openerp>
+
+

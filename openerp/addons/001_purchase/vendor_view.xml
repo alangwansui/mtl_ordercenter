@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+<record model="ir.ui.view" id="vendor_tree_view">
+    <field name="name">vendor.tree</field>
+	<field name="model">vendor</field>
+	<field name="arch" type="xml">
+		<tree string="vendor info">
+			<field name='vendor_code'/> 
+			<field name='name'/>
+			<field name='type'/>
+			<field name='business_goods'/>
+		</tree>
+		
+	</field>
+</record>
+
+<record model="ir.ui.view" id="vendor_form_view">
+	<field name="name">vendor.form</field>
+	<field name="model">vendor</field>
+		<field name="arch" type="xml">
+		<form string='vendor info'>
+			<group>
+				  <group>
+						<field name='vendor_code'/>  
+						<field name='name'/>
+						<field name='type'/>
+						<field name='region'/>
+						<field name='sale_mam'/>	
+				  </group>
+				  <group>
+					
+			        <field name='link_man'/>
+			        <field name='link_phone'/>
+			        <field name='address'/>
+			        <field name='fax_code'/>
+			        <field name='mail_code'/>
+			        <field name='zip_code'/>
+			       
+				  </group>
+				  	  
+				  <group>
+				  	<field name='bank_name'/>
+					<field name='bank_code'/>
+					<field name='note'/>
+				  </group>
+				  
+				  <group>
+				  	<field name='delivery_type'/>
+			        <field name='payment_type'/>
+			        <field name='business_goods'/>
+				  </group>
+				  
+			</group>
+		</form>
+		</field>
+</record>
+				
+<record model="ir.actions.act_window" id="act_vendor">
+	<field name="name">供应商信息</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">vendor</field>
+</record>  
+
+<menuitem  id="menu_vendor"  groups="base.group_no_one" name="供应商信息"  parent="menu_001_purchase_base"   action="act_vendor" sequence='0'/>
+
+
+
+</data>
+</openerp>

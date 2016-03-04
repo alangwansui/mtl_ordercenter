@@ -1,0 +1,115 @@
+<?xml version='1.0'  encoding='utf-8'?>
+<openerp>
+<data>
+
+<record id="wkf_sale_order_new" model="workflow">
+            <field name="name">sale_order_new.workflow</field>
+            <field name="osv">sale.order.new</field>
+         
+        </record>
+
+        <record id="act_draft" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_sale_order_new"/>
+            <field name="flow_start">True</field>
+            <field name="name">draft</field>
+        </record>
+
+		<record id="act_wait_confirm" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_sale_order_new"/>
+            <field name="name">wait_confirm</field>
+            <field name="kind">function</field>
+            <field name='action'>write({'state':'wait_confirm'})</field>
+        </record>
+
+		<record id="act_wait_master" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_sale_order_new"/>
+            <field name="name">wait_master</field>
+            <field name="kind">function</field>
+            <field name='action'>write({'state':'wait_master'})</field>
+        </record>
+        
+        <record id="act_wait_sign_back" model="workflow.activity">    
+            <field name="wkf_id" ref="wkf_sale_order_new"/>
+            <field name="name">wait_sign_back</field>
+            <field name="kind">function</field>
+            <field name='action'>write({'state':'wait_sign_back'})</field>
+        </record>
+ 
+         <record id="act_order_wait_change" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_sale_order_new"/>
+            <field name="name">order_wait_change</field>
+            <field name="kind">function</field>
+            <field name='action'>write({'state':'order_wait_change'})</field>
+        </record>
+        
+        
+        <record id="act_special_approval" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_sale_order_new"/>
+            <field name="name">special_approval</field>
+            <field name="kind">function</field>
+            <field name='action'>write({'state':'done'})</field>
+        </record>
+
+    	<record id="act_done" model="workflow.activity">
+        	<field name="wkf_id" ref="wkf_sale_order_new"/>
+       		<field name="name">done</field>
+        	<field name="kind">function</field>
+        	<field name="action">write({'state':'done'})</field>
+        	<field name="flow_stop">True</field>
+    	</record>
+
+	 	<record id="trans_draft2act_wait_confirm" model="workflow.transition">
+            <field name="act_from" ref="act_draft"/>
+            <field name="act_to" ref="act_wait_confirm"/>
+            <field name="signal">button_approve</field>
+            <field name='condition'>update_wait_production_count()</field>
+        </record>
+        
+        <record id="act_wait_confirm2act_wait_master" model="workflow.transition">
+            <field name="act_from" ref="act_wait_confirm"/>
+            <field name="act_to" ref="act_wait_master"/>
+            <field name="signal">button_approve</field>
+            <field name='condition'>not update_state()</field>
+        </record>
+
+	 	<record id="act_wait_confirm2act_wait_sign_back" model="workflow.transition">
+            <field name="act_from" ref="act_wait_confirm"/>
+            <field name="act_to" ref="act_wait_sign_back"/>
+            <field name="signal">button_approve</field>
+            <field name='condition'>update_state()</field>
+        </record>
+        
+
+
+        <record id="act_wait_master2act_wait_sign_back" model="workflow.transition">
+            <field name="act_from" ref="act_wait_master"/>
+            <field name="act_to" ref="act_wait_sign_back"/>
+            <field name="signal">button_approve</field>
+        </record>
+
+
+ 		<record id="act_wait_sign_back2done" model="workflow.transition">
+            <field name="act_from" ref="act_wait_sign_back"/>
+            <field name="act_to" ref="act_done"/>
+            <field name="signal">button_approve</field>
+            <field name='condition'>check_approval() and done()</field>
+        </record>
+
+
+        <record id="trans_order_wait_change2done" model="workflow.transition">
+          <field name="act_from" ref="act_order_wait_change"/>
+          <field name="act_to" ref="act_done"/>
+          <field name="signal">button_approve</field>
+          <field name="condition">True</field>
+   		 </record>
+
+ 		<record id="act_special_approval2done" model="workflow.transition">
+            <field name="act_from" ref="act_special_approval"/>
+            <field name="act_to" ref="act_done"/>
+            <field name="signal">button_approve</field>
+            <field name='condition'>done()</field>
+        </record>
+
+
+</data>
+</openerp>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id='frame_sale_order_tree_view' model="ir.ui.view">
+			<field name="name">frame.sale.order.tree</field>
+			<field name="model">frame.sale.order</field>
+			<field name="arch" type='xml'>
+				<tree string="sales order information">
+					<field name="name"/>
+					<field name="partner_id"/>
+					<field name="partner_code"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+
+		
+		<record id='frame_sale_order_form_view' model="ir.ui.view">
+			<field name="name">frame.sale.order.form</field>
+			<field name="model">frame.sale.order</field>
+			<field name="arch" type='xml'>
+				<form string=" frame sales order " version="7.0">
+					   	<header>
+						    <button name='button_approve'  string='审批'  class='oe_highlight'/>
+							<field name='state' widget="statusbar" statusbar_visible="draft,wait_director,wait_master,done" statusbar_colors='{"draft":"blue"}'/>
+						</header>
+					    <sheet>
+					      <group colspan="6" col="4" >
+					      		<group>
+									<field name="name" attrs="{'readonly':[('state','!=','draft')]}"/>
+									<field name="partner_code" attrs="{'readonly':[('state','!=','draft')]}"/>
+									<field name="partner_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+								</group>	
+								<group>
+									<field name="quality_agreement" attrs="{'readonly':[('state','!=','draft')]}"/>
+									<field name="environment_agreement" attrs="{'readonly':[('state','!=','draft')]}"/>
+									<field name="technology_agreement" attrs="{'readonly':[('state','!=','draft')]}"/>
+									<field name="confidentiality_agreement" attrs="{'readonly':[('state','!=','draft')]}"/>										
+								</group>
+								<group>
+									<field name="integrity_agreement" attrs="{'readonly':[('state','!=','draft')]}"/>
+									<field name="pcn_agreement" attrs="{'readonly':[('state','!=','draft')]}"/>
+									<field name="sale_order_agreement" attrs="{'readonly':[('state','!=','draft')]}"/>
+									<field name="cooperation_agreement" attrs="{'readonly':[('state','!=','draft')]}"/>
+								</group>
+						  </group>
+						</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id='act_frame_sale_order' model="ir.actions.act_window">
+			<field name="name">框架合同</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">frame.sale.order</field>
+		</record>
+		
+		<menuitem id="menu_frame_sale_order" name="框架合同" parent="001_sale.menu_sale_manager" action="act_frame_sale_order" sequence='5'/>		
+	</data>
+</openerp>

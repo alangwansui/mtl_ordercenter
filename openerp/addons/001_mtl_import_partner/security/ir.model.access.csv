@@ -1,0 +1,2 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_import_partner_ceo","import.partner ceo","model_import_partner","001_mtl_import_partner.group_mtl_ceo",1,1,1,1

@@ -1,0 +1,309 @@
+<openerp>
+<data>
+
+<record id="generalmanager" model="res.groups">
+        <field name="name">GeneralManager</field>
+</record>
+
+<record id="dpt_manager" model="res.groups">
+        <field name="name">DPT/Manager</field>
+</record>
+
+<record id="humanresources_manager" model="res.groups">
+        <field name="name">HumanResources/Manager</field>
+</record>
+
+<record id="humanresources_user" model="res.groups">
+        <field name="name">HumanResources/User</field>
+</record>
+
+<record id="humanresources_security" model="res.groups">
+        <field name="name">HumanResources/Security</field>
+</record>
+
+<record id="humanresources_environment" model="res.groups">
+        <field name="name">HumanResources/Environment</field>
+</record>
+
+<record id="development_manager" model="res.groups">
+        <field name="name">Development/Manager</field>
+</record>
+
+<record id="development_user" model="res.groups">
+        <field name="name">Development/User</field>
+</record>
+
+<record id="development_laboratory" model="res.groups">
+        <field name="name">Development/Laboratory</field>
+</record>
+
+<record id="accounting_accountant" model="res.groups">
+        <field name="name">Accounting/Accountant</field>
+</record>
+
+<record id="accounting_invoice" model="res.groups">
+        <field name="name">Accounting/Invoice</field>
+</record>
+
+<record id="accounting_manager" model="res.groups">
+        <field name="name">Accounting/Manager</field>
+</record>
+
+<record id="accounting_payments" model="res.groups">
+        <field name="name">Accounting/Payments</field>
+</record>
+
+<record id="manufacturing_manager" model="res.groups">
+        <field name="name">Manufacturing/Manager</field>
+</record>
+
+<record id="manufacturing_user" model="res.groups">
+        <field name="name">Manufacturing/User</field>
+</record>
+
+<record id="engineering_manager" model="res.groups">
+        <field name="name">Engineering/Manager</field>
+</record>
+
+<record id="engineering_user" model="res.groups">
+        <field name="name">Engineering/User</field>
+</record>
+
+<record id="engineering_qae" model="res.groups">
+        <field name="name">Engineering/QAE</field>
+</record>
+
+<record id="engineering_film" model="res.groups">
+        <field name="name">Engineering/Film</field>
+</record>
+
+<record id="technology_manager" model="res.groups">
+        <field name="name">Technology/Manager</field>
+</record>
+
+<record id="technology_user" model="res.groups">
+        <field name="name">Technology/User</field>
+</record>
+
+<record id="project_manager" model="res.groups">
+        <field name="name">Project/Manager</field>
+</record>
+
+<record id="project_user" model="res.groups">
+        <field name="name">Project/User</field>
+</record>
+
+<record id="production_manager" model="res.groups">
+        <field name="name">Production/Manager</field>
+</record>
+
+<record id="production_user" model="res.groups">
+        <field name="name">Production/User</field>
+</record>
+
+<record id="production_drill" model="res.groups">
+        <field name="name">Production/Drill</field>
+</record>
+
+<record id="production_stitching" model="res.groups">
+        <field name="name">Production/Stitching</field>
+</record>
+
+<record id="production_graph" model="res.groups">
+        <field name="name">Production/Graph</field>
+</record>
+
+<record id="production_electroplate" model="res.groups">
+        <field name="name">Production/Electroplate</field>
+</record>
+
+<record id="production_route" model="res.groups">
+        <field name="name">Production/Route</field>
+</record>
+
+<record id="production_maintain" model="res.groups">
+        <field name="name">Production/Maintain</field>
+</record>
+
+<record id="quality_manager" model="res.groups">
+        <field name="name">Quality/Manager</field>
+</record>
+
+<record id="quality_user" model="res.groups">
+        <field name="name">Quality/User</field>
+</record>
+
+<record id="quality_test" model="res.groups">
+        <field name="name">Quality/Test</field>
+</record>
+
+<record id="quality_ipqc" model="res.groups">
+        <field name="name">Quality/IPQC</field>
+</record>
+
+<record id="quality_oqc" model="res.groups">
+        <field name="name">Quality/OQC</field>
+</record>
+
+<record id="system_manager" model="res.groups">
+        <field name="name">System/Manager</field>
+</record>
+
+<record id="system_user" model="res.groups">
+        <field name="name">System/User</field>
+</record>
+
+<record id="sales_manager" model="res.groups">
+        <field name="name">Sales/Manager</field>
+</record>
+
+<record id="sales_user" model="res.groups">
+        <field name="name">Sales/User</field>
+</record>
+
+<record id="sales_inland" model="res.groups">
+        <field name="name">Sales/Inland</field>
+</record>
+
+<record id="sales_shenzhen" model="res.groups">
+        <field name="name">Sales/Shenzhen</field>
+</record>
+
+<record id="sales_beijing" model="res.groups">
+        <field name="name">Sales/Beijing</field>
+</record>
+
+<record id="sales_changsha" model="res.groups">
+        <field name="name">Sales/Changsha</field>
+</record>
+
+<record id="sales_shanghai" model="res.groups">
+        <field name="name">Sales/Shanghai</field>
+</record>
+
+<record id="sales_interior" model="res.groups">
+        <field name="name">Sales/Interior</field>
+</record>
+
+<record id="sales_hangzhou" model="res.groups">
+        <field name="name">Sales/Hangzhou</field>
+</record>
+
+<record id="sales_tianjin" model="res.groups">
+        <field name="name">Sales/Tianjin</field>
+</record>
+
+<record id="sales_nanjin" model="res.groups">
+        <field name="name">Sales/Nanjin</field>
+</record>
+
+<record id="sales_xian" model="res.groups">
+        <field name="name">Sales/Xian</field>
+</record>
+
+<record id="sales_foreign" model="res.groups">
+        <field name="name">Sales/Foreign</field>
+</record>
+
+<record id="sales_order" model="res.groups">
+        <field name="name">Sales/Order</field>
+</record>
+
+<record id="material_manager" model="res.groups">
+        <field name="name">Material/Manager</field>
+</record>
+
+<record id="material_user" model="res.groups">
+        <field name="name">Material/User</field>
+</record>
+
+<record id="material_pack" model="res.groups">
+        <field name="name">Material/Pack</field>
+</record>
+
+<record id="material_cutting" model="res.groups">
+        <field name="name">Material/Cutting</field>
+</record>
+
+<record id="pr_buyer" model="res.groups">
+        <field name="name">PR/buyer</field>
+</record>
+
+<record id="pr_creater" model="res.groups">
+        <field name="name">PR/creater</field>
+</record>
+
+<record id="pr_purchaser" model="res.groups">
+        <field name="name">PR/purchaser</field>
+</record>
+
+<record id="other" model="res.groups">
+        <field name="name">Other</field>
+</record>
+
+<record id="quality_IQC" model="res.groups">
+        <field name="name">Quality/IQC</field>
+</record>
+
+<record id="quality_supervisor" model="res.groups">
+        <field name="name">Quality/Supervisor</field>
+</record>
+
+<record id="quality_engineer" model="res.groups">
+        <field name="name">Quality/Engeer</field>
+</record>
+
+<record id="humanresources_structure" model="res.groups">
+        <field name="name">HumanResources/Structure</field>
+</record>
+
+<record id="production_outsource" model="res.groups">
+        <field name="name">Production/Outsource</field>
+</record>
+
+<record id="chairman" model="res.groups">
+        <field name="name">Chairman</field>
+</record>
+
+<record id="supervisor" model="res.groups">
+        <field name="name">Supervisor</field>
+</record>
+
+<record id="director" model="res.groups">
+        <field name="name">Director</field>
+</record>  
+<record id="warehouse_user" model="res.groups">
+        <field name="name">Warehouse/User</field>
+</record>     
+<record id="warehouse_manager" model="res.groups">
+        <field name="name">Warehouse/Manager</field>
+</record>     
+    
+<record id="Engineering/Tests" model="res.groups">
+        <field name="name">Engineering/Tests</field>
+</record>     
+    
+<record id="Engineering/Rout" model="res.groups">
+        <field name="name">Engineering/Rout</field>
+</record>     
+    
+<record id="Engineering/Plot" model="res.groups">
+        <field name="name">Engineering/Plot</field>
+</record>     
+       
+<record id="Engineering/Plan" model="res.groups">
+        <field name="name">Engineering/Plan</field>
+</record>     
+    
+<record id="Engineering/Quality" model="res.groups">
+        <field name="name">Engineering/Quality</field>
+</record>    
+    
+    
+    
+    
+    
+    
+    
+</data>
+</openerp>

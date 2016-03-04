@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+<!-- <data noupdate="1">
+<record id="sequence_pcb_info_type" model="ir.sequence.type">
+    <field name="name">pcb_info</field>
+    <field name="code">pcb.info</field>
+</record>
+
+<record id="sequence_pcb_info" model="ir.sequence">
+    <field name="name">pcb_info</field>
+    <field name="code">pcb.info</field>
+    <field name="prefix">PINF</field>
+    <field name="padding">6</field>
+    <field name="number_next"></field>
+    <field name="number_increment">1</field>
+</record>
+</data>  -->
+
+<data>
+<record model="ir.ui.view" id="pcb_info_tree_view">
+    <field name="name">pcb_info.tree</field>
+    <field name="model">pcb.info</field>
+    <field name="arch" type="xml">
+        <tree string="pcb_info" colors="gray:state in ('done');red:state in('draft');blue:state in('wait_order_supervisor')">
+        	
+            <field name="name"/>
+            <field name='ref'/>
+			<field name="partner_id"/>
+			<field name='fname'/>
+			<field name="responsible_id"/>
+			<field name='receive_type'/>
+			<field name='product_id'/>
+			<field name="create_date"/>                          
+			<field name="custmer_goodscode"/>
+			<field name="state"/>
+        </tree>
+    </field>
+</record>
+
+
+<record model="ir.ui.view" id="pcb_info_form_view">
+    <field name="name">pcb_info.form</field>
+    <field name="model">pcb.info</field>
+    <field name="arch" type="xml">
+        <form string="pcb_info" version='7.0'>
+        	<header>
+          		<button name='button_approve'  string='审批'  class='oe_highlight' states='draft,wait_order_supervisor' groups='001_sale.sales_order'/>
+          		<button name='button_approves'  string='审批' type='object'  class='oe_highlight' groups='001_sale.sales_order' states='wait_change'/>
+          		<button name='sure'  string='确认东烁用户单' type='object' class='oe_highlight' states='draft' groups='001_sale.sales_order'/>
+			 	<!--  <button name='button_return'  string='反审批'  class='oe_highlight'/>-->
+             	<button name='button_refuse'  string='作废' class='oe_highlight' states='wait_order_supervisor' groups='001_sale.sales_manager'/>
+                <field name='state' widget="statusbar" statusbar_visible="draft,wait_order_supervisor,wait_change,done,refuse" statusbar_colors='{"wait_order_supervisor":"blue"}'/>
+            </header>
+            <sheet>
+		        <notebook colspan="4">
+		            <page string="技术标准1">
+		            	  <group colspan="4" col='4'>   <!--  attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"  -->
+		        			<group>
+		        				<field name="name" select="1"/>
+		        				<field name='source_file_name' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		        				<field name='layer_count' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>  	
+		        				<field name='product_material' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		        				<field name='inner_cu' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		     					<field name='out_cu' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		        				<field name='solder_colour' on_change="onchange_silk_solder_colour(solder_colour)" attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		        				<field name='solder_variants' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		         				<field name='solder_type' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		         				<field name='solder_via' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		                      	<field name='contact' options="{'limit':15,'create':false,'create_edit':false}" attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name='phone' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            			<field name='responsible_id' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}" groups='001_sale.sales_manager'/>
+		                       
+								
+		                        
+		        				<!--  <field name='responsible_id'/>
+		        				   <field name='buried_name'/>
+		                        <field name='buried_quantity'/>
+		        				-->
+		        			</group>
+		        			<group>
+		              			<field name="partner_id" on_change="onchange_contact(partner_id)" attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		              			<field name='custmer_goodscode' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		              			<field name='basic_board_thickness' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>  
+		           				<field name='finish_board_thickness' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/> 
+		           				<field name='finish_inner_cu' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name='finish_out_cu' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		      					<field name='silk_colour' on_change="onchange_silk_colour(silk_colour)"  attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		      					<field name='silk_variants' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		     					<field name= 'silk_type' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		     					<field name='soft_version' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		           				<field name='email' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		           				<field name='create_date' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            		
+				        		
+		            		</group>
+		            		<group>
+		            			<field name='ref' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            			<field name='order_recive_id' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            			<field name='product_id' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            			<field name='finish_tol_upper' on_change='onchange_tol_upper(finish_tol_upper)' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/> 
+		            			<field name='finish_tol_lower' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            			<field name='surface_treatment' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>  
+		          				<field name='au_area' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		          				<field name='au_thickness' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		           				<field name='surface_treatment_request' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/> 
+		           				<field name='gold_finger_id' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		           				<field name='allow_scrap_count' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		       					<field name='allow_scrap_percent' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		       					<field name='plot_count' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            			
+								
+		            			
+		            			
+		           		 	<!--  	<field name="mix_press"/>
+		           		 	    <field name='impedance_id'/>
+		           		 		<field name='add_delivery_chapter'/>-->
+		        				
+		            			
+				        		
+		   					</group>
+		   					<group>
+		   						<field name='csmtl_company' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            			<field name='szmtl_company' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>		
+		   						<field name='provide_gerber' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		           				<field name='provide_steel_net' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		        				<field name='confirm_gerber' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		        				<field name= 'pcs_length' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		        				<field name='pcs_width' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            			<field name='unit_length' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name='unit_width' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name='panel_x' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name='panel_y' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name='delivery_type' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name= 'vcut_angle' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            		</group>
+		        		
+		        		</group>
+		        		<group>
+		        			<field name='except_note' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+			        		<field name='special_process_note' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+			        	
+							<field name='packing_note' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+						
+							<field name='delivery_order_request' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+							
+							<field name='partner_special_request' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+							
+							<field name='next_note' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+						</group>
+		            </page>
+		            
+		            <page string='技术标准2'>
+		            	<group colspan='4' col='4'  width='1000'>
+		            		<group>
+		            			<field name='min_line_width' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>  
+								<field name='min_line_space' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name='min_hole2line' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name='min_finish_hole' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>  
+		            		
+		            		
+		            		
+		            		
+		            		
+		            		</group>
+		            		<group>
+		            			
+		            			<field name='pcs_drill_count' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name='pcs_slot_count' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name='test_point_count' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name='multi_panel' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/> 
+								
+		            		
+		            		
+		            		</group>
+		            		<group>
+		            			<field name='drill_density' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            			<field name='test_point_density' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            			
+		            			<field name='route_length' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>  
+		            			<field name='flexible_layer_count' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            		</group>
+		            		<group>
+		            		
+		            			<field name='fill_core_count' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name='fill_pp_count' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+								<field name='matrial_use_ratio' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            			<field name='sepecial_board_size' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>			
+		            			<field name='via_quantity' attrs="{'readonly':[('state','not in',('draft','wait_change'))]}"/>
+		            		</group>
+		            	</group>
+		            	<group colspan='4' col='4'  width='1000'> 
+		            		<group colspan='1' col='2'>
+		            			<field name='pcb_info_many'>
+		            				<tree string='选择项' editable='bottom'>
+		            					<field name='board_material' attrs="{'readonly':[('state','=','done')]}"/>
+		            					<field name='special_process' attrs="{'readonly':[('state','=','done')]}"/>
+		            					<field name='route_type' attrs="{'readonly':[('state','=','done')]}"/>
+		            					<field name='accept_standard' attrs="{'readonly':[('state','=','done')]}"/>
+		            					<field name='test_type' attrs="{'readonly':[('state','=','done')]}"/>
+		            					<field name='mark_request' attrs="{'readonly':[('state','=','done')]}"/>
+		            					<field name='request_with_goods' attrs="{'readonly':[('state','=','done')]}"/>
+		            					<field name='packing_type' attrs="{'readonly':[('state','=','done')]}"/>
+		            					<field name='is_specia_material' attrs="{'readonly':[('state','=','done')]}"/>
+		            					<field name='is_htg' attrs="{'readonly':[('state','=','done')]}"/>
+		            					
+		            					<field name='is_rigid_flexible' attrs="{'readonly':[('state','=','done')]}"/>
+		            					<field name='state' invisible='True'/>
+		            				</tree>
+		            			</field>	
+		            		</group>
+		           	
+		            	</group>
+		            	<group colspan='4' col='4'  width='1000'> 
+		            		 <group colspan='1' col='2'>
+									<field name='layer_cu_thickness_ids' >  
+										<tree string="layer_cu_thickness" editable="bottom">
+											<field name="name" attrs="{'readonly':[('state','=','done')]}"/>
+											<field name="cu_thickness" attrs="{'readonly':[('state','=','done')]}"/>
+									    	<field name='impdance_info_ids' attrs="{'readonly':[('state','=','done')]}"/>
+									    	<field name='state' invisible='True'/>
+										</tree>
+								
+							
+										<form string='layer_cu_thickness'>
+											<field name="name" attrs="{'readonly':[('state','=','done')]}"/>
+											<field name="cu_thickness" attrs="{'readonly':[('state','=','done')]}"/>
+											<newline/>
+											<field name='impdance_info_ids' attrs="{'readonly':[('state','=','done')]}"/>
+										</form>
+									</field>
+									<newline/>
+									<button name="default_layer_cu_thickness"  string="默认板层铜厚" type="object" icon="icon" states='draft'/>
+								</group>
+								<group>
+							 		<field name='blind_buried_via_ids' >  
+										<tree string="blind_buried_via" editable="bottom">
+											<field name="start" attrs="{'readonly':[('state','=','done')]}"/>
+											<field name="end" attrs="{'readonly':[('state','=','done')]}"/>
+											<field name='state' invisible='True'/>
+										</tree>
+									</field>
+								</group>
+		            	</group>
+					</page>
+			
+				</notebook>
+			</sheet>
+		</form>
+    </field>
+</record>
+
+<record id="view_pcb_info_search" model="ir.ui.view">
+       <field name="name">pcb.info.select</field>
+       <field name="model">pcb.info</field>
+       <field name="type">search</field>
+       <field name="arch" type="xml">
+       		<search string='search pcb info'>
+         		<group expand="0" string="Group By...">
+ 					
+ 					
+                   	<filter string="草稿" icon="terp-personal"  name="draft" domain="[('state','=','draft')]"/>
+                   	<filter string="资料审核员" icon="terp-personal" domain="[]" context="{'group_by':'user_id'}"/>
+                   	<field name='name' filter_domain="[('name','ilike',self)]"/>
+                   	<field name='product_id' filter_domain="[('product_id','ilike',self)]"/>
+             		<field name='responsible_id' filter_domain="[('responsible_id','ilike',self)]"/>
+            		<field name='ref' filter_domain="[('ref','ilike',self)]"/>
+            		<field name='partner_id' filter_domain="[('partner_id','ilike',self)]"/>
+ 				</group>
+ 			</search>
+ 	    </field>
+</record>
+
+
+
+
+
+
+
+
+<record model="ir.actions.act_window" id="act_pcb_info">
+	<field name="name">用户单</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">pcb.info</field>
+	<field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="search_view_id" ref="view_pcb_info_search"/>
+    <field name="context">{'search_default_draft':1}</field>
+	
+	
+</record>  
+<menuitem  id="menu_pcb_info"  groups="base.group_no_one" name="用户单"  parent="menu_sale_manager"   action="act_pcb_info" sequence="2"/>
+
+<record model="ir.ui.view" id="pcb_cost_argument_tree_view">
+    <field name="name">pcb_cost_argument.tree</field>
+    <field name="model">pcb.cost.argument</field>
+    
+    <field name="arch" type="xml">
+        <tree string="pcb_cost_argument" editable="bottom">
+            <field name='res_partner_id' widget='selection' attrs="{'readonly':[('state','!=','draft')]}"/>
+            <field name="name" attrs="{'readonly':[('state','!=','draft')]}"/>                    
+			<field name="type" attrs="{'readonly':[('state','!=','draft')]}"/>    
+			<field name="cost_type" attrs="{'readonly':[('state','!=','draft')]}"/>
+			<field name="v" attrs="{'readonly':[('state','!=','draft')]}"/>
+			<field name="layer_count" attrs="{'readonly':[('state','!=','draft')]}"/> 
+			<field name="pcs_area_min" attrs="{'readonly':[('state','!=','draft')]}"/>                    
+			<field name="pcs_area_max" attrs="{'readonly':[('state','!=','draft')]}"/>   
+			<field name="au_thick_min" attrs="{'readonly':[('state','!=','draft')]}"/> 
+			<field name="au_thick_max" attrs="{'readonly':[('state','!=','draft')]}"/> 
+			<field name="finger_count_min" attrs="{'readonly':[('state','!=','draft')]}"/> 
+			<field name="finger_count_max" attrs="{'readonly':[('state','!=','draft')]}"/> 
+			<field name="test_point_min" attrs="{'readonly':[('state','!=','draft')]}"/>
+			<field name="test_point_max" attrs="{'readonly':[('state','!=','draft')]}"/>                      
+			<field name="cost_days" attrs="{'readonly':[('state','!=','draft')]}"/>        
+			<field name="po_area_min" attrs="{'readonly':[('state','!=','draft')]}"/>                    
+			<field name="po_area_max" attrs="{'readonly':[('state','!=','draft')]}"/>   
+			<field name="bd_thick_max" attrs="{'readonly':[('state','!=','draft')]}"/> 
+			<field name="bd_thick_min" attrs="{'readonly':[('state','!=','draft')]}"/>   
+			<field name="material_category" attrs="{'readonly':[('state','!=','draft')]}"/>   
+			<field name='is_gtg' attrs="{'readonly':[('state','!=','draft')]}"/>                 
+			<field name="material_addition" attrs="{'readonly':[('state','!=','draft')]}"/>                    
+			<field name="cu_thickness" attrs="{'readonly':[('state','!=','draft')]}"/>       
+			<field name='flexible_count' attrs="{'readonly':[('state','!=','draft')]}"/>
+			<field name='surface_treatment' attrs="{'readonly':[('state','!=','draft')]}"/>     
+			<button name='button_approve'  string='done'  type='object' class='oe_highlight'/>  
+			           
+			<field name='state'/>
+			                
+        </tree>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="pcb_cost_argument_form_view">
+    <field name="name">pcb.cost.argument.form</field>
+    <field name="model">pcb.cost.argument</field>
+    <field name="arch" type="xml">
+        <form string="pcb_cost_argument" version='7.0'>
+            <header>
+            
+        	</header>
+            <sheet>
+            	<field name="name" select="1"/>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_pcb_cost_argument">
+	<field name="name">pcb_cost_argument</field>
+	<field name="res_model">pcb.cost.argument</field>
+	<field name="type">ir.actions.act_window</field>
+
+	<field name='view_id' ref='pcb_cost_argument_tree_view'/>
+</record>  
+<menuitem  id="menu_pcb_cost_argument"  groups="base.group_no_one" name="报价参数表"  parent="menu_sale_config_manager"   action="act_pcb_cost_argument" sequence="2"/>
+
+<record model="ir.ui.view" id="pcb_list_tree_view">
+    <field name="name">pcb_list_tree</field>
+    <field name="model">pcb.list</field>
+    <field name="arch" type="xml">
+        <tree string="pcb list" >
+        	
+            <field name="name"/>
+            <field name='ref'/>
+			<field name="partner_id"/>
+			<field name='pcb_info_id'/>
+			
+        </tree>
+    </field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_pcb_list">
+	<field name="name">档案号清单</field>
+	<field name="res_model">pcb.list</field>
+	<field name="type">ir.actions.act_window</field>
+
+	<field name='view_id' ref='pcb_list_tree_view'/>
+</record>  
+<menuitem  id="menu_pcb_list"  groups="base.group_no_one" name="档案号清单"  parent="menu_sale_config_manager"   action="act_pcb_list" sequence="12"/>
+
+
+
+
+
+<!-- <record model="ir.ui.view" id="product_form_view">
+	<field name="name">product.product.inherit.form</field>
+    <field name="model">product.product</field>
+    <field name="type">form</field>
+    <field name="inherit_id" ref="product.product_normal_form_view"/>
+    <field name="arch" type="xml">      
+   		<page string="Descriptions" position="after">
+   
+          	<page string="PCB info" attrs="{'invisible':[('pcb_info_id','=',None)]}">
+          		<field name='pcb_info_id'/>  
+          	</page>
+          	
+        </page>
+	</field>
+</record>-->
+
+
+<!--  <act_window name="goto my price sheet"
+	domain="[('pcb_info_id','=', active_id)]"
+	res_model="price.sheet"
+	src_model="pcb.info"
+	id="act_pcb_info2price_sheet"/>
+
+<act_window name="goto my partner general"
+	
+	res_model="partner.general.requirements"
+	src_model="pcb.info"
+	view_type='form'
+	view_mode='form'
+	id="act_pcb_info2partner_general_requirements"/>	-->
+	
+	
+
+	
+	
+</data>
+</openerp>

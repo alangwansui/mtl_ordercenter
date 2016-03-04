@@ -1,0 +1,33 @@
+<openerp>
+<data>
+    
+<record id="pr_creater_unlink" model="ir.rule">
+	<field name="name">pr_creater_unlink</field>
+    <field name="model_id"  ref="001_purchase.model_purchase_order"/>
+    <field name="groups"    eval="[(6,0,[ref('pr_creater')])]" />
+    <field name="domain_force">[('user_id','=',user.id),('state','=','draft') ]</field>
+    <field name="global" eval="0"/>
+    <field name="perm_unlink" eval="1"/>
+    <field name="perm_write"  eval="0"/>
+    <field name="perm_read"   eval="0"/>
+    <field name="perm_create" eval="0"/>
+</record>   
+
+
+     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</data>
+</openerp>

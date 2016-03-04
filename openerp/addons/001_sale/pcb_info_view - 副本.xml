@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+<!-- <data noupdate="1">
+<record id="sequence_pcb_info_type" model="ir.sequence.type">
+    <field name="name">pcb_info</field>
+    <field name="code">pcb.info</field>
+</record>
+
+<record id="sequence_pcb_info" model="ir.sequence">
+    <field name="name">pcb_info</field>
+    <field name="code">pcb.info</field>
+    <field name="prefix">PINF</field>
+    <field name="padding">6</field>
+    <field name="number_next"></field>
+    <field name="number_increment">1</field>
+</record>
+</data>  -->
+
+<data>
+<record model="ir.ui.view" id="pcb_info_tree_view">
+    <field name="name">pcb_info.tree</field>
+    <field name="model">pcb.info</field>
+    <field name="arch" type="xml">
+        <tree string="pcb_info" colors="gray:state in ('done');red:state in('draft');blue:state in('wait_order_supervisor')">
+        	
+            <field name="name"/>
+			<field name="partner_id"/>
+			<field name="responsible_id"/>
+			<field name="create_time"/>                          
+			<field name="custmer_goodscode"/>
+			<field name="state"/>
+        </tree>
+    </field>
+</record>
+
+
+<record model="ir.ui.view" id="pcb_info_form_view">
+    <field name="name">pcb_info.form</field>
+    <field name="model">pcb.info</field>
+    <field name="arch" type="xml">
+        <form string="pcb_info" version='7.0'>
+        	<header>
+          		<button name='button_approve'  string='审批'  class='oe_highlight'/>
+			 	<button name='button_return'  string='反审批'  class='oe_highlight'/>
+             	<button name='button_refuse'  string='作废' class='oe_highlight'/>
+                <field name='state' widget="statusbar" statusbar_visible="draft,wait_order_supervisor,done,wait_change" statusbar_colors='{"wait_order_supervisor":"blue"}'/>
+            </header>
+            <sheet>
+		        <notebook colspan="4">
+		            <page string="技术标准1">
+		            	  <group colspan="4" col='4'>
+		        			<group>
+		        				<field name="name" select="1"/>
+		        				<field name='product_id'/>
+		        				<field name='custmer_goodscode'/>
+		        				<field name='responsible_id'/>
+		        				<field name='create_time'/>
+		        			</group>
+		        			<group>
+		              			<field name="partner_id" context="{'partner_id':partner_id}"/>
+		              			<field name='order_recive_id'/>
+		              			<field name='layer_count' on_change="onchange_layer_count(layer_count)"/>  	
+		            			<field name='standard_days'/>
+								<field name='provide_gerber'/>
+				        		
+		            		</group>
+		            		<group>
+		            					
+		           		 		<field name="mix_press"/>
+		           		 	    <field name='impedance_id'/>
+		           		 		<field name='add_delivery_chapter'/>
+		        				<field name='provide_steel_net'/>
+		        				<field name='confirm_gerber'/>
+		            			
+				        		
+		   					</group>
+		   					<group>
+		   						<field name='basic_board_thickness'/>  
+		           				<field name='finish_board_thickness'/> 
+		           				<field name='finish_tol_upper' on_change='onchange_tol_upper(finish_tol_upper)'/> 
+		            			<field name='finish_tol_lower'/>
+		            			<field name='csmtl_company'/>
+		            			<field name='szmtl_company'/>		
+		            		</group>
+		        
+		        		</group>
+		        		<separator colspan='1'/>
+		                	<group colspan='4' col='4' width='1000'>
+		            	  		<group>
+		        					<!--<field name='solder_colour' widget='selection' on_change="onchange_silk_solder_colour('solder_variants',solder_colour)"/>
+		        					<field name='solder_variants' widget='selection'/>
+		        					<field name='solder_type' widget='selection'/>
+		        					<field name='solder_via' widget='selection'/>-->
+		        					<field name='solder_colour' on_change="onchange_silk_solder_colour(solder_colour)"/>
+		        					<field name='solder_variants'/>
+		         					<field name='solder_type'/>
+		         					<field name='solder_via'/>
+		         					
+									<field name='test_point_density'/>
+		                            <field name='test_point_count'/>
+		                            <field name='buried_name'/>
+		                            <field name='buried_quantity'/>
+			            		</group>
+			            		<group>
+		          				<!-- 	<field name='silk_colour' widget='selection' on_change="onchange_silk_solder_colour('silk_variants',silk_colour)" />
+		      						<field name='silk_variants' widget='selection' />
+		      						<field name= 'silk_type' widget='selection'/> -->
+		      						
+		      						<field name='silk_colour' on_change="onchange_silk_colour(silk_colour)" />
+		      						<field name='silk_variants'/>
+		     						<field name= 'silk_type'/>
+		     						<field name='inner_cu'/>
+		     						<field name='out_cu'/>
+		                            <field name='allow_scrap_count'/>
+		       						<field name='allow_scrap_percent'/>
+		       						<field name='sepecial_board_size'/>							
+		       					</group>
+			            			
+		            	  		<group>
+		          				 	<field name='surface_treatment'/>  
+		          				 	<field name='au_area'/>
+		           					<field name='surface_treatment_request'/> 
+		           					<field name='gold_finger_id'/>
+									<field name= 'vcut_angle'/>
+									<field name='finish_inner_cu'/>
+									<field name='finish_out_cu'/>
+									<field name='delivery_type'/>
+		            			</group>
+		            		</group>
+		            		
+		            		<separator colspan='1'/>
+		            		<group colspan='2' expand='2'>
+		            		    <group>
+									<field name='special_process_note'/>
+									<field name='packing_note'/>
+									<field name='next_note'/>
+								</group>
+								<group>
+									<field name='delivery_order_request'/>
+									<field name='partner_special_request'/>
+								</group>
+							</group>
+		        
+		            </page>
+		            
+		            <page string='技术标准2'>
+		            	<group colspan='4' col='4'  width='1000'>
+		            		<group colspan='1' col='2'>
+		            			<field name='pcb_info_many'>
+		            				<tree string='选择项' editable='bottom'>
+		            					<field name='board_material'/>
+		            					<field name='is_specia_material'/>
+		            					<field name='is_htg'/>
+		            					<field name='special_process'/>
+		            					<field name='route_type'/>
+		            					<field name='accept_standard'/>
+		            					<field name='test_type'/>
+		            					<field name='mark_request'/>
+		            					<field name='request_with_goods'/>
+		            					<field name='packing_type'/>
+		            				</tree>
+		            			</field>	
+		            		</group>
+		           		<!--  	<group>
+		                            <field name='board_material' widget='many2many' width='220'/> 						
+		      						<field name='accept_standard' widget='many2many' width='220'/>
+		       						<field name='mark_request' widget='many2many' width='220'/>
+		           			</group>
+		           			<group>
+		                            <field name='route_type'  widget='many2many' width='220'/>						
+		          					<field name='request_with_goods' widget='many2many' width='220'/>
+		          					<field name='special_process' widget='many2many' width='220'/>
+		           			</group>	
+		           			<group>		
+		          					<field name='test_type' widget='many2many' width='220'/> 
+		          					<field name='packing_type' widget='many2many' width='220'/>
+		           			</group>	-->
+		            	</group>
+					</page>
+					<page string='难度规范说明'>	
+		        			<group colspan='4' col='6'  width='1000'>
+			        			<group colspan='1' col='2'>
+									<field name='min_line_width'/>  
+									<field name='min_line_space'/>
+									<field name='min_hole2line'/>
+									<field name='min_finish_hole'/>  
+		                            <field name='min_pth_ring'/> 							  
+									<field name='min_via_ring'/> 
+									<field name='min_line2pad'/> 
+								</group>
+								<group colspan='1' col='2'>
+									
+									<field name='pcs_drill_count'/>
+									<field name='pcs_slot_count'/>
+									<field name='npth_tolerance'/>  
+									<field name='pth_tolerance'/>  
+									
+									<field name='route_length'/>  
+									<field name='half_pth'/> 
+									<field name='matrial_use_ratio'/>
+									<field name='flexible_layer_count'/>
+									
+								</group>
+								<group colspan='1' col='2'> 
+								    <field name='back_drill'/>
+									<field name='pad_via'/>  
+									<field name='control_deep_hole'/>  
+									<field name='step_hole'/>  
+									<field name='multi_panel'/>  
+									<field name='laminar_structure'/>  
+									<field name='fill_core_count'/>
+									<field name='fill_pp_count'/>
+								</group>
+						    </group>
+							<group colspan='4' col='4'  width='1000'>
+								<group>
+									<separator string='制作基准' colspan='2'/>
+									
+		    						<field name='soft_info'/>
+		    						<field name='soft_version' widget='selection'/>
+		    						<field name='plot_count'/>
+		      					
+								</group>
+								<group>
+									<separator string='面积和孔径' colspan='2'/>
+									<field name='pcs_area'/>  
+									  
+									<field name='drill_density'/>
+									<field name='pcs_unit_count'/>
+								</group>
+								<group>
+									<separator string='外形尺寸' colspan='2'/>
+									<field name='outline_size_request'/>
+		        					<field name= 'pcs_length'/>
+		        					<field name='pcs_width'/>
+		        					<field name='panel_x'/>
+								</group>
+								<group>
+									<separator string='拼版方式' colspan='2'/>
+									<field name='panel_request'/>
+									<field name='unit_length'/>
+									<field name='unit_width'/>
+									<field name='panel_y'/>
+								</group>
+							</group>
+							<separator colspan='4' string='特殊说明'/>
+						
+							<field name='special_indicate'/>
+						</page>	
+						<page  string="结构信息">
+							<group colspan='4' col='4'>
+							    <group>
+									<field name='layer_cu_thickness_ids' >  
+										<tree string="layer_cu_thickness" editable="bottom">
+											<field name="name"/>
+											<field name="cu_thickness"/>
+									    	<field name='impdance_info_ids'/>
+										</tree>
+								
+							
+										<form string='layer_cu_thickness'>
+											<field name="name"/>
+											<field name="cu_thickness"/>
+											<newline/>
+											<field name='impdance_info_ids'/>
+										</form>
+									</field>
+									<newline/>
+									<button name="default_layer_cu_thickness"  string="默认板层铜厚" type="object" icon="icon" />
+								</group>
+								<group>
+							 		<field name='blind_buried_via_ids' >  
+										<tree string="blind_buried_via" editable="bottom">
+											<field name="start"/>
+											<field name="end"/>
+										</tree>
+									</field>
+								</group>
+							</group>
+						</page>
+				</notebook>
+			</sheet>
+		</form>
+    </field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_pcb_info">
+	<field name="name">用户单</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">pcb.info</field>
+</record>  
+<menuitem  id="menu_pcb_info"  groups="base.group_no_one" name="用户单"  parent="menu_sale_manager"   action="act_pcb_info" sequence="2"/>
+
+<record model="ir.ui.view" id="pcb_cost_argument_tree_view">
+    <field name="name">pcb_cost_argument.tree</field>
+    <field name="model">pcb.cost.argument</field>
+    
+    <field name="arch" type="xml">
+        <tree string="pcb_cost_argument" editable="bottom">
+            <field name='res_partner_id' widget='selection'/>
+            <field name="name"/>                    
+			<field name="type"/>    
+			<field name="cost_type"/>
+			<field name="v"/>
+			<field name="layer_count"/> 
+			<field name="pcs_area_min"/>                    
+			<field name="pcs_area_max"/>   
+			<field name="au_thick_min"/> 
+			<field name="au_thick_max"/> 
+			<field name="finger_count_min"/> 
+			<field name="finger_count_max"/> 
+			<field name="test_point_min"/>
+			<field name="test_point_max"/>                      
+			<field name="cost_days"/>        
+			<field name="po_area_min"/>                    
+			<field name="po_area_max"/>   
+			<field name="bd_thick_max"/> 
+			<field name="bd_thick_min"/>   
+			<field name="material_category"/>   
+			<field name='is_gtg'/>                 
+			<field name="material_addition"/>                    
+			<field name="cu_thickness"/>       
+			<field name='flexible_count'/>
+			<field name='surface_treatment'/>                  
+
+			                
+        </tree>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="pcb_cost_argument_form_view">
+    <field name="name">pcb.cost.argument.form</field>
+    <field name="model">pcb.cost.argument</field>
+    <field name="arch" type="xml">
+        <form string="pcb_cost_argument" version='7.0'>
+            <header>
+            
+        	</header>
+            <sheet>
+            	<field name="name" select="1"/>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_pcb_cost_argument">
+	<field name="name">pcb_cost_argument</field>
+	<field name="res_model">pcb.cost.argument</field>
+	<field name="type">ir.actions.act_window</field>
+
+	<field name='view_id' ref='pcb_cost_argument_tree_view'/>
+</record>  
+<menuitem  id="menu_pcb_cost_argument"  groups="base.group_no_one" name="报价参数表"  parent="menu_sale_config_manager"   action="act_pcb_cost_argument" sequence="2"/>
+
+
+
+<!-- <record model="ir.ui.view" id="product_form_view">
+	<field name="name">product.product.inherit.form</field>
+    <field name="model">product.product</field>
+    <field name="type">form</field>
+    <field name="inherit_id" ref="product.product_normal_form_view"/>
+    <field name="arch" type="xml">      
+   		<page string="Descriptions" position="after">
+   
+          	<page string="PCB info" attrs="{'invisible':[('pcb_info_id','=',None)]}">
+          		<field name='pcb_info_id'/>  
+          	</page>
+          	
+        </page>
+	</field>
+</record>-->
+
+
+<!--  <act_window name="goto my price sheet"
+	domain="[('pcb_info_id','=', active_id)]"
+	res_model="price.sheet"
+	src_model="pcb.info"
+	id="act_pcb_info2price_sheet"/>
+
+<act_window name="goto my partner general"
+	
+	res_model="partner.general.requirements"
+	src_model="pcb.info"
+	view_type='form'
+	view_mode='form'
+	id="act_pcb_info2partner_general_requirements"/>	-->
+	
+	
+
+	
+	
+</data>
+</openerp>

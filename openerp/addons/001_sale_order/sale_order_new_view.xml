@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id='sale_order_new_tree_view' model="ir.ui.view">
+			<field name="name">sale.order.new.tree</field>
+			<field name="model">sale.order.new</field>
+			<field name="arch" type='xml'>
+				<tree string="sales order information" colors="black:state in ('cancel');red:state in('draft');blue:state in('wait_confirm');green:state in('wait_sign_back')">
+					<field name="name"/>
+					<field name="create_date"/>
+					<field name="invoiced"/>
+					<field name="partner_id" options="{'limit':10,'create':false,'create_edit':false}"/>	
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id='sale_order_new_form_tree' model='ir.ui.view'>
+			<field name="name">sale.order.new.form.tree</field>
+			<field name="model">sale.order.new</field>
+			<field name="arch" type="xml">
+				<form string='销售订单' version="7.0">
+					<header>
+					     <button name='button_approve'  string='审批'  states='draft,wait_confirm,wait_master,wait_sign_back,order_wait_change' class='oe_highlight' groups='001_sale.sales_order'/>
+						<button name='button_refuse' type='object' string='作废'   states='draft,wait_confirm,wait_master,wait_sign_back,' class='oe_highlight' groups='001_sale.sales_manager'/>
+						<field name='state' widget="statusbar" statusbar_visible="draft,wait_confirm,wait_master,wait_sign_back,special_approval,order_wait_change,done,cancel" statusbar_colors='{"wait_confirm":"blue"}'/>
+
+					</header>
+					
+					<sheet>
+						<group  colspan="4" col="4">
+						   <group>
+								<field name="name"/>
+							    <field name="create_date" attrs="{'readonly':[('state','not in',('draft','order_wait_change'))]}"/>	
+							    <field name="sign_addr" attrs="{'readonly':[('state','not in',('draft','order_wait_change'))]}"/>
+							    <field name="user_id" attrs="{'readonly':1}"/>
+							    <field name="city" attrs="{'readonly':1}"/>
+							    <field name="special_instruction" attrs="{'readonly':[('state','not in',('draft','order_wait_change'))]}"/>
+							    <field name="cancel_note" attrs="{'readonly':[('state','!=','cancel')]}"/>
+						   </group>
+						   
+						    <group>
+						        <field name="partner_code" attrs="{'readonly':[('state','!=','draft')]}"/>
+						        <field name="partner_id" attrs="{'readonly':[('state','!=','draft')]}" options="{'limit':5,'create':false,'create_edit':false}" on_change="onchange_partner_contact(partner_id)"/>
+							    <field name="phone" attrs="{'readonly':[('state','not in',('draft','order_wait_change'))]}"/>
+							    <field name="pur_contact" attrs="{'readonly':[('state','not in',('draft','order_wait_change'))]}" options="{'limit':15,'create':false,'create_edit':false}"/>
+							    <field name="fax" attrs="{'readonly':[('state','not in',('draft','order_wait_change'))]}"/>
+							    <field name="receiver" attrs="{'readonly':[('state','not in',('draft','order_wait_change'))]}" options="{'limit':15,'create':false,'create_edit':false}"/>
+								<field name="receiver_unit" attrs="{'readonly':[('state','not in',('draft','order_wait_change'))]}"/>
+								<field name="receive_addr" attrs="{'readonly':[('state','not in',('draft','order_wait_change'))]}"/>
+								<field name="street2" attrs="{'readonly':[('state','not in',('draft','order_wait_change'))]}"/>
+							    
+							</group>
+                            <group>
+                                <field name="sale_company" attrs="{'readonly':1}"/>
+								<field name="tax" attrs="{'readonly':1}"/>
+								<field name="currency" attrs="{'readonly':1}"/>
+							    <field name="acceptance_period" attrs="{'readonly':[('state','!=','draft')]}"/>
+							    <field name="payment" attrs="{'readonly':1}"/>
+							    <field name="carriage" attrs="{'readonly':1}"/>
+								<field name="delivery_way" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="settle" attrs="{'readonly':1}"/> 
+								<field name="sale_order" attrs="{'readonly':[('state','!=','draft')]}"/> 
+							</group>
+
+	                           
+  
+					
+							
+						</group>
+						<notebook>
+							<page string="订单明细">
+
+									<field name="sale_order_new_line" attrs="{'readonly':[('state','not in',('draft','wait_confirm'))]}">
+										<tree string='订单明细'>
+											<field name='sequence'/>
+										    <field name="price_sheet_id"/>
+											<field name="name"/>
+											<field name="product_id"/>
+											<field name="sale_type"/>
+											<field name="change_code"/>
+											<field name="custmer_goodscode"/>
+											<field name='layer_count'/>
+											<field name='finish_board_thickness'/>
+											<field name="pcs_length"/>
+											<field name="pcs_width"/>
+											<field name="product_qty"/>
+											<field name="cost_ready_s"/>
+											<field name="cost_plot_s"/>
+											<field name="cost_test_s"/>
+											<field name="cost_days"/>
+											<field name="cost_other_s"/>
+											<field name="cost_once"/>
+											<field name="is_recive_once_cost"/>
+											<field name="product_uom"/>
+											<field name="discount"/>
+											<field name="price_unit"/>
+											<field name="line_tax" sum='tax'/>
+											<field name="line_untax_amount_total" sum='untax_amount_total'/>
+											<field name="line_amount_total" sum='amount_total'/>
+											<field name="delivery_date"/>
+											<field name="back_sign_date"/>
+											<field name="sub_memo"/>
+											<field name="state"/>
+										</tree>
+										<form string='订单明细'>
+											<group cospan="3" col="1">
+												<group>
+													<group>
+														<field name="price_sheet_id" options="{'limit':10,'create':false,'create_edit':false}"/>
+														<field name="product_id"/>
+													</group>
+													<group>
+														<field name="name"/>
+														<field name="product_uom"/>
+													</group>	
+												</group>
+												<group>
+												    <group>
+														<field name="cost_ready_s"/>
+														<field name="cost_plot_s"/>
+														<field name="cost_test_s"/>
+														<field name="cost_other_s"/>
+														<field name="cost_days"/>
+														<field name="cost_once"/>
+														<field name="scrap_fee"/>
+														<field name="customer_project_name"/>
+														<field name="product_name"/>
+														
+													</group>	
+													<group>
+														<field name="pcs_length"/>
+														<field name="pcs_width"/>
+														<field name="is_recive_once_cost"/>
+														<field name="delivery_date"/>
+														<field name="back_sign_date"/>
+														<field name="sub_memo"/>
+														<field name="customer_material_code"/>
+														<field name="bar_code"/>
+														<field name='customer_order'/>
+													</group>	
+												</group>
+												
+												<group>
+													<group>
+														<field name="product_qty"/>
+														<field name="price_unit"/>
+													</group>
+													<group>
+														<field name="discount"/>
+														<field name="line_amount_total"/>
+													</group>
+												</group>
+										   </group>
+										    
+										</form>
+
+									</field>
+							   <group colspan="2" col="6">
+							   	   <field name="amount_untaxed"/>
+							   	   <field name="amount_tax"/>
+							   	   <field name="amount_total"/>
+							   </group>	
+							 
+							</page>
+							<!--<page string='附加信息'>
+								<group colspan="4">
+									<group>
+										<field name="sale_order" attrs="{'readonly':[('state','!=','draft')]}"/>
+										<field name="customer_material_code" attrs="{'readonly':[('state','!=','draft')]}"/>
+									</group>
+									<group>	
+										<field name="customer_project_name" attrs="{'readonly':[('state','!=','draft')]}"/>
+										<field name="bar_code" attrs="{'readonly':[('state','!=','draft')]}"/>
+									</group>
+								</group>
+							</page> -->
+						</notebook>
+					</sheet>
+					
+				</form>
+			</field>
+		</record>
+		
+		<record id='act_sale_order_new' model="ir.actions.act_window">
+			<field name="name">销售订单</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">sale.order.new</field>
+		</record>
+ 
+		
+		
+		<menuitem id="menu_sale_order_new" name="销售订单" parent="001_sale.menu_sale_manager" action="act_sale_order_new" sequence='4'/>
+	
+		<record id="view_sale_order_new_filter" model="ir.ui.view">
+			<field name="name">sale.order.new.select</field>
+		    <field name="model">sale.order.new</field>
+		    <field name="arch" type="xml">
+		    	<search string="Search sale order new">
+		             <field name="partner_id"
+		                       filter_domain="[('partner_id','ilike',self)]"/>
+		             <field name='partner_code' filter_domain="[('partner_code','ilike',self)]"/>
+		             <field name='name' filter_domain="[('name','ilike',self)]"/>
+		         	 <field name='receiver' filter_domain="[('receiver','ilike',self)]"/>
+		             <field name='state' filter_domain="[('state','ilike',self)]"/>
+				</search>
+			</field>
+		</record>
+		
+		
+		
+		<record id='sale_order_new_line_tree_view' model="ir.ui.view">
+			<field name="name">sale.order.new.line.tree</field>
+			<field name="model">sale.order.new.line</field>
+			<field name="arch" type='xml'>
+				<tree string="sales order line information" colors="gray:state in ('done');red:state in('draft')">
+					
+					<field name="name"/>
+					<field name='sale_order_new_id'/>
+					<field name="price_sheet_id"/>
+					<field name="pcb_info_id"/>
+					<field name='customer_name'/>
+					<field name="product_id"/>
+					<field name="custmer_goodscode"/>
+					<field name="wait_production_count"/>
+					<field name="product_qty"/>
+					<field name='state'/>
+				
+				</tree>
+			</field>
+		</record>
+		
+		<record id='sale_order_new_line_form_view' model="ir.ui.view">
+			<field name="name">sale.order.new.line.form</field>
+			<field name="model">sale.order.new.line</field>
+			<field name="arch" type='xml'>
+				<form string="sales order line information" version='7.0'>
+					<header>
+						<!--<button name='button_approves'  string='审批'  class='oe_highlight'/>
+						<button name='button_refuses'  string='作废'  class='oe_highlight'/>-->
+						<button name='%(action_sale_order_new_line_wizard)d'  string='分批投产' type='action' class='oe_highlight' groups='001_sale.sales_order'/>
+						<field name='state' widget="statusbar" statusbar_visible="draft,wait_confirm,done,wait_change" statusbar_colors='{"confirm":"blue"}'/>
+
+					</header>
+					<sheet>
+						<group colspan="4" col='4'>
+							<group>
+								<field name='sale_order_new_id' attrs="{'readonly':1}"/>
+								<field name="name" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="price_sheet_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="pcb_info_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='customer_name' attrs="{'readonly':[('state','!=','draft')]}"/>
+							</group>
+							
+							<group>
+								<field name="product_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="custmer_goodscode" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="product_qty" attrs="{'readonly':1}"/>
+								<field name='wait_production_count' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='product_uom' attrs="{'readonly':[('state','!=','draft')]}"/>
+							</group>
+							<group>
+								<field name='delivery_date' attrs="{'readonly':[('state','!=','draft')]}"/>
+								
+							</group>
+						</group>
+                        <notebook>
+                        	<page string="投产明细">
+                        	    <field name="mrp_production_new_id">
+                        	       <tree sting='投产明细'>
+                        	            <field name="order_create_date"/>
+                        	            <field name="product_qty"/>
+                        	            <field name="store_qty"/>
+                        				<field name="type"/>
+                        				<field name="name"/>
+                        				<field name="company_name"/>
+                        				<field name="delivery_date"/>
+                        				<field name="state"/>
+                        				<field name="memo"/>
+                        		   </tree>
+						       </field>
+						    </page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id='act_sale_order_new_line' model="ir.actions.act_window">
+			<field name="name">订单投产</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">sale.order.new.line</field>
+		</record>
+ 
+		
+		
+		<menuitem id="menu_sale_order_new_line" name="订单投产" parent="001_sale.menu_sale_manager" action="act_sale_order_new_line" sequence='5'/>
+		<record model="ir.ui.view" id="view_mrp_production_new_tree">
+			<field name="name">mrp_production_new.tree</field>
+			<field name="model">mrp.production.new</field>
+			<field name="arch" type="xml">
+				<tree  string="mrp production new" colors="gray:state in ('done');red:state in('draft')">
+				   <field name='name'/>
+				   <field name='sale_order_new_line_id'/>
+				   <field name='partner_id'/>
+				   <field name='delivery_count'/>
+				   <field name='order_create_date'/>
+				   <field name='company_name'/>
+				   <field name='state'/>
+				   <field name='stop_state'/>
+				</tree>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="view_mrp_production_new_form">
+			<field name="name">mrp_production_new.form</field>
+			<field name="model">mrp.production.new</field>
+			<field name="arch" type="xml">
+				<form  string="mrp production new form" version='7.0'>
+					<header>
+						<button name='button_approve'  string='审批' type='object' class='oe_highlight'/>
+						<button name='button_return'  string='反审批' type='object'  class='oe_highlight'/>
+						<field name='state' widget="statusbar" statusbar_visible="draft,eng_recive,cancel" statusbar_colors='{"eng_recive":"blue"}'/>
+					</header>
+					<sheet>
+						<group colspan="4" col='4'>
+							<group>
+								<field name='sale_order_new_line_id'/>
+								<field name='name'/>
+								<field name='pcb_info_id'/>
+								<field name='product_id'/>
+								<field name='standard_days'/>
+								<field name='type'/>
+								<field name='urgent_type'/>
+							</group>
+						
+							<group>
+								<field name='order_create_date'/>
+								<field name='sale_order_new_ids'/>
+								<field name='customer_name'/>
+								<field name='layer_count'/>
+								<field name='delivery_count'/>
+								<field name='product_qty'/>
+								<field name='panel_count'/>
+								
+							</group>
+								
+							<group>
+								<field name='delivery_date'/>
+								<field name='partner_id'/>
+								<field name='ref'/>
+								<field name='so_user_id'/>
+								<field name='pcs_count'/>
+								<field name='company_name'/>
+								<field name='cam_id'/>
+								
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.actions.act_window" id="act_mrp_production_new">
+				<field name="name">投产明细单</field>
+				<field name="type">ir.actions.act_window</field>
+				<field name="res_model">mrp.production.new</field>
+			
+		</record>  
+		
+		
+		<menuitem  id="menu_mrp_new" name="生产"    sequence="2" /> 
+		<menuitem  id="menu_mrp_new_manager" name="生产管理"  parent="menu_mrp_new"  sequence="1" /> 
+
+		<menuitem  id="menu_mrp_production_new" name="投产明细单" parent="menu_mrp_new_manager"  action="act_mrp_production_new" sequence="1"/>
+		<menuitem  id="menu_mrp_production_new_sale" name="投产明细单" parent="001_sale.menu_sale_manager"  action="act_mrp_production_new" sequence="9"/>
+		
+		
+	</data>
+</openerp>

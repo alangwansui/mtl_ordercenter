@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record id="view_employee_tree_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.tree.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="type">tree</field>
+            <field name='inherit_id' ref='hr.view_employee_tree'/>
+            <field name="arch" type="xml">
+            	
+               <field name="parent_id"  position='after'>
+               	<field name='this_month' invisible='1'/>
+               </field>
+               <field name="job_id" position="after">
+				<field name='culture_level'/>
+			   </field>
+			   <field name="country_id" position="after">
+			   	<field name='if_on_job' on_change="onchange_on_job(if_on_job)"/>
+				<field name="mobile_phone"/>
+			   </field>
+			   <field name="identification_address" position="after">
+				<field name="employee_state"/>
+			   </field>
+            </field>
+ </record>
+
+<record model="ir.ui.view" id="hr_employee_tree_inherit_view">
+       	<field name="name">hr.employee.inherit.form</field>
+       	<field name="model">hr.employee</field>
+       	<field name='inherit_id' ref='hr.view_employee_form'/>
+       	<field name="arch" type="xml">
+       	    <header>
+       	        
+       	    </header>
+       	    <sheet>
+	       		<field name='country_id' position='replace'/>
+	       		<field colspan="6" name="name" position='after'>
+	       		     <field name='job_number'/>
+	       		 </field>
+	       		 <field name="gender" position='before'>
+	       		     <field name='in_factory'/>
+	       		     <field name='out_factory'/>
+	       		    
+	       		 </field>
+	       		 
+	       		 <field name='sinid' position='before'>
+	       		     <field name='if_yanglao_insure'/>
+	       		     <field name='if_social_security'/>
+	       		     <field name='identification_address'/>
+	       		     
+	       		 </field>
+	       		<field name='address_home_id' position='before'>
+	       			<field name='culture_level'/>
+	       			<field name='home_address'/>
+	       			<field name='home_telephone'/>
+	       		</field>
+	       		<field name="active" groups="base.group_extended" position='replace'>
+	       			<field name="active" groups="base.group_extended" invisible='1'/>
+	       			<field name='if_on_job' on_change="onchange_on_job(if_on_job)"/>
+	       			 <field name='employee_state'/>
+	       			 <field name='job_age'/>
+	       			 <field name='work_years'/>
+	       			 <field name='nation'/>
+	       		</field>
+	       		<field name='coach_id' position='after'>
+	       		    <field name='country_id'/>
+	       		     <field name='contract_date_start'/>
+	       		    <field name='contract_date_end'/>
+	       		</field>
+				
+				<field colspan="4" name="job_id" position='attributes'>
+				  <attribute name="required">True</attribute> 
+			    </field>
+				
+	            <field colspan="4" name="gender" position='attributes'>
+				    <attribute name="required">True</attribute> 
+				</field>
+				
+	            <field colspan="4" name="country_id" position='attributes'>
+					<attribute name="required">True</attribute> 
+				</field>
+	       
+	            <field colspan="4" name="in_factory" position='attributes'>
+					<attribute name="required">True</attribute> 
+				</field>
+				
+	            <field colspan="4" name="birthday" position='attributes'>
+					<attribute name="required">True</attribute> 
+				</field>
+				
+				
+	       		<field name='department_id' position='after'>
+	       			<button name='create_users' string='create employee erp user' type='object' icon='gtk-jump-to'/>
+	       		</field> 
+	       	</sheet>
+       	</field>       
+</record>
+
+<record model="ir.ui.view" id="hr_employee_search_inherit_view">
+       	<field name="name">hr.employee.inherit.search</field>
+       	<field name="model">hr.employee</field>
+       	<field name="type">search</field>
+       	<field name='inherit_id' ref='hr.view_employee_filter'/>
+       	<field name="arch" type="xml">
+       		 <filter icon="terp-personal+" domain="[('active','=',True)]" name="active" string="Active" groups="base.group_extended" position='after'>
+       		 	<filter icon="terp-personal+" domain="[('if_on_job','=',True)]" name='if_on_job' string="on_job" groups="base.group_extended"/>
+       		 	<filter icon="terp-personal+" domain="[('if_on_job','=',False)]" name='if_on_job' string="leaving_job" groups="base.group_extended"/>
+       		 </filter>
+       		 
+       		  <field name="job_id" widget="selection" position='after'>
+       		  	<field name='in_factory'/>
+       		  	<field name='contract_date_end'/>
+       		  </field>
+       		<filter string="Company" icon="terp-go-home" domain="[]" context="{'group_by':'company_id'}" groups="base.group_multi_company" position='after'>
+       			<filter string='Current month birthday' domain="[('this_month','=',True)]"/>
+       		</filter>
+       	</field>
+</record>
+                   
+</data>
+</openerp>

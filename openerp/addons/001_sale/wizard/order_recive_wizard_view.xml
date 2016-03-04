@@ -1,0 +1,80 @@
+<openerp>
+   <data>
+
+        <!-- crm make sale's view -->
+
+       <record id="view_order_recive_wizard" model="ir.ui.view">
+          <field name="name">order.recive.wizard.form</field>
+          <field name="model">order.recive.wizard</field>
+          <field name="arch" type="xml">
+            <form string="Convert to pcb info"  version="7.0">
+                <group col="4">
+                    <field name="name"/>
+                   
+                  
+                </group>
+                <footer>
+                    <button name="creat_pcb_info" string="_Create" type="object" class="oe_highlight"/>
+                    or
+               
+                    <button string="取消" class="oe_link" special="cancel" />
+                </footer>
+               
+            </form>
+          </field>
+       </record>
+
+       <!-- crm make sale's  action -->
+
+       <record id="action_order_recive_wizard" model="ir.actions.act_window">
+          <field name="name">Order Recive Wizard</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">order.recive.wizard</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">form</field>
+          <field name="target">new</field>
+       </record>
+
+       
+       
+       <record id="view_lead_price_sheet" model="ir.ui.view">
+          <field name="name">lead.price.sheet.form</field>
+          <field name="model">lead.price.sheet</field>
+          <field name="arch" type="xml">
+            <form string="Convert to pcb info"  version="7.0">
+                <group col="4">
+            
+                </group>
+                <footer>
+                    <button name="transform_price_sheet" string="新增" type="object" class="oe_highlight"/>
+                    or
+                    <button string="取消" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+          </field>
+       </record>
+
+       <!-- crm make sale's  action -->
+
+       <record id="action_lead_price_sheet" model="ir.actions.act_window">
+          <field name="name">Lead price sheet</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">lead.price.sheet</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">form</field>
+          <field name="target">new</field>
+       </record>       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+   </data>
+</openerp>

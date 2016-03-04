@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding='utf-8'?>
+<openerp>
+    <data>
+        
+  	<record model="ir.ui.view" id="view_mrp_production_new_tree">
+        <field name="name">mrp_production_new.tree</field>
+        <field name="model">mrp.production.new</field>
+        <field name="arch" type="xml">
+            <tree  string="mrp production new" >
+               <field name='name'/>
+               <field name='sale_order_line_new_id'/>
+               <field name='partner_id'/>
+               <field name='delivery_count'/>
+               <field name='order_create_date'/>
+               <field name='company_id'/>
+               <field name='state'/>
+            </tree>
+        </field>
+	</record>
+	
+	<record model="ir.ui.view" id="view_mrp_production_new_form">
+        <field name="name">mrp_production_new.form</field>
+        <field name="model">mrp.production.new</field>
+        <field name="arch" type="xml">
+            <form  string="mrp production new form" version='7.0'>
+            	<header>
+            		<button name='button_approve'  string='审批'  class='oe_highlight'/>
+					<button name='button_refuse'  string='作废'  class='oe_highlight'/>
+					<field name='state' widget="statusbar" statusbar_visible="draft,eng_recive" statusbar_colors='{"eng_recive":"blue"}'/>
+            	</header>
+            	<sheet>
+               		<group colspan="4" col='4'>
+               			<group>
+               				<field name='sale_order_line_new_id'/>
+               				<field name='name'/>
+               				<field name='pcb_info_id'/>
+               			    <field name='product_id'/>
+               				<field name='standard_days'/>
+               				<field name='type'/>
+               				<field name='urgent_type'/>
+               			</group>
+               		
+               			<group>
+               				<field name='order_create_date'/>
+               			    <field name='sale_order_new_ids'/>
+               			    <field name='customer_name'/>
+               				<field name='layer_count'/>
+               				<field name='delivery_count'/>
+               				<field name='product_qty'/>
+               				<field name='panel_count'/>
+               				
+               			</group>
+               				
+            			<group>
+            				<field name='delivery_date'/>
+            			 	<field name='partner_id'/>
+            				<field name='ref'/>
+            			    <field name='so_user_id'/>
+            				<field name='pcs_count'/>
+            				<field name='company_id'/>
+            				<field name='cam_id'/>
+            				
+            			</group>
+            		</group>
+          		</sheet>
+            </form>
+        </field>
+	</record>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<record model="ir.actions.act_window" id="act_mrp_production_new">
+			<field name="name">生产订单</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">mrp.production.new</field>
+		
+	</record>  
+	
+	
+	<menuitem  id="menu_mrp_new" name="生产"    sequence="2" /> 
+	<menuitem  id="menu_mrp_new_manager" name="生产管理"  parent="menu_mrp_new"  sequence="1" /> 
+
+	<menuitem  id="menu_mrp_production_new" name="生产订单" parent="menu_mrp_new_manager"  action="act_mrp_production_new" sequence="1"/>
+	
+
+	
+	
+	
+    </data>
+</openerp>

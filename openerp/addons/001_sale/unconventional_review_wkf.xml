@@ -1,0 +1,408 @@
+<?xml version='1.0'  encoding='utf-8'?>
+<openerp>
+<data>
+	<!--activity: 'w_eng','w_tech','w_quality','w_material','w_plan','w_ger_deparment','w_order_center' -->
+	<record model='workflow' id='wkf_unreview'>
+		<field name='name'>unconventional review wkf</field>
+		<field name='osv'>unconventional.review</field>
+		<field name="on_create">True</field>
+	</record>
+	
+	<record id="act_draft" model="workflow.activity">
+	       <field name="wkf_id" ref="wkf_unreview"/>
+	       <field name="flow_start">True</field>
+	       <field name="name">draft</field>
+	</record>
+	<record id="act_w_eng" model="workflow.activity">
+	        <field name="wkf_id" ref="wkf_unreview"/>
+	        <field name="name">w_eng</field>
+	        <field name="kind">function</field>
+	        <field name="action">write({'state':'w_eng'})</field>
+	</record>
+	
+	<record id="act_w_tech" model="workflow.activity">
+	        <field name="wkf_id" ref="wkf_unreview"/>
+	        <field name="name">w_tech</field>
+	        <field name="kind">function</field>
+	        <field name="action">write({'state':'w_tech'})</field>
+	</record>
+	<record id="act_w_quality" model="workflow.activity">
+	        <field name="wkf_id" ref="wkf_unreview"/>
+	        <field name="name">w_quality</field>
+	        <field name="kind">function</field>
+	        <field name="action">write({'state':'w_quality'})</field>
+	</record>
+	
+	<record id="act_w_material" model="workflow.activity">
+	        <field name="wkf_id" ref="wkf_unreview"/>
+	        <field name="name">w_material</field>
+	        <field name="kind">function</field>
+	        <field name="action">write({'state':'w_material'})</field>
+	</record>
+	<record id="act_w_plan" model="workflow.activity">
+	        <field name="wkf_id" ref="wkf_unreview"/>
+	        <field name="name">w_plan</field>
+	        <field name="kind">function</field>
+	        <field name="action">write({'state':'w_plan'})</field>
+	</record>
+	
+	<record id="act_w_ger_deparment" model="workflow.activity">
+	        <field name="wkf_id" ref="wkf_unreview"/>
+	        <field name="name">w_ger_deparment</field>
+	        <field name="kind">function</field>
+	        <field name="action">write({'state':'w_ger_deparment'})</field>
+	</record>
+	
+	<record id="act_w_order_center" model="workflow.activity">
+	        <field name="wkf_id" ref="wkf_unreview"/>
+	        <field name="name">w_order_center</field>
+	        <field name="kind">function</field>
+	        <field name="action">write({'state':'w_order_center'})</field>
+	</record>
+	
+	<record id="act_done" model="workflow.activity">
+	           <field name="wkf_id" ref="wkf_unreview"/>
+	           <field name="name">done</field>
+	           <field name="action">write({'state':'done'})</field>
+	           <field name="kind">function</field>
+	           <field name="flow_stop">True</field>
+	           <field name="join_mode">AND</field>  
+	    </record>
+    
+ 
+    
+    <!--trans :'w_eng','w_tech','w_quality','w_material','w_plan','w_ger_deparment','w_order_center' -->
+<!-- trans_in: w_eng-->
+    <record id="transunr_draft2w_eng" model="workflow.transition">
+          <field name="act_from" ref="act_draft"/>
+          <field name="act_to" ref="act_w_eng"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <!-- <field name="condition">condition_function</field> -->
+    </record>
+<!-- trans_in: w_eng-->
+
+
+<!-- trans_out: w_eng -->
+	 <record id="transunr_w_eng2w_tech" model="workflow.transition">
+          <field name="act_from" ref="act_w_eng"/>
+          <field name="act_to" ref="act_w_tech"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+    	 <field name="condition">review_dpt_is([True,None,None,None])</field>
+    </record>    
+	
+	<record id="transunr_w_eng2w_quality_eq" model="workflow.transition">
+          <field name="act_from" ref="act_w_eng"/>
+          <field name="act_to" ref="act_w_quality"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <field name="condition">review_dpt_is([False,True,None,None])</field>
+    </record>
+    
+	<record id="transunr_w_eng2w_material_em" model="workflow.transition">
+          <field name="act_from" ref="act_w_eng"/>
+          <field name="act_to" ref="act_w_material"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <field name="condition">review_dpt_is([False,False,True,None])</field>
+    </record>
+    
+	<record id="transunr_w_eng2w_plan_ep" model="workflow.transition">
+          <field name="act_from" ref="act_w_eng"/>
+          <field name="act_to" ref="act_w_plan"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <field name="condition">review_dpt_is([False,False,False,True])</field>
+    </record>
+<!-- trans_out: w_eng -->
+
+<!--trans_out: w_tech-->  
+	<record id="transunr_w_techt2w_order_center" model="workflow.transition">
+          <field name="act_from" ref="act_w_tech"/>
+          <field name="act_to" ref="act_w_order_center"/>
+          <field name="signal">button_approve</field>
+	   <!-- <field name="group_id" ref="group_id"/> -->
+      	<field name="condition">review_dpt_is([None,False,False,False])</field> 
+    </record>
+    
+     <record id="transunr_w_tech2w_quality_etq" model="workflow.transition">
+          <field name="act_from" ref="act_w_tech"/>
+          <field name="act_to" ref="act_w_quality"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+    	 <field name="condition">review_dpt_is([None,True,None,None]) </field>
+    </record>
+    
+    <record id="transunr_w_tech2w_material_etm" model="workflow.transition">
+          <field name="act_from" ref="act_w_tech"/>
+          <field name="act_to" ref="act_w_material"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <field name="condition">review_dpt_is([None,False,True,None])</field>
+    </record>
+    
+     <record id="transunr_w_tech2w_plan_etp" model="workflow.transition">
+          <field name="act_from" ref="act_w_tech"/>
+          <field name="act_to" ref="act_w_plan"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <field name="condition">review_dpt_is([None,False,False,True])</field>
+    </record>
+    
+     <record id="transunr_w_tech2w_ger_deparment" model="workflow.transition">
+          <field name="act_from" ref="act_w_tech"/>
+          <field name="act_to" ref="act_w_ger_deparment"/>
+          <field name="signal">button_refuse</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <!--  <field name="condition">review_condition('emp')</field> -->
+    </record>
+<!--trans_out: w_tech-->  
+   
+<!--trans_out: w_quality--> 
+	<record id="transunr_w_quality2w_material_eqm" model="workflow.transition">
+          <field name="act_from" ref="act_w_quality"/>
+          <field name="act_to" ref="act_w_material"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <field name="condition">review_dpt_is([None,None,True,None])</field>
+    </record>
+    
+    <record id="transunr_w_quality2w_plan_eqp" model="workflow.transition">
+          <field name="act_from" ref="act_w_quality"/>
+          <field name="act_to" ref="act_w_plan"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <field name="condition">review_dpt_is([None,None,False,True])</field>
+    </record>
+    
+    <record id="transunr_w_quality2w_order_center_eq" model="workflow.transition">
+          <field name="act_from" ref="act_w_quality"/>
+          <field name="act_to" ref="act_w_order_center"/>
+          <field name="signal">button_approve</field>
+	   <!-- <field name="group_id" ref="group_id"/> -->
+      	<field name="condition">review_dpt_is([None,None,False,False])</field>
+    </record>
+    
+    <record id="transunr_w_quality2w_ger_deparment" model="workflow.transition">
+          <field name="act_from" ref="act_w_quality"/>
+          <field name="act_to" ref="act_w_ger_deparment"/>
+          <field name="signal">button_refuse</field>
+	   <!--    <field name="group_id" ref="group_id"/> -->
+          <!--  <field name="condition">review_condition('emp')</field> -->
+    </record>
+<!--trans_out: w_quality--> 
+
+<!--trans_out: w_material--> 
+    <record id="transunr_w_material2w_plan_emp" model="workflow.transition">
+          <field name="act_from" ref="act_w_material"/>
+          <field name="act_to" ref="act_w_plan"/>
+          <field name="signal">button_approve</field>
+	   <!--     <field name="group_id" ref="group_id"/>  -->
+          <field name="condition">review_dpt_is([None,None,None,True])</field>
+    </record>
+   
+ 
+     <record id="transunr_w_material2w_order_center_em" model="workflow.transition">
+          <field name="act_from" ref="act_w_material"/>
+          <field name="act_to" ref="act_w_order_center"/>
+          <field name="signal">button_approve</field>
+	   <!-- <field name="group_id" ref="group_id"/> -->
+       <field name="condition">review_dpt_is([None,None,None,False])</field> 
+    </record>
+    
+    
+     <record id="transunr_w_material2w_ger_deparment" model="workflow.transition">
+          <field name="act_from" ref="act_w_material"/>
+          <field name="act_to" ref="act_w_ger_deparment"/>
+          <field name="signal">button_refuse</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <!--  <field name="condition">review_condition('emp')</field> -->
+    </record>
+<!--trans_out: w_material--> 
+
+<!-- trans_out: w_plan -->   
+	<record id="transunr_w_plan2w_order_center_ep" model="workflow.transition">
+          <field name="act_from" ref="act_w_plan"/>
+          <field name="act_to" ref="act_w_order_center"/>
+          <field name="signal">button_approve</field>
+	   <!-- <field name="group_id" ref="group_id"/> -->
+   <!--   	<field name="condition">review_dpt_is([None,None,None,None])</field>   -->
+    </record>
+    
+     <record id="transunr_w_plan2w_ger_deparment" model="workflow.transition">
+          <field name="act_from" ref="act_w_plan"/>
+          <field name="act_to" ref="act_w_ger_deparment"/>
+          <field name="signal">button_refuse</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <!--  <field name="condition">review_condition('emp')</field> -->
+    </record>
+<!-- trans_out: w_plan -->   
+ 	
+ 	<record id="transunr_w_ger_deparment2w_order_center" model="workflow.transition">
+          <field name="act_from" ref="act_w_ger_deparment"/>
+          <field name="act_to" ref="act_w_order_center"/>
+          <field name="signal">button_approve</field>
+	   <!-- <field name="group_id" ref="group_id"/> -->
+      <!--  <field name="condition">condition_function</field> -->
+    </record>
+    
+    <record id="transunr_w_order_center2done" model="workflow.transition">
+          <field name="act_from" ref="act_w_order_center"/>
+          <field name="act_to" ref="act_done"/>
+          <field name="signal">button_approve</field>
+	  <!--   <field name="group_id" ref="group_id"/> -->
+       <!--    <field name="condition">condition_function</field> -->
+    </record>
+    
+   
+</data>
+</openerp>
+
+
+
+<!--    
+		
+	refuse:'w_eng','w_tech','w_quality','w_material','w_plan','w_ger_deparment','w_order_center' 
+    <record id="transunr_w_eng2w_ger_deparment" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_eng"/>
+          <field name="act_to" ref="actunr_w_ger_deparment"/>
+          <field name="signal">button_refuse</field>
+	       <field name="group_id" ref="group_id"/>
+       <field name="condition">condition_function</field>
+    </record>
+    
+    <record id="transunr_w_tech2w_ger_deparment" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_tech"/>
+          <field name="act_to" ref="actunr_w_ger_deparment"/>
+          <field name="signal">button_refuse</field>
+	   <field name="group_id" ref="group_id"/>
+          
+    </record>
+    
+    <record id="transunr_w_quality2w_ger_deparment" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_quality"/>
+          <field name="act_to" ref="actunr_w_ger_deparment"/>
+          <field name="signal">button_refuse</field>
+	    <field name="group_id" ref="group_id"/>
+         <field name="condition">condition_function</field>
+    </record>
+    
+    <record id="transunr_w_material2w_ger_deparment" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_material"/>
+          <field name="act_to" ref="actunr_w_ger_deparment"/>
+          <field name="signal">button_refuse</field>
+	    <field name="group_id" ref="group_id"/> 
+         <field name="condition">condition_function</field> 
+    </record>
+    
+    <record id="transunr_w_plan2unrw_ger_deparment" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_plan"/>
+          <field name="act_to" ref="actunr_w_ger_deparment"/>
+          <field name="signal">button_refuse</field>
+	      <field name="group_id" ref="group_id"/> 
+        <field name="condition">condition_function</field>
+    </record>
+	  <record id="transunr_w_eng2w_plan" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_eng"/>
+          <field name="act_to" ref="actunr_w_plan"/>
+          <field name="signal">button_approve</field>
+	    <field name="group_id" ref="group_id"/> 
+          <field name="condition">next_dpt_is('计划部')</field>
+    </record> 
+	<record id="transunr_w_quality2w_material" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_quality"/>
+          <field name="act_to" ref="actunr_w_material"/>
+          <field name="signal">button_approve</field>
+	     <field name="group_id" ref="group_id"/>
+          <field name="condition">review_condition</field>
+    </record>
+    
+    <record id="transunr_w_quality2w_material" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_quality"/>
+          <field name="act_to" ref="actunr_w_material"/>
+          <field name="signal">button_approve</field>
+	  <field name="group_id" ref="group_id"/> 
+        <field name="condition">review_condition</field>
+    </record>
+    
+    <record id="transunr_w_material2w_plan" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_material"/>
+          <field name="act_to" ref="actunr_w_plan"/>
+          <field name="signal">button_approve</field>
+	    <field name="group_id" ref="group_id"/> 
+          <field name="condition">review_condition</field>
+    </record>
+    
+    <record id="transunr_w_plan2w_ger_deparment" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_plan"/>
+          <field name="act_to" ref="actunr_w_ger_deparment"/>
+          <field name="signal">button_approve</field>
+	    <field name="group_id" ref="group_id"/> 
+         <field name="condition">condition_function</field>
+    </record>
+    
+    <record id="transunr_w_ger_deparment2w_order_center" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_ger_deparment"/>
+          <field name="act_to" ref="actunr_w_order_center"/>
+          <field name="signal">button_approve</field>
+	     <field name="group_id" ref="group_id"/> 
+        <field name="condition">condition_function</field>
+    </record>
+    
+    <record id="transunr_w_order_center2done" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_order_center"/>
+          <field name="act_to" ref="actunr_done"/>
+          <field name="signal">button_approve</field>
+	     <field name="group_id" ref="group_id"/>
+          <field name="condition">condition_function</field> 
+    </record>
+    
+    
+    <record id="transunr_w_eng2w_quality" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_eng"/>
+          <field name="act_to" ref="actunr_w_quality"/>
+          <field name="signal">button_approve</field>
+	   <field name="group_id" ref="group_id"/>
+          <field name="condition">next_dpt_is('品质部')</field>
+    </record>
+     
+    <record id="transunr_w_eng2w_material" model="workflow.transition">
+          <field name="act_from" ref="actunr_w_eng"/>
+          <field name="act_to" ref="actunr_w_material"/>
+          <field name="signal">button_approve</field>
+	      <field name="group_id" ref="group_id"/> 
+          <field name="condition">next_dpt_is('物控部')</field>
+    </record>   
+
+
+###########################3reveiw line wkf #########################    
+	<record model='workflow' id='wkfl_unconventional_review_line'>
+		<field name='name'>unconventional_review_line.workflow</field>
+		<field name='osv'>unconventional.review.line</field>
+	</record>
+	
+	<record id="actl_draft" model="workflow.activity">
+           <field name="wkf_id" ref="wkfl_unconventional_review_line"/>
+           <field name="flow_start">True</field>
+           <field name="name">draft</field>
+           <field name="action">write({'state':'draft'})</field>
+           <field name="kind">function</field>
+    </record>	
+	<record id="actl_done" model="workflow.activity">
+           <field name="wkf_id" ref="wkfl_unconventional_review_line"/>
+           <field name="flow_stop">True</field>
+           <field name="name">done</field>
+           <field name="action">write_done()</field>
+           <field name="kind">function</field>
+    </record>	
+    
+    <record id="transl_draft2done" model="workflow.transition">
+          <field name="act_from" ref="actl_draft"/>
+          <field name="act_to" ref="actl_done"/>
+          <field name="signal">button_approve</field>
+	      <field name="group_id" ref="group_id"/>
+     <field name="condition">condition_function</field> 
+    </record>
+	
+-->

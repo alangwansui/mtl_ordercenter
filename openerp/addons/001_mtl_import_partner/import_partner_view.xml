@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <record id="view_hr_department_form_inherit" model="ir.ui.view">
+            <field name="name">hr.department.inherit.form</field>
+            <field name="model">hr.department</field>
+            <field name="type">form</field>
+            <field name='inherit_id' ref='hr.view_department_form'/>
+            <field name="arch" type="xml"> 
+        		<field name='company_id' position='before'>
+        		    <field name='dpt_code'/>
+        		    <field name='dpt_type'/>
+        		    <field name='dpt_responsible'/>
+        		    <field name='dpt_telephone'/>
+        		    <field name='dpt_address'/>
+        		    <field name='dpt_note'/>
+        		    
+        		</field>
+        	</field>
+        </record>
+        
+    <menuitem id="mtl_import_partner_config" name="销售数据导入" parent="base.menu_sale_config_sales" sequence="5"/>
+      <record id="view_import_partner_tree" model="ir.ui.view">
+            <field name="name">import.partner.tree</field>
+            <field name="model">import.partner</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="客户导入模板">
+                     <field name="server"/>
+                     <field name="user"/>
+                     <field name="password"/>
+                     <field name="database"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_import_partner_form" model="ir.ui.view">
+            <field name="name">import.partner.form</field>
+            <field name="model">import.partner</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="客户导入模板">
+                     <field name="server"/>
+                     <field name="user"/>
+                     <field name="password"/>
+                     <field name="database"/>
+                     <field name="type" colspan="2"/>
+                     <field name="sqlrequery" colspan="4"/>                    
+                     <button colspan="2" name="action_draft" string="导入数据" icon="gtk-apply" type="object"/>                   
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_import_partner" model="ir.actions.act_window">
+            <field name="name">客户导入模板</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">import.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_import_partner_tree"/>
+        </record>        
+      <menuitem action="action_import_partner" id="mtl_import_partner_main" name="客户数据导入" parent="mtl_import_partner_config" sequence="0"/>                                  
+    </data>
+</openerp>

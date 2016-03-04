@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="qingjia_record_tree_view">
+       	<field name="name">qingjia_record.tree</field>
+       	<field name="model">qingjia.record</field>
+       	<field name="type">tree</field>
+       	<field name="arch" type="xml">
+       		<tree string='qingjia tree'>
+       			<field name="employee_id"/>
+       			<field name='dpt_id'/>
+       			<field name="qingjia_type"/>
+       			<field name="start_time"/>
+       			<field name='end_time'/>
+       			<field name="tianshu_total" sum='tianshu total'/>
+       			<field name='note'/>
+       			<field name='state'/>
+       		</tree>
+       	</field>       
+</record>
+
+<record model="ir.ui.view" id="qingjia_record_form_view">
+       	<field name="name">qingjia_record.form</field>
+       	<field name="model">qingjia.record</field>
+       	<field name="arch" type="xml">
+       		<form string='qingjia form' version='7.0'>
+       		    <header>
+       		        
+       		        <button name="button_approve" string="Approve"  state='draft' class="oe_highlight"/>
+    	   	    	<field name="state" widget="statusbar" statusbar_colors='{"draft":"red","w_receive":"blue"}' readonly="1"/>
+			
+       		    </header>
+       		    <sheet>
+	       			<field name="employee_id"/>
+	       			<field name='dpt_id'/>
+	       			<field name="qingjia_type"/>
+	       			<field name="start_time" />
+	       			<field name='end_time' />
+	       			<field name="tianshu_total" /> 
+	       			<field name='test'/>
+	       			<newline/>
+	       			<button name='count_tian_shu' string='Count tianshu' type='object'/>
+	       			<group colspan='4' col='4'>
+	       				<field name='note'/>
+	       			</group>
+	       			<field name='state'/>
+	       			
+       			</sheet>
+       		</form>
+       	</field>       
+</record>
+
+<record model="ir.ui.view" id="qingjia_record_search_view">
+       	<field name="name">qingjia_record.search</field>
+       	<field name="model">qingjia.record</field>
+       	<field name="type">search</field>
+       	<field name="arch" type="xml">
+       	    <search string='qingjia search'>
+       	        <field name='employee_id'/>
+       	        <field name='qingjia_type'/>
+       	        <field name='start_time'/>
+       	        <field name='end_time'/>
+       	        <field name='state'/>
+       	        <newline/>
+       	        <group expand="0" string="Group By..." colspan="11" col="11" groups="base.group_extended">
+                        <filter name='qingjia_type' string="Qingjia_type" icon="" domain="[]" context="{'group_by':'qingjia_type'}"/>
+                        
+                 </group>
+       	    </search>
+       </field>
+     </record>
+       	    
+       	    
+<record model='ir.actions.act_window' id='qingjia_record_action'>
+    	<field name='name'>qingjia.record.action</field>
+    	<field name='res_model'>qingjia.record</field>
+    	<field name="context">{'search_default_qingjia_type': 1,}</field>
+    <field name="search_view_id" ref="qingjia_record_search_view"/>
+</record>
+
+ <menuitem name="Qingjia Requests" parent="hr_holidays.menu_open_ask_holidays" id="qingjia_record_menu"
+             action="qingjia_record_action"/>
+ 
+ 
+ 
+</data>
+</openerp>

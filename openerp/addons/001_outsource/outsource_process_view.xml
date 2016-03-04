@@ -1,0 +1,988 @@
+﻿<openerp>
+
+<data noupdate="1">
+<record model="ir.sequence.type" id="seq_type_outsource_apply">
+    <field name="name">Outsource_apply</field>
+    <field name="code">Outsource.apply</field>
+</record>
+<record model="ir.sequence" id="seq_outsource_apply">
+    <field name="name">Outsource_apply</field>
+    <field name="code">Outsource.apply</field>
+    <field name="prefix">AP</field>
+    <field name="padding">6</field>
+</record>
+
+<record model="ir.sequence.type" id="seq_type_outsource_process">
+    <field name="name">Outsource_process</field>
+    <field name="code">Outsource.process</field>
+</record>
+<record model="ir.sequence" id="seq_outsource_process">
+    <field name="name">Outsource_process</field>
+    <field name="code">Outsource.process</field>
+    <field name="prefix">PR</field>
+    <field name="padding">6</field>
+</record>
+
+
+</data>
+    
+<data>
+   <!-- outsource apply -->
+<record model="ir.actions.act_window" id="act_outsource_apply">
+		<field name="name">Outsource apply</field>
+		<field name="res_model">outsource.apply</field>
+</record>  
+<menuitem id='menu_outsource_process_management'  groups='base.group_no_one' name='Outsource management' parent='base.menu_purchase_root'/>
+<menuitem  id="menu_outsource_apply"  groups="base.group_no_one" name="outsource apply form"  parent="menu_outsource_process_management"   action="act_outsource_apply"/>   
+
+<record model="ir.ui.view" id="act_outsource_apply_tree_view">
+   <field name="name">outsource_apply.tree</field>
+   <field name="model">outsource.apply</field>
+   <field name="type">tree</field>
+   <field name="arch" type="xml">
+       <tree string="apply tree">
+            <field name="outsource_number"/> 
+            <field name='outsource_type'/>
+            <field name='applicant_id'/>
+            <field name='dpt_id'/>
+            <field name='applicant_note'/>
+            <field name='create_date'/>
+             <field name="finish_time"/> 
+     
+            <field name='state'/>
+       </tree>
+   </field>
+</record>
+
+<record model="ir.ui.view" id="outsource_apply_form_view">
+   	<field name="name">outsource_apply.form</field>
+   	<field name="model">outsource.apply</field>
+   	<field name="arch" type="xml">
+		<form string="apply form" version="7.0">
+       		<header>
+       		    
+		        <button name="button_approve" string="approve line" state='draft' class="oe_highlight"/>
+		       
+		        <field name="state" widget="statusbar" statusbar_visible="draft,w_director,plan_director,w_outsource,w_gmanager" statusbar_colors='{"draft":"red","w_director":"blue"}' readonly="1"/>
+		    </header>
+   	   		<sheet>  
+   	   		    <h1>
+   	   		    </h1>
+				<group colspan='4' col='4'>
+	           		<group colspan='2' col='2'>
+			           <field name="outsource_number"/> 
+			            <field name='outsource_type'/>
+			            <field name='dpt_id'/>
+	           		</group>
+	           		<group colspan='2' col='2'>
+	           		    <field name='create_date'/>
+	            		<field name="finish_time"/> 
+	            		<field name='applicant_id'/>
+			        </group>
+	        	</group>
+	        	<notebook colspan='4'>
+        	<page string='outsource apply lines'>
+	      			<field name='outsource_lines_ids'>
+	      			    <tree string='process lines'>
+	      			        <field name='production_id'/>
+	      			        <field name='current_workcenter_id'/>
+				          
+				            <field name="product_id"/>
+				            <field name='product_unit'/>
+							 <field name="pcs_price_units" />
+					       	<field name='pnl_price_units'/>
+							<field name='length'/>
+							<field name='width'/>
+							<field name="product_qty" />
+							<field name='qty_pnl'/>
+							<field name='qty_pnl_pcs'/>
+							<field name="process_args" />
+							<field name='qty_receive' />
+							<field name='delivery_date'/>
+							<field name='state'/>
+	      			    </tree>
+	      			    <form string='process lines'>
+	      			        <group colspan='6' col='12'>
+					               <group colspan='1' col='1'>
+					                   	<field name='outsource_apply_id' readonly='1' invisible='1'/>
+									  	<field name='production_id'/>
+										<field name="product_id"/>
+										 <field name='current_workcenter_id'/>
+										 <field name='layer_count'/>
+							           	<field name='board_thickness'/>
+							           	<field name='cu_thickness'/>
+							           	<field name='delivery_date'/>
+							           	<field name='eng_file' filename='eng_filename'/>
+							         	<field name='process_args' />
+							       </group>
+							       <group colspan='1' col='1'>
+										<field name='length'/>
+							           	<field name='width'/>
+							           	<field name='product_unit'/>
+							           	<field name='pnl_length'/>
+							           	<field name='pnl_width'/>
+							           	<field name='pnl_unit'/>
+							           	 <field name='eng_filename'/>
+							        </group>
+							        <group colspan='1' col='1'>
+						     		   <field name="top_area" />
+							           <field name='bottom_area'/>
+							           <field name="product_qty" />
+							           <field name='qty_pnl'/>
+							           	<field name='pcs_unit_count'/>
+							           <field name="pcs_price_units" />
+							           	<field name='pnl_price_units'/>
+							           	
+							           <field name='qty_receive'  attrs="{'invisible':[('state','=','draft')]}"/>
+							           <field name='scrap_qty'  attrs="{'invisible':[('state','=','draft')]}"/>
+									   <field name='qty_pnl_receive' attrs="{'invisible':[('state','=','draft')]}"/>
+		           					   <field name='scrap_pnl_qty' attrs="{'invisible':[('state','=','draft')]}"/>
+							          
+							         </group>
+						        </group>
+						        <group colspan='4' col='4'>
+						            <group colspan='1' col='1'>
+						            	<separator string='drill info' colspan='2'/>
+						            	<field name="min_hole_dia" />
+								         <field name='hole_count'/>
+								         <field name="drills_file"  filename='drills_filename'/>
+								         <field name='drills_filename' readonly='1'/>
+						            	 <field name="slot_hole_count" />
+						            	 <field name='plate_hole_count'/>
+								         <field name='join_hole_count'/>
+								         <field name="special_hole_count"/>
+								    
+						            </group>
+						            <group colspan='1' col='1'>
+						            	<separator string='Shap vcut info' colspan='2'/>
+						            	<field name="cutter_size" />
+								         <field name='vcut_size'/>
+								         <field name='gong_size'/>
+								        <!--   <field name='slot_size'/> -->
+									      <field name='gong_slot_count'/>
+									      <field name='sink_hole_count'/>
+									        <field name='horn_hole_count'/>
+						            </group>
+						            <group colspan='1' col='1'>
+						            	<separator string='fly test info' colspan='2'/>
+						            	<field name="points_count" />
+						            		<field name='total_count'/>
+								         <field name='if_first_test'/>
+								         <field name='if_retest'/>
+								         <field name='if_fpc_sample' />
+										<field name='if_low_resistance'/>
+										<field name='pcb_remove'/>
+									
+						            </group>
+						            <newline/>
+						            
+						          </group>
+						         <group colspan='2' col='2' expand='1'>
+						             <group colspan='1' col='1' expand='1'>
+						            	<field name='reason_apply'/>
+						            </group>
+						            <group colspan='1' col='1' expand='1'>
+						           		<field name="process_content"/>
+						           	</group>
+						         </group>
+							     
+						  		<newline/>
+						      <field name='state'/>
+	      			    </form>
+	      			    
+	      			 </field>
+	      			 <newline/>
+	      			 <button name='production_read' string='production read' icon='gtk-jump-to' type='object'/>
+	      			 <group colspan='2' expand='1'>
+    			    	<field name='director_note'/>
+			    		<newline/>
+			    		<field name='plan_note'/>
+			   			 <newline/>
+			    		<field name='outsource_note'/>
+			    		<newline/>
+			   			 <field name='gmanager_note'/>
+			   		</group>
+    		</page>
+    	</notebook>
+		  	</sheet>
+		 </form>
+		
+	</field>
+</record>
+    
+<!-- outsource_process -->
+<record model="ir.actions.act_window" id="act_outsource_process">
+		<field name="name">Outsource process</field>
+		<field name="res_model">outsource.process</field>
+</record>  
+<menuitem  id="menu_outsource_process"  groups="base.group_no_one" name="outsource process form"  parent="menu_outsource_process_management"   action="act_outsource_process"/>
+
+<record model="ir.ui.view" id="act_outsource_process_tree_view">
+   <field name="name">outsource_process.tree</field>
+   <field name="model">outsource.process</field>
+   <field name="type">tree</field>
+   <field name="arch" type="xml">
+       <tree string="process tree">
+            <field name="outsource_number"/> 
+            <field name='responsible_id'/>
+            <field name='partner_id'/>
+            <field name='process_type'/>
+            <field name='return_number'/>
+            <field name='create_date'/>
+            <field name='send_state'/>
+            <field name='state'/>
+            
+       </tree>
+   </field>
+</record>
+
+<record model="ir.ui.view" id="act_outsource_process_form_view">
+   <field name="name">outsource_process.form</field>
+   <field name="model">outsource.process</field>
+   <field name="arch" type="xml">
+       <form string="process form" version="7.0">
+           <header>
+               
+                <button name="button_approve" string="Approve"  state='draft' class="oe_highlight"/>
+             	
+    	   	    <field name="state" widget="statusbar" statusbar_colors='{"draft":"red","w_receive":"blue"}' readonly="1"/>
+			
+           </header>
+           <sheet>
+         
+	           <group colspan='4' col='4'>
+	           		<group colspan='2' col='2'>
+			           <field name="outsource_number"/> 
+			           <field name='partner_id' attrs="{'readonly':[('state','!=','draft')]}"/>
+					   <field name='delivery_type' attrs="{'readonly':[('state','!=','draft')]}"/>
+					   <field name='process_type' attrs="{'readonly':['|',('state','=','done'),('state','=','w_receive')]}"/>
+					   <field name='type' invisible="1"/>
+					   <field name='user_id'/>
+				  	   <field name='send_state'/>
+				  	   <field name='if_send'/>
+	           		</group>
+	           		<group colspan='2' col='2'>
+			           <field name='street'/>
+			           <field name='responsible_id'/>
+			           <field name='create_date'/>
+			           <field name='return_number'/>
+			           <field name='delivery_time'/>
+			           <field name='receive_boards'/>
+			           <button icon="gtk-ok" name="download_attendment" string="Send now" type="object" attrs="{'readonly':[('state','=','done')]}"/>
+			           <button name="approve_line"  states="w_receive,done" string="approve line" type="object" icon="icon" groups="base.group_no_one"/>
+			        </group> 
+	        </group>
+		     <notebook colspan='4'>
+		         <page string='outsource process info'>
+			         
+			      		<field name='outsource_delivery_ids'  attrs="{'readonly':[('state','=','done')]}">
+								<tree string='process lines'>
+								
+			      			        <field name='production_id'/>
+			      			        <field name='process_types'/>
+			      			        <field name='board_types'/>
+			      			        <field name='receive_board'/>
+						            <field name="product_id"/>
+						            <field name="product_qty" />
+									<field name='qty_pnl'/>
+						            <field name='qty_receive' />
+									<field name='qty_pnl_receive' editable='bottom'/>
+								    <field name='receive_area'/>
+						            <field name='product_unit'/>
+									<field name="pcs_price_units" />
+							       	<field name='pnl_price_units'/>
+							       	<field name='cost_total' sum='cost total'/>
+							       	<field name='board_thickness'/>
+							       	<field name='hole_count'/>
+							       	<field name='board_type'/>
+									<field name='length'/>
+									<field name='width'/>
+									<field name='pnl_length'/>
+									<field name='pnl_width'/>
+									<field name="process_args" />
+									<field name='delivery_date'/>
+									<field name='finish_time'/>
+								    <field name='state'/>
+									 <field name='note'/>
+			      			    </tree>
+			      			    <form string='process lines'>
+			      			        <group colspan='4' col='6'>
+							               <group colspan='1' col='1'>
+							           
+								    			<field name='production_id' attrs="{'readonly':[('process_lines_id','!=',False)]}"/>
+								    			
+								    			<field name='process_lines_id' on_change='onchange_process_lines_id(process_lines_id)'/>
+								    			<field name='outsource_number'/>
+								    			
+								    			<field name='process_type'/>
+								    			<field name='process_types' readonly="1"/>
+								    			<field name="product_id"/>
+							                   	<field name='outsource_apply_id' invisible='1'/>
+											 
+									           	 <field name='delivery_date'/>
+									           	  <field name='dispatch_state'  attrs="{'invisible':[('state','!=','w_receive')]}"/>
+									           		<field name='delivery_time'/> 
+									           		<field name='eng_file' filename='eng_filename'/>
+									     
+									         		
+									       </group>
+									       <group colspan='1' col='1'>
+									         
+				          						<field name='current_workcenter_id'/>
+												<field name='length'/>
+									           	<field name='width'/>
+									           	<field name='product_unit'/>
+									           	<field name='pnl_length'/>
+									           	<field name='pnl_width'/>
+									           	<field name='pnl_unit'/>
+									           	 <field name='product_area'/>
+									           	 <field name='receive_area'/>
+									           	 <field name='eng_filename' readonly='1'/>
+									        </group>
+									        <group colspan='1' col='1'>
+									          
+									           <field name='layer_count'/>
+									          <field name='board_thickness'/>
+									           <field name="product_qty" />
+									           <field name='qty_pnl'/>
+									           <field name='pcs_unit_count'/>
+									           <field name='qty_receive'  attrs="{'invisible':[('state','=','draft')]}"/>
+									           <field name='scrap_qty'  attrs="{'invisible':[('state','=','draft')]}"/>
+											   <field name='qty_pnl_receive' attrs="{'invisible':[('state','=','draft')]}"/>
+			           					       <field name='scrap_pnl_qty' attrs="{'invisible':[('state','=','draft')]}"/>
+												
+												<field name='delivery_id'/>
+												<field name='partner_id' invisible='1'/>
+												<field name='return_numbers'/>
+									         </group>
+									         <newline/>
+									         <group colspan='2' col='4'>
+									             <field name='process_args' colspan='4'/>
+									             <newline/>
+									             <field name='process_args_info' colspan='4'/>
+									         </group>
+								        </group>
+								     
+								        <group colspan='2' col='2'>
+								            <group colspan='1' col='1'>
+								                <field name='top_area'/>
+		  										<field name='bottom_area'/>
+		  										<field name='top_bot_area'/>
+		  										<field name="gold_thickness" />
+		  										<field name="nickel_thickness"/>
+		  										<field name='sn_thickness'/>
+								            </group>
+								            <group colspan='1' col='1'>
+								                <field name='gold_fingers'/>
+								                
+								           	     <field name='red_tape_article'/>
+								           	     <field name='silver_thickness'/>
+								   
+								                 <field name="pcs_price_units" />
+									             <field name='default_min_cost' readonly='1'/>
+									             <field name='meter'/> 	 
+								            </group>
+								            <group colspan='2' col='2'>
+								                <group colspan='1' col='1'>
+									             	<field name='board_types'/>
+			  										<field name='if_have_tax'/>
+			  										<field name='account_tax_id'/>
+			  										<field name='pnl_price_units'/>
+									           	 	<field name='cost_total' sum='cost total'/>
+		  										</group>
+		  										<newline/>
+		  										<button name='production_read' string='production read' icon='gtk-jump-to' type='object' invisible='1'/>
+								            </group>
+								        </group>
+								        <group colspan='2' col='2'>
+								           	<notebook colspan='2'>
+								         
+								           	    <page string='plasma_gong_side_VCUT info'>
+								           	        <field name='board_type'/>
+								           	        <newline/>
+								           	        <group colspan='2' col='2'>
+								            			<field name="cutter_size" />
+										         		<field name='vcut_size'/>
+										         		<field name='v_cutter_count'/>
+										         		<field name='note'/>
+										         	</group>
+										         	<group colspan='2' col='2'>
+										         	    <field name='gong_size'/>
+										         	  
+										         		<field name='gong_slot_count'/>
+										         		<field name='sink_hole_count'/>
+										         		<field name='horn_hole_count'/>
+										         		<field name='plate_hole_count'/>
+										         		<field name='pd_thick'/>
+										         	</group>
+								           	    </page>
+								           	    <page string='fly_test info'>
+								           	        <group colspan='2' col='2'>
+													    <field name="points_count" />
+										            	<field name='total_count'/>
+												         <field name='if_first_test'/>
+												         <field name='aoi_test_count'/>
+													</group>
+								           	        <group colspan='2' col='2'>
+								           	            <field name='if_retest'/>
+												         <field name='if_fpc_sample' />
+												         <field name='if_low_resistance'/>
+												         <field name='pcb_remove'/>
+								           	        </group>
+								           	    </page>
+								           	    <page string='drill info'>
+								           	        <group colspan='2' col='2'>
+												         <field name="drills_file"  filename='drills_filename'/>
+										            	<field name="min_hole_dia" />
+										            	<field name='board_material'/>
+												  
+												         <field name='hole_count'/>
+												         <field name='cu_thickness'/>
+								            		</group>
+								            		<group colspan='2' col='2'>
+								            		    <field name='drills_filename' readonly='1'/>
+								            		    <field name="slot_hole_count" />
+												         <field name='join_hole_count'/>
+												         <field name="special_hole_count" />
+												         <field name='plate_hole_count'/>
+												      
+								            		</group>
+								           	    </page>
+								           	    <page string='gold finger info'>
+								           	        <group colspan='1' col='1'>
+								           	            <field name='gold_finger_width'/>
+								           	            <field name='gold_finger_width2'/>
+								           	            <field name='gold_finger_width3'/>
+								           	            <field name='gold_finger_width4'/>
+								           	            <field name='gold_finger_width5'/>
+								           	            <field name='gold_finger_width6'/>
+								           	        </group>
+								           	        <group colspan='1' col='1'>
+								           	            <field name='gold_finger_height'/>
+								           	            <field name='gold_finger_height2'/>
+								           	            <field name='gold_finger_height3'/>
+								           	            <field name='gold_finger_height4'/>
+								           	            <field name='gold_finger_height5'/>
+								           	            <field name='gold_finger_height6'/>
+								           	        </group>
+								           	        <group colspan='1' col='1'>
+								           	            <field name='finger_count'/>
+								           	            <field name='finger_count2'/>
+								           	            <field name='finger_count3'/>
+								           	            <field name='finger_count4'/>
+								           	            <field name='finger_count5'/>
+								           	            <field name='finger_count6'/>
+								           	        </group>
+								           	    </page>
+								           	  	<page string='wire_drawing_OSP info'>
+								           	  	    <group colspan='1'  col='1'>
+								           	  	        <field name='wire_draw_types'/>
+								           	  	        <field name='norms_mark'/>
+								           	        	<field name='film_thickness'/>
+								           	  	    </group>
+								           	  	</page>
+								           	  	<page string='sink_sliver info'>
+								           	  	    <group colspan='1'  col='1'>
+								           	  	        <field name='sink_sliver_type'/>
+								           	      		<field name='cut_type'/>
+								           	      		<field name='laminate_types'/>
+								           	      		<field name='laminate_board_thickness'/>
+								           	      	</group>	
+								           	      	<group colspan='1'  col='1'>	
+								           	      		<field name='repair_type'/>
+								           	      		<field name='osp_type'/>
+								           	      		<field name='length_pp'/>
+								           	      		<field name='laminate_cu_thickness'/>
+								           	  	    </group>
+								           	  	</page>
+								          
+								           	  	
+								           	  	
+								           	  	
+								           	</notebook>
+								      	</group>
+								      <field name='state'/>
+								       <button name='process_cost_compute' string='process cost compute' icon='' type='object' invisible='1'/>
+			      			    </form>
+			      			 </field>
+			      			 <button name='production_read' string='production read' icon='gtk-jump-to' type='object' attrs="{'invisible':[('state','=','done')]}" groups="base.group_no_one"/>
+			      			 <button name='process_cost_compute' string='process cost compute' icon='' type='object' attrs="{'invisible':[('type','=','plasma_process')],'readonly':[('state','=','done')]}" groups="base.group_no_one"/>
+			      			 <button name='plasma_amount' string='plasma amount' icon='' type='object' attrs="{'invisible':[('type','!=','plasma_process')],'readonly':[('state','=','done')]}" groups="base.group_no_one"/>
+			      			 
+		      	  
+		      		<group colspan='1'>
+			           	<field name='reason_apply'/>
+			              <newline/>
+			            <field name="process_content"/>
+			             <newline/>
+				        <field name="process_require" />
+		      		</group>
+		      	</page> 
+				</notebook>
+		         <newline/> 
+            	<!--  <field name="state" readonly="True"/>  -->
+    	   	
+    		</sheet>
+       	</form>
+   </field>
+</record>
+
+
+<!--  -->
+<record model="ir.ui.view" id="act_outsource_process_line_tree_view">
+   <field name="name">outsource_process_lines.tree</field>
+   <field name="model">outsource.process.lines</field>
+   <field name="type">tree</field>
+   <field name="arch" type="xml">
+       <tree string="process lines tree">
+          	<field name='production_id'/>
+            <field name='current_workcenter_id'/>
+         	
+            <field name="product_id"/>
+            <field name='product_unit'/>
+			 <field name="pcs_price_units"/>
+	          
+	       	<field name='pnl_price_units'/>
+	       	<field name='qty_receive'/>
+			<field name='qty_pnl_receive'/>
+			<field name='length'/>
+			<field name='width'/>
+			<field name="product_qty" />
+			<field name='qty_pnl'/>
+			<field name="process_args" />
+			<field name='state'/>
+       </tree>
+   </field>
+</record>
+
+<record model="ir.ui.view" id="act_outsource_process_lines_form_view">
+   <field name="name">outsource_process_lines.form</field>
+   <field name="model">outsource.process.lines</field>
+   <field name="arch" type="xml">
+       <form string="process lines form" version="7.0">
+           <sheet>
+	           <group colspan='4' col='4'>
+	               <group colspan='2' col='2'>
+	                   	<field name='outsource_apply_id' readonly='1' invisible='1'/>
+					  	<field name='production_id'/>
+						<field name="product_id"/>
+						<field name='length'/>
+			           	<field name='width'/>
+			           	<field name='product_unit'/>
+			           	
+			           	 
+			        </group>
+			        <group colspan='2' col='2'>
+			            <field name='current_workcenter_id'/>
+		          
+			           <field name="product_qty" />
+			           <field name='qty_pnl'/>
+			           <field name='qty_receive'  attrs="{'invisible':[('state','!=','w_outsource')]}"/>
+			           <field name='scrap_qty'  attrs="{'invisible':[('state','!=','w_outsource')]}"/>
+			           <newline/>
+			       
+			         </group>
+		        </group>
+	           	<group colspan='4' col='4'>
+	           	    <field name='reason_apply' colspan='4'/>
+	           	    <newline/>
+		       		<field name="process_content" colspan='4'/>
+		        	<newline/>
+		        	<field name="process_require" colspan='4'/>
+		        </group>
+				<field name='state'/>
+			</sheet>
+         </form>
+       </field>
+ </record>
+
+<record model="ir.ui.view" id="act_outsource_duizhang_tree_view">
+   <field name="name">outsource.duizhang.tree</field>
+   <field name="model">outsource.duizhang</field>
+   <field name="type">tree</field>
+   <field name="arch" type="xml">
+       <tree string="duizhang tree">
+            <field name='outsource_number'/>
+            <field name='applicant_id'/>
+            <field name='total_amount'/>
+            <field name='partner_id'/>
+            <field name='outsource_type'/>
+            <field name='start_time'/>
+            <field name='end_time'/>
+			<field name='create_dates'/>
+           
+			<field name="state" />
+       </tree>
+   </field>
+</record>
+	
+<record model="ir.ui.view" id="act_outsource_duizhang_form_view">
+   <field name="name">outsource.duizhang.form</field>
+   <field name="model">outsource.duizhang</field>
+   <field name="arch" type="xml">
+       <form string="duizhang form" version="7.0">
+           <header>
+        
+           		<button name="button_approve" states="draft" string="approve" class='oe_highlight'/>
+           		<field name="state" widget="statusbar" statusbar_visible="draft,outsource_check,outsource_confirm,done" statusbar_colors='{"draft":"red","outsource_check":"blue"}' readonly="1"/>
+           
+           </header>
+           <sheet>
+	           <group colspan='4' col='6'>
+	               <group colspan='1' col='2'>
+			            <field name='outsource_number' attrs="{'readonly':[('state','!=','draft')]}"/>
+			            <field name='partner_id' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            		<field name='contact_name'/>
+	            		<field name='phone'/>
+	            		<field name='fax'/>
+	            		<field name='outsource_type' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            	</group>
+	            	<group colspan='1' col='2'>
+	           			<field name='applicant_id' attrs="{'readonly':[('state','!=','draft')]}"/>
+	         
+	           		
+	           			<field name='total_amount' attrs="{'readonly':[('state','!=','draft')]}"/>
+						<field name='create_dates'/>
+						<field name='start_time' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            		<field name='end_time' attrs="{'readonly':[('state','!=','draft')]}"/>
+						
+					</group>
+					<group colspan='1' col='2'>
+					    <button name="create_lines"  states="draft" string="create_lines" type="object" icon="icon"/>
+						<newline/>
+						 <button name="update_if_fault"  states="draft" string="update if fault" type="object" icon="icon"/>
+		
+					</group>
+				</group>
+				<newline/>
+				<group colspan='4' col='4' expand='1'>
+				    <group colspan='1' col='2' expand='1'>
+				        <separator string='duizhang line info:' colspan='2'/>
+					    <field name='duizhang_lines_ids' widget='one2many_list' nolabel='1' colspan='4'/>
+						
+						<newline/>
+						
+						<button name='check_data' string='check_data' icon='' type='object' invisible='1'/>
+						<button name='check_data' string='check_data' icon='' type='object'  states="draft"/>
+					</group>
+					
+			
+					
+					
+			    	<group colspan='2' col='2' expand='2'>
+				     		    <separator string='import outsource info' colspan='2'/>
+				     			<newline/>
+					     		<field name='duizhang_lines_partner_ids' nolabel='1' colspan='4' context="">
+					     		 	<tree colors="red:if_faults==False" string='line tree' >
+					     			    <field name='outsource_numbers'/>
+					     			    <field name='return_numbers'/>
+					     			    <field name="product_ids"/>
+					     				<field name="if_faults"/> 
+					     				<field name='qty'/>
+					     				<field name="price"/>
+						       			<field name="amount" sum="total amount"/>
+						       			<field name='pcs_length'/>
+						       			<field name='pcs_width'/>
+						       			<field name='pnl_length'/>
+						       			<field name='pnl_width'/>
+						       			<field name='production_process_id'/>  
+						       			<field name='total_area'/>
+										<field name='finger_count'/>
+										<field name='pnl_units_count'/>
+						       			<field name="send_date"/>
+						       			<field name='duizhang_times'/>
+										<field name='outsource_type'/>
+										<field name='outsource_number'/>
+									</tree>
+									<form string='line form'>
+										<group colspan='4' col='4'>
+					     			    		<field name='outsource_numbers'/>
+					     			   		    <field name='return_numbers'/>
+										    	<field name='production_process_id'/>
+										    	<field name="product_ids"/>
+										    	<field name="if_faults"/>
+						       				    <field name='if_have_duizhangs'/>
+						       					<field name="duizhang_times"/>
+						       					<field name='qty'/>
+						       					<field name="price"/>
+						       					<field name="amount"/> 
+						       					<field name='pcs_length'/>
+						       					<field name='pcs_width'/>
+						       					<field name='pnl_length'/>
+						       					<field name='pnl_width'/>
+						       					<field name='total_area'/>
+												<field name='finger_count'/>
+												<field name='pnl_units_count'/>
+						       					<field name="send_date"/>
+						       					<field name='duizhang_times'/>
+												<field name='outsource_type'/>
+												<field name='outsource_number'/>
+												<field name="notes"/>		
+						       			</group>
+	                                </form>
+	                          
+	                            </field>
+	                            <button name="open_duizhang_lines"  states="draft" string="import duizhang form" type="object" icon="gtk-open" colspan='4'/>		
+	                         
+						</group>	     
+				</group>
+				<newline/>
+	
+			</sheet>
+       </form>
+   </field>
+</record> -->
+
+<record model="ir.actions.act_window" id="act_outsource_duizhang">
+		<field name="name">Outsource duizhang</field>
+		<field name="res_model">outsource.duizhang</field>
+</record>  
+<menuitem  id="menu_outsource_duizhang"  groups="base.group_no_one" name="outsource duizhang form"  parent="menu_outsource_process_management"   action="act_outsource_duizhang"/>   
+
+
+<record model="ir.ui.view" id="outsource_duizhang_line_tree_view">
+   <field name="name">outsource.duizhang.line.tree</field>
+   <field name="model">outsource.duizhang.line</field>
+   <field name="type">tree</field>
+   <field name="arch" type="xml">
+       <tree  colors="red:if_fault==False" string="duizhang tree">
+           <field name='outsource_number'/>
+             <field name='duizhangs_lines_id'/>
+            <field name="product_id"/>
+			<field name="if_fault"/>
+            <field name='qty_receive'/>
+			<field name='qty_pnl_receive'/> 
+			<field name="pcs_price_units"/>
+			<field name='pnl_price_units'/>
+			<field name="amount" sum="total amount"/> 
+			<field name='pcs_length'/>
+			<field name='pcs_width'/>
+			<field name='pnl_length'/>
+			<field name='pnl_width'/>
+			<field name='return_number'/>
+			
+       </tree>
+   </field>
+</record>	
+
+<record model="ir.ui.view" id="outsource_duizhang_line_form_view">
+   <field name="name">outsource.duizhang.line.form</field>
+   <field name="model">outsource.duizhang.line</field>
+   <field name="arch" type="xml">
+       <form string="duizhang form" version="7.0">
+           <sheet>
+	            <field name='duizhangs_lines_id'/>
+	            <field name='outsource_apply_id' readonly='1'/>
+	            <field name='if_have_duizhang'/>
+				<field name="product_id"/>
+				<field name="if_fault"/>
+				<field name='qty_receive'/>
+				<field name='qty_pnl_receive'/> 
+				<field name="pcs_price_units"/>
+				<field name='pnl_price_units'/>
+				<field name="amount"/> 
+				<field name='pcs_length'/>
+				<field name='pcs_width'/>
+				<field name='pnl_length'/>
+				<field name='pnl_width'/>
+				<field name='return_number'/>
+				<field name='outsource_number'/>
+			</sheet>
+       </form>
+   </field>
+</record>
+
+
+
+<record model="ir.ui.view" id="outsource_partner_line_tree">
+	<field name="name">outsource_partner_line</field>
+	<field name="model">outsource.partner.line</field>
+	<field name="arch" type="xml">
+		<tree colors="red:if_faults==False" string="outsource partner line" >  
+		    <field name='outsource_numbers'/>
+			<field name="product_ids"/>				     		
+		    <field name="if_faults"/>
+		     <field name='if_have_duizhangs'/>
+			<field name='qty'/>
+			<field name='price'/>
+			<field name="amount" sum="total amount"/> 
+			<field name='pcs_length'/>
+			<field name='pcs_width'/>
+			<field name='pnl_length'/>
+			<field name='pnl_width'/>
+			<field name='return_numbers'/>
+			<field name='send_date'/>
+			<field name='total_area'/>
+			<field name='finger_count'/>
+			<field name='pnl_units_count'/>
+			<field name='duizhang_times'/>
+			<field name='outsource_type'/>
+			<field name='outsource_number'/>
+		</tree>
+	</field>
+</record>
+
+
+
+
+
+
+
+ <!-- <record model="ir.actions.act_window" id="act_outsource_partner_line">
+		<field name="name">Outsource partner line</field>
+		<field name="res_model">outsource.partner.line</field>
+		<field name='view_type'>form</field>
+        <field name='view_mode'>tree</field>
+        <field name='view_id'  ref='outsource_partner_line_tree'/>
+</record> -->
+<record model="ir.actions.act_window" id="act_outsource_partner_line">
+		<field name="name">Outsource partner line</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">outsource.partner.line</field>
+</record>
+<menuitem  id="menu_outsource_partner_line"  groups="base.group_no_one" name="outsource partner line form"  parent="menu_outsource_process_management"   action="act_outsource_partner_line" sequence='7'/>   
+
+
+
+  
+
+
+<record model="ir.ui.view" id="outsource_delivery_lines_tree_view">
+   <field name="name">outsource_delivery_lines.tree</field>
+   <field name="model">outsource.delivery.lines</field>
+   <field name="type">tree</field>
+   <field name="arch" type="xml">
+       <tree colors="red:if_fault==False" string="delivery lines tree">
+            <field name='outsource_process_id'/>
+            <!--  <field name='outsource_number'/>  -->
+            <field name='production_id'/>
+            <field name='product_id'/>
+            <field name='if_fault'/>
+            <field name='if_have_duizhangs'/>
+            <field name="pcs_price_units"/>
+            <field name='pnl_price_units'/>
+            <field name='cost_total' sum="total amount"/>
+            <field name='qty_receive'/>
+            <field name='qty_pnl_receive' sum='qty pnl receive'/>
+            <field name='pnl_length'/>
+            <field name='pnl_width'/>
+             <field name='length'/>
+            <field name='width'/>
+            <field name='gold_thickness'/> 
+      
+            <field name='process_types'/>
+            <field name='partner_id'/>
+            <field name='delivery_id'/>
+            <field name='receive_area' sum='total area'/>
+            <field name='create_date'/>
+            <field name='delivery_date'/>
+       
+            <field name='finish_time'/>
+            <field name='return_numbers'/>
+            <field name='state'/>
+          	<field name='note'/>
+            
+        
+       </tree>
+   </field>
+</record>	
+
+
+<record model="ir.ui.view" id="outsource_delivery_lines_form_view">
+   <field name="name">outsource.delivery.lines.form</field>
+   <field name="model">outsource.delivery.lines</field>
+   <field name="arch" type="xml">
+       <form string="delivery lines form" version="7.0">
+            <sheet>
+	            <field name='outsource_process_id' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='production_id' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='product_id' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='if_fault' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='if_have_duizhangs' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name="pcs_price_units" attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='pnl_price_units' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='cost_total' sum="total amount" attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='qty_receive' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='qty_pnl_receive' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='pnl_length' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='pnl_width' attrs="{'readonly':[('state','!=','draft')]}"/>
+	             <field name='length' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='width' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='gold_thickness' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='process_args' attrs="{'readonly':[('state','!=','draft')]}"/>  
+	            <field name='process_types' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='partner_id' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='responsible_id' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='delivery_time' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='delivery_id' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='receive_area' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='receive_note' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='create_date' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='return_numbers' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='delivery_date' attrs="{'readonly':[('state','!=','draft')]}"/>
+	            <field name='finish_time' attrs="{'readonly':[('state','!=','draft')]}"/>
+	           
+	        	<field name='state' attrs="{'readonly':[('state','!=','draft')]}"/>
+        	</sheet>
+       </form>
+   </field>
+</record>
+
+
+
+
+ 	
+	
+<record id="view_outsource_delivery_liens_search" model="ir.ui.view">
+       <field name="name">outsource.delivery.lines.select</field>
+       <field name="model">outsource.delivery.lines</field>
+       <field name="type">search</field>
+       <field name="arch" type="xml">
+       		<search string="Search if fault">
+         		<group col='9' colspan='4'>
+ 					<filter icon="terp-camera_test" string="if fault" name="if_fault"
+                           domain="[('if_fault','=',False)]"/>
+ 					<filter icon="terp-camera_test" string="if fault true" name="if_fault"
+                           domain="[('if_fault','=',True)]"/>
+ 					<filter icon="terp-camera_test" string="Draft" name="draft"
+                       domain="[('state','=','draft')]"
+                       help="Orders which are draft to start outsource"/>
+ 					<field name='state'/>
+ 					<field name='process_types'/>
+ 					<field name='partner_id'/>
+ 					<field name='production_id'/>
+ 					<field name='outsource_process_id'/>
+ 					
+ 					<field name='product_id'/>
+ 					<field name='delivery_date'/>
+ 					<field name='create_date'/>
+ 					
+ 				</group>
+ 			</search>
+ 	    </field>
+</record>
+
+
+<record id="act_outsource_delivery_lines_action" model="ir.actions.act_window">
+            <field name="name">outsource.delivery.lines.select</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">outsource.delivery.lines</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph,gantt</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="view_outsource_delivery_liens_search"/>
+            <field name="context">{'search_default_draft':1}</field>
+</record>
+
+
+
+
+<menuitem id='outsource_delivery_lines_menu' name='outsource process product lines' parent='menu_outsource_process_management' action='act_outsource_delivery_lines_action' sequence='6'/>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+</data>
+</openerp>

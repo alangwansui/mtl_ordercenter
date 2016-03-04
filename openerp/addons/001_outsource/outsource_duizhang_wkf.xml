@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+    <record model="workflow" id="wkf_duizhang">
+      <field name="name">outsource_duizhang</field>
+      <field name="osv">outsource.duizhang</field>
+      <field name="on_create">True</field>
+    </record>
+      
+      <!-- active:draft,outsource_check,outsource_confirm,done -->
+     <record id="act_draft_dui" model="workflow.activity">
+       <field name="wkf_id" ref="wkf_duizhang"/>
+       <field name="flow_start">True</field>
+       <field name="name">draft</field>
+     </record>
+     
+     <record id="act_outsource_check_dui" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_duizhang"/>
+           <field name="name">outsource_check</field>
+           <field name="action">write({'state':'outsource_check'})</field>
+           <field name="kind">function</field>
+    </record>
+     
+     <record id="act_outsource_confirm_dui" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_duizhang"/>
+           <field name="name">outsource_confirm</field>
+           <field name="action">write({'state':'outsource_confirm'})</field>
+           <field name="kind">function</field>
+     </record>
+     
+    <record id="act_done_dui" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_duizhang"/>
+           <field name="name">done</field>
+           <field name="action">write({'state':'done'})</field>
+           <field name="kind">function</field>
+           <field name="flow_stop">True</field>
+           <field name="join_mode">AND</field>
+    </record>
+    
+    <!-- trans:draft,outsource_check,outsource_confirm,done -->
+     <record id="act_draft_dui2act_outsource_check_dui" model="workflow.transition">
+          <field name="act_from" ref="act_draft_dui"/>
+          <field name="act_to" ref="act_outsource_check_dui"/>
+          <field name="signal">button_approve</field>
+    
+        </record>
+        
+     	<record id="act_outsource_check_dui2act_outsource_confirm_dui" model="workflow.transition">
+          <field name="act_from" ref="act_outsource_check_dui"/>
+          <field name="act_to" ref="act_outsource_confirm_dui"/>
+          <field name="signal">button_approve</field>
+     
+        </record>
+        
+     	<record id="act_outsource_confirm_dui2act_done_dui" model="workflow.transition">
+          <field name="act_from" ref="act_outsource_confirm_dui"/>
+          <field name="act_to" ref="act_done_dui"/>
+          <field name="signal">button_approve</field>
+        </record>
+    
+	</data>
+</openerp>

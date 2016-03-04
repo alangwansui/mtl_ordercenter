@@ -1,0 +1,165 @@
+<?xml version='1.0'  encoding='utf-8'?>
+<openerp>
+
+
+<data noupdate="1">
+	<record id="sequence_unconventional_review_type" model="ir.sequence.type">
+	    <field name="name">unconventional_review</field>
+	    <field name="code">unconventional.review</field>
+	</record>
+	<record id="sequence_unconventional_review" model="ir.sequence">
+	    <field name="name">unconventional_review</field>
+	    <field name="code">unconventional.review</field>
+	    <field name="prefix">UR</field>
+	    <field name="padding">6</field>
+	    <field name="number_next">1</field>
+	    <field name="number_increment">1</field>
+	</record>
+</data>
+
+
+    <data>
+    	<record model='ir.ui.view' id='unconventional_review_view_tree'>
+    		<field name='name'>unconventional.review.tree</field>
+    		<field name='model'>unconventional.review</field>
+    		<field name='arch' type='xml'>
+                <tree  string='sheng'>
+               		 <field name='name'/>
+					 <field name='responsible_id'/>
+               		 <field name='pcb_info_id'/>
+               		 <field name='create_time'/>
+           			 <field name='partner_id'/>
+               		 <field name='file_name'/>
+               		 <field name='product_id'/>
+               		 <field name='order_qty'/>
+               		 <field name='delivery_time'/>
+               		 <field name='production_factory'/>
+               		 <field name='unconventional_note'/>
+               		 <field name='state'/>
+                </tree>
+            </field>
+    	</record>
+    	<record model='ir.actions.act_window' id='act_unconventional'>
+    		<field name='name'>非常规评审</field>
+    	    <field name='res_model'>unconventional.review</field>
+        </record>
+    
+  <menuitem  id="menu_unconventional"  name='非常规评审单'  parent="menu_sale_manager"   action="act_unconventional"  sequence="8"/>
+  		
+  		<record model='ir.ui.view' id='unvonventional_review_view_form'>
+  			<field name='name'>unconventional.review.form</field>
+  			<field name='model'>unconventional.review</field>
+  			<field name='arch' type='xml'>
+  				<form string='unconventional form' version='7.0'>
+  				    <header>
+  				        	
+  							<button name='button_approve' string='审批' states='draft,w_eng,w_tech,w_quality,w_material,w_plan,w_ger_deparment,w_order_center' class='oe_highlight'/>
+            				<button name='button_refuse' string='作废' states='draft,w_eng,w_tech,w_quality,w_material,w_plan,w_ger_deparment,w_order_center' class='oe_highlight'/>
+            				<field name='state'  widget="statusbar" statusbar_visible="draft,w_eng,w_tech,w_quality,w_material,w_plan,w_ger_deparment,w_order_center,done" statusbar_colors='{"w_eng":"blue"}'/>
+  				    </header>
+  				    <sheet>
+	  					<group colspan='4' col='6'>
+	  						<group colspan='1' col='2'>
+	  							 <field name='name'/>
+			            		 <field name='pcb_info_id'/>
+			            		 <field name='create_time'/>
+			        			 <field name='tech_review'/>
+			            		 <field name='quality_review'/>
+	  						</group>
+	  						<group colspan='1' col='2'>
+	  							<field name='partner_id'/>
+	               		 		<field name='product_id'/>
+								<field name='responsible_id'/>
+								<field name='material_review'/>
+								<field name='plan_review'/>
+							
+	  					    </group>
+	  				
+		  				   <group colspan='1' col='2'>
+		  				   		<field name='order_qty'/>
+		  					    <field name='delivery_time'/>
+								<field name='file_name'/>
+		               		 	<field name='production_factory'/>
+		  				   </group>
+	  					</group>
+	  					<group colspan='4' col='4' expand='1'>
+	  						<field name='unconventional_note'/>
+	  						<field name='parameter_note'/>
+	  				   </group>
+	                    <notebook colspan='4'>
+		  					 <page string='评审记录信息'>
+		  					 		<field name='unconventional_review_ids' widget='one2many_list'/>
+		  					 </page>
+	  				</notebook>
+	  			
+            	</sheet>	
+  			</form>
+  		</field>
+  	</record>
+  	
+  	<record model='ir.ui.view' id='unconventional_review_line_view_tree'>
+    		<field name='name'>unconventional.review.line.tree</field>
+    		<field name='model'>unconventional.review.line</field>
+    		<field name='arch' type='xml'>
+    			<tree string='review lines tree'>
+    				 <field name='state' readonly='1'/>
+    				 <field name='department_id'/>
+               		 <field name='review_date'/>
+               		 <field name='review_users_id'/>
+               		 <field name='review_note'/>
+           			 <field name='ok_desgin_requirement'/>
+               		 <field name='is_need_other_dpt'/>
+               		 <field name='is_limit_example'/>
+               		 <field name='ok_create_project'/>
+               		 <field name='ok_meet_quality'/>
+           			 <field name='ok_meet_material'/>
+               		 <field name='ok_delivery_time'/>
+               		 <field name='ok_final_affirm'/>
+    			</tree>
+    		</field>
+    </record>
+    <record model='ir.ui.view' id='unconventional_review_line_view_form'>
+    		<field name='name'>unconventional.review.line.form</field>
+    		<field name='model'>unconventional.review.line</field>
+    		<field name='arch' type='xml'>
+    			<form string='review lines form' version='7.0'>
+    			    <header>
+    			        
+    			    </header>
+    			    <sheet>
+	    			 <group colspan='4' col='6'>
+	    			 	<group colspan='1' col='2'>
+	    			 		 <field name='department_id'/>
+		               		 <field name='review_date'/>
+		               		 <field name='review_users_id'/>
+		               		 <field name='state'/>
+		           			 
+	    			 	</group>
+	    			 	<group colspan='1' col='2'>
+	    			 		 <field name='is_need_other_dpt'/>
+	               		 	<field name='is_limit_example'/>
+	               		 	<field name='ok_desgin_requirement'/>
+		               		 <field name='ok_create_project'/>
+	    			 	</group>
+	    			 	
+	    			 	<group colspan='1' col='2'>
+	    			 		<field name='ok_meet_quality'/>
+	    			 		<field name='ok_meet_material'/>
+	               		 	<field name='ok_delivery_time'/>
+	               		 	<field name='ok_final_affirm'/>
+	    			 	</group>
+	    			 </group>
+	    			  <group colspan='4' col='4'>
+	    			 		<field name='review_note'/>
+	    			 		<button name="button_approve"  string="Approve" icon="icon"/>
+	    			 
+	    			 </group>
+				</sheet>
+    		 </form>
+    	  </field>
+    </record>
+    	
+</data>
+</openerp>
+
+

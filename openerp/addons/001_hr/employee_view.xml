@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="employee_tree_view">
+    <field name="name">employee.tree</field>
+	<field name="model">employee</field>
+	<field name="arch" type="xml">
+		<tree string="employee information" version="7.0">
+			<field name='employeecode'/>
+			<field name='employeename'/>
+			<field name='sex'/>
+			<field name='department'/>
+			<field name='workstartdate'/>
+			<field name="workertype"/>
+			<field name='company'/>
+		</tree>	
+	</field>
+</record>
+<record model="ir.ui.view" id="employee_form_view">
+    <field name="name">employee.form</field>
+    <field name="model">employee</field>
+    <field name="arch" type="xml">
+        <form string="employeeinformation" version="7.0">
+        <header>
+             <button string="创建账号" name='create_user' type='object' class='oe_highlight'/>
+             <button string="写入到东烁" name='write_to_dS' type='object' class='oe_highlight'/>
+             <button string="导入数据" name='import_data' type='object' class='oe_highlight'/>
+        </header>
+           <sheet>
+               <field name="photo" widget='image' class="oe_left oe_avatar"/>
+               <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="employeename"/>
+                            </h1>
+               </div>
+               <notebook>
+                   <page string="公开信息">
+                       <group>
+                           <group>
+                               <field name="employeecode"/>
+                               <field name="workertype"/>
+                               <field name="con_sta_date"/>
+                               <field name="employee_type"/>
+                               <field name='department'/>
+                              
+                               <field name="workstartdate"/> 
+                               <field name="technicaltitle"/>
+                               <field name='company'/>
+                           </group>
+                           <group>
+                               <field name="leave_type"/>
+                               <field name="leave_date"/>
+                               <field name="con_end_date"/>
+                               <field name="code_name"/>
+                               <field name="email"/>
+                               <field name="sex"/>
+                               <field name='is_sale_approve'/>
+                               <field name='is_saleman'/>
+                         
+                           </group>
+                           <field name="memo" colspan="4"/>        
+                       </group>
+                   </page>
+                   <page string="个人信息">
+                       <group>
+                           <group>
+                               
+                               <field name='birth_date'/>
+                               <field name='marriage_state'/>
+                               <field name='ethnic'/>
+                               <field name='diploma'/>
+                               <field name='politics'/>    
+                           </group>
+                          <group>
+                               <field name='cellphone'/>
+                               <field name='perfession'/>
+                               <field name='link_phone'/>
+                               <field name='issocialcard'/>
+                               <field name='isoldinsurance'/>    
+                           </group>
+                           <group>
+                               
+                               <field name='idcardcode'/>
+                               <field name='family_tel'/>
+                               <field name='birth_place'/>
+
+                           </group>
+                            <group>
+                               <field name='healthy_state'/>
+                               <field name='family_addr'/>
+                               
+                           </group>
+                        </group>
+                   </page>
+               </notebook>
+           </sheet>  
+        </form>
+    </field>
+</record>
+
+<record model="ir.actions.act_window" id="act_employee">
+	<field name="name">职员管理</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">employee</field>
+</record>  
+<menuitem  id="menu_employee"  name="职员管理"  parent="menu_hr_new"  sequence='1'/>
+<menuitem  id="menu_employee_new"  name="职员"  parent="menu_employee"   action="act_employee" sequence='1'/>
+
+
+<record id="view_employee_new_filter" model="ir.ui.view">
+	<field name="name">employee.select</field>
+    <field name="model">employee</field>
+    <field name="arch" type="xml">
+    	<search string="Search employee">
+              <field name="employeename"  filter_domain="[('employeename','ilike',self)]"/>
+             <field name='employeecode' filter_domain="[('employeecode','ilike',self)]"/>
+             <field name="workertype"/>
+             <field name='department'/>
+             <field name='code_name'/>
+  			 <field name='workstartdate'/>
+  			 <field name='leave_type'/>
+            
+		</search>
+	</field>
+</record>
+
+
+</data>
+</openerp>

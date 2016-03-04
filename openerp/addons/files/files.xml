@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <menuitem id="main_files_menu" name="Files" />
+
+        <menuitem id="files_menu" name="files"
+            parent="main_files_menu" />
+
+      
+
+        <record model="ir.ui.view" id="files_tree">
+            <field name="name">files_tree</field>
+            <field name="model">files_name</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Files">
+                    <field name="message"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="files_form">
+            <field name="name">files_form</field>
+            <field name="model">files_name</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="files">
+                    <group>
+                        <field name="message" colspan="4"/>
+                       
+                        <field name="files" widget="files" colspan="4"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="files_name_action">
+            <field name="name">files</field>
+            <field name="res_model">files_name</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="files_name" name="files name" parent="files_menu"
+            action="files_name_action"/>
+        
+        
+   
+
+    </data>
+</openerp>

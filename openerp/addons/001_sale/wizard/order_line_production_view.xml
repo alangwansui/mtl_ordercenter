@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+<data>
+      
+<!-- convent mrp production wizard --> 		
+<record model="ir.ui.view" id="wizard_production_count_form_view">
+		<field name="name">wizard.production.count.form</field>
+		<field name="model">wizard.production.count</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+		        <form string="Product count">
+		        	
+		        
+		        	<field name='delivery_date' />
+		            <field name="production_count" />
+		            <field name='type'/>
+		            <field name='company_id'/>
+		            <button special='cancel' string="Cancel" icon="gtk-cancel"/>
+		            <button name='convent_production_count'  string='Convent production' type='object' icon='gtk-jump-to'/>     
+		        </form>
+		</field>
+</record>
+
+<act_window 
+	context="{'model_id': active_id,'xxx':state}"
+	name='Wizard production count'
+	id='act_production_count'
+	res_model='wizard.production.count'
+	src_model='sale.order.line'
+	view_mode='form'
+	view_type='form'
+	target='new'
+	key2='client_action_multi'/>
+
+</data>
+</openerp>
+
+<!-- 
+<button name='_get_wait_production_count'  string='residue number' type='object' icon='gtk-jump-to'/>
+-->

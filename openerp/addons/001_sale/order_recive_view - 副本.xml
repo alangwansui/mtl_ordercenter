@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+<record model="ir.ui.view" id="order_recive_tree_view">
+	<field name="name">order_recive_tree</field>
+	<field name="model">order.recive</field>
+	<field name="arch" type="xml">
+		<tree string='order recive tree' colors="gray:state in ('done');red:state in('draft')">
+			<field name="partner_code"/>
+			<field name="partner_id"/>
+			<field name="org_file_name"/>
+			<field name='custmer_goodscode'/>
+			<field name="source_type"/>
+			<field name="create_date"/>
+			<field name="approve_date"/>
+		   <field name='priority'/>
+			<field name="attachment_count"/>
+			<field name="assessor_id"/>
+			<field name='sale_type'/>
+			<field name='recive_id'/>
+			<field name='product_number'/>
+			<field name="repeat_crm_lead_id"/>
+			<field name='is_repeat2order'/>
+			<field name="is_repeat2price"/>
+			<field name='state'/>
+		</tree>
+	</field>
+</record>
+<!--<record model="ir.ui.view" id="order_recive_form_view2">
+	<field name="name">order_recive.form</field>
+	<field name="model">order.recive</field>
+	<field name="arch" type="xml">
+		<form string='order recive form' version='7.0'>
+			<header>
+				
+				<button name='button_approve'  string='审批'  class='oe_highlight'/>
+				<button name='button_refuse'  string='作废' class='oe_highlight'/>
+				<field name='state' widget="statusbar" statusbar_visible="draft,done" statusbar_colors='{"done":"blue"}'/>
+			</header>
+			<sheet>
+				<group>
+					<group colspan='1' col='2'>
+						<field name="partner_code"/>
+						<field name="partner_id"/>
+						<field name="org_file_name"/>
+						<field name="source_type" widget="selection"/>
+						<field name='sale_type'/>
+						<field name='priority'/>
+						
+						<field name='recive_id'/>
+					
+						<field name="approve_date"/>
+					</group>
+					<group colspan='1' col='2'>
+						<field name='pcb_info_id'/>
+						<field name='custmer_goodscode'/>
+			  
+						<field name="assessor_id"/>
+						<field name="repeat_crm_lead_id"/>
+						<field name='product_number'/>
+						<field name='is_repeat2order'/>
+						<field name="is_repeat2price"/>
+						<field name="create_date"/>
+					</group>
+					<group colspan='4' col='4'>
+						<field name='special_note'/>
+						<field name='note'/>
+					</group>
+				</group>
+			
+		   </sheet>
+		</form>
+	</field>
+</record>  -->
+<record model="ir.actions.act_window" id="act_order_recive">
+	<field name="name">接单</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">order.recive</field>
+</record>  
+<menuitem  id="menu_order_recive"  groups="base.group_no_one" name="接单"  parent="base.menu_sales"   action="act_order_recive" sequence='4'/>
+
+	
+<!--	<act_window 
+		id="action_wizard_crm_lead"
+		name="新增用户单"
+		src_model="order.recive"
+		res_model="crm.lead.wizard"
+		view_mode="form"
+		target="new"
+		key2="client_action_multi"/> 
+	
+	<act_window 
+		id="action_wizard_price_sheet"
+		name="Convent price sheet "
+		res_model="lead.price.sheet"
+		src_model="order.recive"
+		key2="client_action_multi"
+		view_mode="form"
+		view_type="form"
+		target="new"/>
+	
+	<act_window 
+		name="goto my price sheet"
+		domain="[('lead_id','=', active_id)]"
+		res_model="price.sheet"
+		src_model="order.recive"
+		id="act_crm_lead2price_sheet"/>  -->
+
+	
+</data>
+</openerp>
+    

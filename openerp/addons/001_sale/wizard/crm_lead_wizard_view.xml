@@ -1,0 +1,88 @@
+<?xml version='1.0'  encoding='utf-8'?>
+<openerp>
+<data>
+<record model="ir.ui.view" id="wizard_crm_lead_form_view">
+	<field name="name">crm.lead.wizard.form</field>
+	<field name="model">crm.lead.wizard</field>
+	<field name="arch" type="xml">
+	     <form string="wizard pcb info">
+	     	<label colspan ="4"  string="Please sure sale type is new and not pcb info."/>
+	     	<newline/>
+	     	<button special='cancel' string='Cancel' icon='gtk-cancel'/> 
+	        <button name="creat_pcb_info" string="creat_pcb_info" type="object" icon="gtk-jump-to"/>
+	     </form>
+	</field>
+</record>
+<act_window 
+	id="action_wizard_crm_lead"
+	name="Convent pcb info "
+	res_model="crm.lead.wizard"
+	src_model="crm.lead"
+	key2="client_action_multi"
+	view_mode="form"
+	view_type="form"
+	target="new"/>
+
+    	
+<record model="ir.ui.view" id="wizard_price_sheet_form_view">
+    <field name="name">price.sheet.wizard.form</field>
+    <field name="model">lead.price.sheet</field>
+    <field name="arch" type="xml">
+         <form string="wizard price sheet">
+	     	<label colspan ="4"  string="You will to creat a price-sheet!"/>
+	     	<newline/>
+         	<button special='cancel' string='Cancel' icon='gtk-cancel'/> 
+			<button name="transform_price_sheet" string="trans_price_sheet" type="object" icon="gtk-jump-to"/>
+         </form>
+    </field>
+</record>
+
+<act_window 
+	id="action_wizard_price_sheet"
+	name="Convent price sheet "
+	res_model="lead.price.sheet"
+	src_model="crm.lead"
+	key2="client_action_multi"
+	view_mode="form"
+	view_type="form"
+	target="new"/>
+	
+</data>
+</openerp>
+
+<!-- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	id="act_mrp_production_split"
+	name="mrp_production_split"
+	res_model="mrp.production.split"
+	src_model="mrp.production"
+	view_type="form"
+	view_mode="form"
+	target='new'
+	key2='client_action_multi'/>
+
+ -->

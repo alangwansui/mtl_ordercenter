@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="technology_capabilities_parameter_tree_view">
+    <field name="name">technology_capabilities_parameter.tree</field>
+    <field name="model">technology.capabilities.parameter</field>
+    <field name="type">tree</field>
+    <field name="arch" type="xml">
+        <tree string="technology_capabilities_parameter" editable='bottom'>
+            <field name="name"/>
+            <field name="item"/>
+			<field name="sub_item"/>
+		    <field name="level"/>
+		    <field name='layer'/>
+		    <field name="inorout"/>
+		    <field name='v'/>
+			<field name="min"/>
+			<field name='max'/>
+			<field name='tol_lower'/>
+			<field name='tol_upper'/>
+			<field name='cu_thickness'/>
+			<field name="surface_treatment"/>
+			<field name="board_material"/>
+			<field name="drill_type"/>
+			<field name='angle'/>
+			<field name="ink_type"/>
+			<field name="accept_standard"/>
+			<field name='res_company'/>
+        </tree>
+    </field>
+</record>
+
+<record model='ir.actions.act_window' id='technology_capabilities_parameter_action'>
+    <field name='name'>非常规参数设置</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name='res_model'>technology.capabilities.parameter</field>
+</record>
+<menuitem id='technology_capabilities_parameter_menu' name='非常规参数设置' parent='menu_sale_config_manager' action='technology_capabilities_parameter_action' groups='base.group_no_one'/>
+</data>
+</openerp>

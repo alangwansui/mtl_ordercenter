@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+<record model="ir.ui.view" id="order_recive_tree_view">
+	<field name="name">order_recive_tree</field>
+	<field name="model">order.recive</field>
+	<field name="arch" type="xml">
+		<tree string='order recive tree' colors="gray:state in ('done');red:state in('draft')">
+		    <field name='name'/>
+			<field name="partner_code"/>
+			<field name="partner_ids" options="{'limit':3,'create':false,'create_edit':false}"/>
+			<field name='product_name'/>
+			<field name='fname'/>
+			<field name="create_date"/>
+			<field name="approve_date"/>
+	  		<field name='priority'/>
+			<field name="assessor_id"/>
+			
+			<field name='state'/>
+		
+		</tree>
+	</field>
+</record>
+<record model="ir.ui.view" id="order_recive_form_view2">
+	<field name="name">order_recive.form</field>
+	<field name="model">order.recive</field>
+	<field name="arch" type="xml">
+		<form string='order recive form' version='7.0'>
+			<header>
+				
+				<button name='button_approve'  string='审批' states='draft' class='oe_highlight' groups='001_sale.sales_order'/>
+				<button name='import_data'  string='导入东烁用户单' type='object' class='oe_highlight' groups='001_sale.sales_order'/>
+				<button name='button_refuse'  string='作废' states='draft,done' class='oe_highlight' groups='001_sale.sales_manager'/>
+				
+				
+				<field name='state' widget="statusbar" statusbar_visible="draft,wait_pcb_info,wait_price,wait_sale,wait_production,done" statusbar_colors='{"wait_pcb_info":"blue"}'/>
+			</header>
+			<sheet>
+				<notebook colspan="4" >
+					<page string='接单信息' attrs="{'readonly':[('state','!=','draft')]}">
+						<group>
+							<group colspan='1' col='2'>
+							    <field name='name'/>
+								<field name="partner_code"/>
+								<field name="partner_ids" options="{'limit':10,'create':False,'create_edit':False}" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<!--  	<field name="org_file_name"/>-->
+								 <field name='sale_type' attrs="{'readonly':[('state','!=','draft')]}"/>
+							    <field name='priority' attrs="{'readonly':[('state','!=','draft')]}"/>
+							  	<field name='recive_id' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='product_name' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='email_date' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='spend_time' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='special_note' attrs="{'readonly':[('state','!=','draft')]}"/>
+							</group>
+							<group colspan='1' col='2'>
+								
+								
+								<field name='re_pcb_info_id' options="{'limit':1,'create':False,'create_edit':False}" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='pcb_info_id'/>
+								<field name='custmer_goodscode' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='saleman' attrs="{'readonly':1}"/>
+								<field name="assessor_id" attrs="{'readonly':[('state','!=','draft')]}" options="{'limit':10,'create':False,'create_edit':False}"/>
+								<field name="create_date" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="approve_date" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="refile" filename='fname' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='fname' attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name='note' invisible='1'/>
+								<button name="read_file"  string="获取邮件时间" type="object" class='oe_highlight' invisible='1'/>
+								<newline/>
+								<field name='user_note' attrs="{'readonly':[('state','!=','draft')]}"/>
+							</group>
+					 	
+						</group>
+					</page>
+					<page string='导入用户单'>
+						<group>
+							<field name='goodscode'  attrs="{'readonly':[('state','!=','draft')]}"/>
+						</group>
+					</page>
+					
+				</notebook>
+		   </sheet>
+		</form>
+	</field>
+</record>
+
+
+<record id="view_order_recive_filter" model="ir.ui.view">
+	<field name="name">order.recive.select</field>
+    <field name="model">order.recive</field>
+    <field name="arch" type="xml">
+    	<search string="Search Order Recive">
+             <field name="partner_ids"
+                       filter_domain="[('partner_ids','ilike',self)]"/>
+             <field name='partner_code' filter_domain="[('partner_code','ilike',self)]"/>
+             <field name="recive_id"/>
+    		 <filter string="草稿" icon="terp-personal"  name="draft" domain="[('state','=','draft')]"/>
+             <field name='name' filter_domain="[('name','ilike',self)]"/>
+  			 <field name='custmer_goodscode' filter_domain="[('custmer_goodscode','ilike',self)]"/>
+  			 <field name='product_name' filter_domain="[('product_name','ilike',self)]"/>
+             <field name='assessor_id' filter_domain="[('assessor_id','ilike',self)]"/>
+            
+		</search>
+	</field>
+</record>
+
+
+
+
+
+
+
+
+<record model="ir.actions.act_window" id="act_order_recive">
+	<field name="name">接单</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">order.recive</field>
+	<field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="search_view_id" ref="view_order_recive_filter"/>
+    <field name="context">{'search_default_draft':1}</field>
+</record>  
+
+<menuitem  id="menu_sale_manager" name="销售管理"  parent="001_res_partners.menu_sale"  sequence="1" /> 
+
+<menuitem  id="menu_order_recive"  groups="base.group_no_one" name="接单"  parent="menu_sale_manager"   action="act_order_recive" sequence='1'/>
+	
+
+
+	
+</data>
+</openerp>
+    

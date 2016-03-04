@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id='contract_special_approval_tree_view' model="ir.ui.view">
+			<field name="name">contract.special.approval.tree</field>
+			<field name="model">contract.special.approval</field>
+			<field name="arch" type='xml'>
+				<tree string="contract special approval information">
+					<field name="name"/>
+					<field name="sale_order_new_id"/>
+					<field name="partner_id"/>
+					<field name="approval_date"/>
+					<field name="amount_total"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id='contract_special_approval_form_view' model="ir.ui.view">
+			<field name="name">contract.special.approval.form</field>
+			<field name="model">contract.special.approval</field>
+			<field name="arch" type='xml'>
+				<form string="contract special approval information" version="7.0">
+                	<header>
+					    <button name='button_approve'  string='审批' type='object' class='oe_highlight'/>
+						<button name='button_refuse'  string='作废'  type='object'  class='oe_highlight'/>
+						<field name='state' widget="statusbar" statusbar_visible="draft,wait_confirm" statusbar_colors='{"wait_confirm":"blue"}'/>
+					</header>
+					<sheet>
+						<group>
+
+							   	
+							   <group>
+							        <field name="name"/>
+									<field name="response_id"/>
+									<field name="partner_id"/>
+									<field name="note" attrs="{'readonly':[('state','!=','draft')]}"/>
+			
+							  </group>
+							  <group>
+							        <field name="approval_date"/>
+									<field name="sale_order_new_id"/>
+									<field name="amount_total"/>
+									<field name="master_note"/>
+							  </group>  
+							  
+						</group>
+					 </sheet>	
+				</form>
+			</field>
+		</record>  
+		
+		<record id='contract_special_approval' model="ir.actions.act_window">
+			<field name="name">投产特批单</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">contract.special.approval</field>
+		</record>
+ 
+		<menuitem id="menu_contract_special_approval" name="投产特批单" parent="001_sale.menu_sale_manager" action="contract_special_approval" sequence='5'/>
+
+
+</data>
+
+</openerp>

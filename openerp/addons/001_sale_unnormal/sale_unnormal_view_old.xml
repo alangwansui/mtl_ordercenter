@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding='utf-8'?>
+<openerp>
+	<data>
+        
+	 <record model="ir.ui.view" id="view_sale_unnormal_tree">
+        <field name="name">sale_unnormal.tree</field>
+        <field name="model">sale.unnormal</field>
+        <field name="arch" type="xml">
+            <tree  string="sale_unnormal" editable="bottom">
+               
+               <field name='sequence'/>
+               <field name='name'/>
+            	<field name="min_value"/>
+            	<field name='max_value'/>
+            	<field name='issure'/>
+	          
+            </tree>
+        </field>
+	</record>
+
+
+
+<!--  
+	<record model="ir.actions.act_window" id="act_sale_unnormal">
+			<field name="name">act_sale_unnormal</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">sale.unnormal</field>
+		
+	</record> 
+
+
+
+ 	<menuitem  id="menu_sale_unnormal" name="非常规参数"    sequence="2" /> 
+	<menuitem  id="menu_sale_unnormal_manager" name="参数管理"  parent="menu_sale_unnormal"  sequence="2" /> 
+	<menuitem  id="menu_sale_unnormal"  groups="base.group_no_one" name="非常规评审"  parent="menu_sale_unnormal_manager"   action="act_sale_unnormal" sequence='1'/>
+-->
+
+
+	</data>
+</openerp>

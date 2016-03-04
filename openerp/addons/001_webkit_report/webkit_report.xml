@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+
+<report 
+	id="res_partners_odt_report" 
+	name="res_partners_report"
+    model="res.partners"   
+    file="001_webkit_report/report/res_partners/res_partners_report.odt" 
+    string="res partners report" 
+    report_type="odt" 
+    auto="False" 
+    header="False" 
+    keyword='client_print_multi'
+   
+  
+/> 
+
+
+
+
+
+
+
+
+
+</data>
+</openerp>

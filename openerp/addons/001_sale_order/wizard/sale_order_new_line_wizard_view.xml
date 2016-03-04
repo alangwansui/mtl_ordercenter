@@ -1,0 +1,54 @@
+<openerp>
+   <data>
+
+        <!-- crm make sale's view -->
+
+       <record id="view_order_recive_wizard" model="ir.ui.view">
+          <field name="name">sale_order_new_line_wizard.form</field>
+          <field name="model">sale.order.new.line.wizard</field>
+          <field name="arch" type="xml">
+            <form string="Convert to pcb info"  version="7.0">
+                <group col="4">
+                    <field name="delivery_date"/>
+                   	<field name="count"/>
+                   	<field name='type'/>
+                   	<field name="company_name"/>
+                    <field name="store_qty"/>
+                    <field name="memo"/>
+                </group>
+                <footer>
+                    <button name="create_mrp_production_info" string="投产" type="object" class="oe_highlight"/>
+                    or
+               
+                    <button string="取消" class="oe_link" special="cancel" />
+                </footer>
+               
+            </form>
+          </field>
+       </record>
+
+       <!-- sale order line new  action -->
+
+       <record id="action_sale_order_new_line_wizard" model="ir.actions.act_window">
+          <field name="name">订单投产</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">sale.order.new.line.wizard</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">form</field>
+          <field name="target">new</field>
+       </record>
+
+       
+   
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+   </data>
+</openerp>

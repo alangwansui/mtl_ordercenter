@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+<data> 
+
+
+<record id="view_partner_general_wizard" model="ir.ui.view">
+	<field name="name">partner.general.wizard.form</field>
+	<field name="model">partner.general.wizard</field>
+	<field name="arch" type="xml">
+		<form string="partner general form"  version="7.0">
+		    <group col="4">
+            	<field name="partner_id"/>  
+			</group>
+			<footer>
+				<button name="get_partner_info" string="_Create" type="object" class="oe_highlight"/>
+                    or
+                <button string="Cancel" class="oe_link" special="cancel" />
+			</footer>      
+		</form>
+	</field>
+</record>
+
+       
+
+<record id="action_partner_general_wizard" model="ir.actions.act_window">
+	<field name="name">Partner general wizard</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">partner.general.wizard</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+       
+
+
+
+
+
+
+
+
+
+</data>
+</openerp>

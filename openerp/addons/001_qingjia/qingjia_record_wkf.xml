@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+	<record model='workflow' id='wkf_qjia'>
+		<field name='name'>qingjia.record.workflow</field>
+		<field name='osv'>qingjia.record</field>
+	</record>
+	
+	<!-- activity:draft,w_dpt_director,w_dpt_manage,w_manager,w_personnel,done -->    
+	<record id="act_draft_qjia" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_qjia"/>
+           <field name="flow_start">True</field>
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">draft</field>
+           <field name="action">updata_state('draft')</field>
+           <field name="kind">function</field>
+    </record>
+    
+	<record id="act_dpt_director_qjia" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_qjia"/>
+        	<!-- <field name="flow_start">True</field> -->
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">w_dpt_director</field>
+           <field name="action">updata_state('w_dpt_director')</field>
+           <field name="kind">function</field>
+    </record>
+    
+	<record id="act_dpt_manage_qjia" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_qjia"/>
+        	<!-- <field name="flow_start">True</field> -->
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">w_dpt_manage</field>
+           <field name="action">updata_state('w_dpt_manage')</field>
+           <field name="kind">function</field>
+    </record>
+    
+	<record id="act_w_manager_qjia" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_qjia"/>
+        	<!-- <field name="flow_start">True</field> -->
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">w_manager</field>
+           <field name="action">updata_state('w_manager')</field>
+           <field name="kind">function</field>
+    </record>
+    
+	<record id="act_w_personnel_qjia" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_qjia"/>
+        	<!-- <field name="flow_start">True</field> -->
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">w_personnel</field>
+           <field name="action">updata_state('w_personnel')</field>
+           <field name="kind">function</field>
+    </record>
+    
+	<record id="act_done_qjia" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_qjia"/>
+        	<!-- <field name="flow_start">True</field> -->
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">done</field>
+           <field name="action">updata_state('done')</field>
+           <field name="kind">function</field>
+    </record>
+    
+	 <record id="trans_draft_qjia2w_dpt_director" model="workflow.transition">
+          <field name="act_from" ref="act_draft_qjia"/>
+          <field name="act_to" ref="act_dpt_director_qjia"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<!-- <field name="condition">check_verdict_line()</field> -->
+    </record>
+	
+	 <record id="trans_dpt_director_qjia2w_dpt_manage" model="workflow.transition">
+          <field name="act_from" ref="act_dpt_director_qjia"/>
+          <field name="act_to" ref="act_dpt_manage_qjia"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<!-- <field name="condition">check_verdict_line()</field> -->
+    </record>
+    
+	 <record id="trans_dpt_manage_qjia2w_manager" model="workflow.transition">
+          <field name="act_from" ref="act_dpt_manage_qjia"/>
+          <field name="act_to" ref="act_w_manager_qjia"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<field name="condition">check_tian_shu()</field>
+    </record>
+    
+	 <record id="trans_dpt_manage2w_personnel" model="workflow.transition">
+          <field name="act_from" ref="act_dpt_manage_qjia"/>
+          <field name="act_to" ref="act_w_personnel_qjia"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		 <field name="condition">not check_tian_shu()</field>
+    </record>
+    
+	 <record id="trans_w_manager2w_personnel" model="workflow.transition">
+          <field name="act_from" ref="act_w_manager_qjia"/>
+          <field name="act_to" ref="act_w_personnel_qjia"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<!-- <field name="condition">check_verdict_line()</field> -->
+    </record>
+    
+	 <record id="trans_w_personnel2done" model="workflow.transition">
+          <field name="act_from" ref="act_w_personnel_qjia"/>
+          <field name="act_to" ref="act_done_qjia"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<!-- <field name="condition">check_verdict_line()</field> -->
+    </record>
+    
+</data>
+</openerp>

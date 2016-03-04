@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+	<record model='workflow' id='wkf_punish'>
+		<field name='name'>punish.lines.workflow</field>
+		<field name='osv'>punish.lines</field>
+		<field name="on_create">True</field>
+	</record>
+	
+	
+	
+	
+	
+	
+	
+	<!-- activity:draft,w_director,w_quality_manager,w_personnel,w_gmanager,done -->
+	<record id="act_draft_pu" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_punish"/>
+           <field name="flow_start">True</field>
+           <field name="name">draft</field>
+       
+    </record>
+    
+	<record id="act_w_dpt_confirm_pu" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_punish"/>
+           <field name="name">w_dpt_confirm</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_dpt_confirm'})</field>
+          
+    </record>
+    
+	<record id="act_w_responsible_pu" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_punish"/>
+           <field name="name">w_responsible</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_responsible'})</field>
+           
+    </record>
+    
+    <record id="act_top_responsible_pu" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_punish"/>
+           <field name="name">top_responsible</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'top_responsible'})</field>
+           
+    </record>
+    
+	<record id="act_w_director_pu" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_punish"/>
+           <field name="name">w_director</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_director'})</field>
+           
+    </record>
+	<record id="act_w_dpt_manage_pu" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_punish"/>
+           <field name="name">w_dpt_manager</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_dpt_manager'})</field>
+           
+    </record>
+    
+	<record id="act_w_personnel_pu" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_punish"/>
+           <field name="name">w_personnel</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_personnel'})</field>
+           
+    </record>
+    
+	<record id="act_w_gmanager_pu" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_punish"/>
+           <field name="name">w_gmanager</field>
+            <field name="kind">function</field>
+           <field name="action">write({'state':'w_gmanager'})</field>
+          
+    </record>
+    
+    <record id="act_w_punish_pu" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_punish"/>
+           <field name="name">w_punish</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'w_punish'})</field>
+           
+    </record>
+    
+    
+	<record id="act_done_pu" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_punish"/>
+           <field name="name">done</field>
+           <field name="kind">function</field>
+           <field name="action">write({'state':'done'})</field>
+           <field name="flow_stop">True</field>
+	       <field name="join_mode">AND</field>  
+    </record>
+    
+	<record id="act_cancel_pu" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_punish"/>
+           <field name="name">cancel</field>
+           <field name="action">updata_state('cancel')</field>
+           <field name="kind">function</field>
+    </record>
+    
+	<!-- trans:draft,w_dpt_confirm,w_responsible,w_dpt_manager,w_director,w_quality_manager,w_personnel,w_gmanager,done -->
+	
+	<record id="trans_draft_pu2w_dpt_confirm_pu" model="workflow.transition">
+          <field name="act_from" ref="act_draft_pu"/>
+          <field name="act_to" ref="act_w_dpt_confirm_pu"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		 <field name="condition">pu_exist_position(position='user_cf')</field>
+    </record>
+	
+	
+	 <record id="trans_w_dpt_confirm_pu2w_responsible_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_dpt_confirm_pu"/>
+          <field name="act_to" ref="act_w_responsible_pu"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<field name="condition">pu_exist_position(position='director_cf') and not check_without_responsible()</field>
+    </record>
+    
+    <record id="trans_w_dpt_confirm_pu2w_top_responsible_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_dpt_confirm_pu"/>
+          <field name="act_to" ref="act_top_responsible_pu"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<field name="condition">check_without_responsible()=='E'</field>
+    </record>
+    
+    <record id="trans_w_responsible_pu2w_top_responsible_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_responsible_pu"/>
+          <field name="act_to" ref="act_top_responsible_pu"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<field name="condition">not check_without_responsible()</field>
+    </record>
+    
+    <record id="trans_w_dpt_confirm_pu2w_director_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_dpt_confirm_pu"/>
+          <field name="act_to" ref="act_w_director_pu"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		  <field name="condition">check_without_responsible()</field>
+    </record>
+    
+    <record id="trans_top_responsible_pu2w_director_pu" model="workflow.transition">
+          <field name="act_from" ref="act_top_responsible_pu"/>
+          <field name="act_to" ref="act_w_director_pu"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		  <field name="condition">pu_exist_position(position='director_cf')</field>
+    </record>
+    
+    
+	<record id="trans_w_director_pu2w_dpt_manage_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_director_pu"/>
+          <field name="act_to" ref="act_w_dpt_manage_pu"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		   <field name="condition">pu_exist_position(position='supervisor_cf') and not check_director_sel()</field>
+    </record>
+    
+    <record id="trans_w_director_pu2w_personnel_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_director_pu"/>
+          <field name="act_to" ref="act_w_personnel_pu"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		   <field name="condition">pu_exist_position(position='supervisor_cf') and check_director_sel()</field>
+    </record>
+    
+    
+    <record id="trans_w_dpt_manager_pu2w_personnel_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_dpt_manage_pu"/>
+          <field name="act_to" ref="act_w_personnel_pu"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		  <field name="condition">pu_exist_position(position='manager_cf')</field>
+    </record>
+    
+	 <record id="trans_w_personnel_pu2w_gmanage_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_personnel_pu"/>
+          <field name="act_to" ref="act_w_gmanager_pu"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		 <field name="condition">check_amount() and check_line_amount()</field>
+    </record>
+    
+	 <record id="trans_w_personnel_pu2act_done_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_personnel_pu"/>
+          <field name="act_to" ref="act_done_pu"/>
+          <field name="signal">button_approver</field>
+	        <!-- <field name="group_id" ref="group_id"/> -->
+   		 <field name="condition">not check_amount() and check_line_amount()</field>
+    </record>   
+    
+    <record id="trans_w_gmanage_pu2w_done_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_gmanager_pu"/>
+          <field name="act_to" ref="act_done_pu"/>
+          <field name="signal">button_approver</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		   <!-- <field name="condition">check_amount()</field> -->
+    </record>
+    
+	 
+    
+	 <!-- cancel:w_director,w_quality_manager,w_personnel,w_gmanager -->
+	 <record id="trans_w_director_pu2act_cancel_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_director_pu"/>
+          <field name="act_to" ref="act_cancel_pu"/>
+          <field name="signal">button_cancel</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<!-- <field name="condition"></field>-->
+    </record>
+    
+	  <record id="trans_w_dpt_manager_pu2act_cancel_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_dpt_manage_pu"/>
+          <field name="act_to" ref="act_cancel_pu"/>
+          <field name="signal">button_cancel</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<!-- <field name="condition"></field>-->
+    </record>
+    
+	  <record id="trans_w_personnel_pu2act_cancel_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_personnel_pu"/>
+          <field name="act_to" ref="act_cancel_pu"/>
+          <field name="signal">button_cancel</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<!-- <field name="condition"></field>-->
+    </record>
+    
+	  <record id="trans_w_gmanager_pu2act_cancel_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_gmanager_pu"/>
+          <field name="act_to" ref="act_cancel_pu"/>
+          <field name="signal">button_cancel</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		<!-- <field name="condition"></field>-->
+    </record>
+	 
+	<!-- return: w_dpt_manager,w_personnel--> 
+	
+	
+	<record id="trans_w_director_pu2act_w_dpt_confirm_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_director_pu"/>
+          <field name="act_to" ref="act_w_dpt_confirm_pu"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<field name="condition">check_without_responsible() and updata_state('w_dpt_confirm','return')</field> 
+    </record>
+	
+	<record id="trans_w_director_pu2act_top_responsible_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_director_pu"/>
+          <field name="act_to" ref="act_top_responsible_pu"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<field name="condition">not check_without_responsible()</field> 
+    </record>
+    
+	<record id="trans_w_dpt_manage_pu2w_director_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_dpt_manage_pu"/>
+          <field name="act_to" ref="act_w_director_pu"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<!--  <field name="condition"></field>  -->
+    </record>
+    
+    <record id="trans_w_personnel_pu2w_dpt_manage_pu" model="workflow.transition">  
+           <field name="act_from" ref="act_w_personnel_pu"/> 
+           <field name="act_to" ref="act_w_dpt_manage_pu"/>   
+           <field name="signal">button_return</field>  
+	       <!-- <field name="group_id" ref="group_id"/> -->
+    		<field name="condition">not check_director_sel()</field>   
+    </record>  
+	
+    <record id="trans_w_personnel_pu2w_director_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_personnel_pu"/>
+          <field name="act_to" ref="act_w_director_pu"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<field name="condition">not check_quality_manager_sel()</field>  
+    </record>
+    
+	<record id="trans_w_gmanage_pu2w_personnel_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_gmanager_pu"/>
+          <field name="act_to" ref="act_w_personnel_pu"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<!--  <field name="condition"></field>  -->
+    </record>
+	
+	<record id="trans_done2w_personnel_pu" model="workflow.transition">
+          <field name="act_from" ref="act_done_pu"/>
+          <field name="act_to" ref="act_w_personnel_pu"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<field name="condition">not check_amount() and check_line_amount()</field>  
+    </record>
+	
+	<record id="trans_done2w_gmanager_pu" model="workflow.transition">
+          <field name="act_from" ref="act_done_pu"/>
+          <field name="act_to" ref="act_w_gmanager_pu"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   			<field name="condition">check_amount() and check_line_amount</field>  
+    </record>
+    
+    <record id="trans_top_responsible_pu2act_w_dpt_confirm_pu" model="workflow.transition">
+          <field name="act_from" ref="act_top_responsible_pu"/>
+          <field name="act_to" ref="act_w_dpt_confirm_pu"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		  <field name="condition">updata_state('w_dpt_confirm','return')</field> 
+    </record>
+    
+    <record id="trans_w_responsible2act_w_dpt_confirm_pu" model="workflow.transition">
+          <field name="act_from" ref="act_w_responsible_pu"/>
+          <field name="act_to" ref="act_w_dpt_confirm_pu"/>
+          <field name="signal">button_return</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+   		  <field name="condition">updata_state('w_dpt_confirm','return')</field> 
+    </record>
+</data>
+</openerp>
+
+
+<!-- 
+
+	
+
+ -->

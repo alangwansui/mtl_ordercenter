@@ -1,0 +1,80 @@
+<?xml version="1.0"  encoding="utf-8" ?>
+<openerp>
+    <data>
+    	<record model='workflow' id='wkf_order_recive'>
+    		<field name='name'>order_recive.workflow</field>
+    		<field name='osv'>order.recive</field>
+    		<field name="on_create">True</field>
+    	</record>
+  <!-- 'draft','done','refuse' -->  
+    	  <record id="actre_draft" model="workflow.activity">
+	       <field name="wkf_id" ref="wkf_order_recive"/>
+	       <field name="flow_start">True</field>
+	        <field name="name">draft</field>
+	      
+	     </record>
+	     
+	     <record id="actre_wait_pcb_info" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_order_recive"/>
+           <!--<field name="flow_start">True</field>-->
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">wait_pcb_info</field>
+           <field name="action">write({'state':'wait_pcb_info'})</field>
+           <field name="kind">function</field>
+    	</record>
+	     
+	     
+	    <record id="actre_wait_price" model="workflow.activity">
+           <field name="wkf_id" ref="wkf_order_recive"/>
+           <!--<field name="flow_start">True</field>-->
+           <!--<field name="flow_stop">True</field>-->
+           <field name="name">wait_price</field>
+           <field name="action">write({'state':'wait_price'})</field>
+           <field name="kind">function</field>
+    	</record>
+    	
+	     <record id="act_refuse" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_order_recive"/>
+            <field name="name">refuse</field>
+            <field name="kind">function</field>
+            <field name="flow_stop">True</field>
+            <field name="action">write({'state':'refuse'})</field>
+        </record>
+	     
+	    <record id="actre_done" model="workflow.activity">
+	           <field name="wkf_id" ref="wkf_order_recive"/>
+	           <field name="name">done</field>
+	           <field name="action">write({'state':'done'})</field>
+	           <field name="kind">function</field>
+	           <field name="flow_stop">True</field>
+	           <field name="join_mode">AND</field>  
+	    </record>
+	    
+    	
+    <!--activity  -->
+    
+    	
+    	<!-- trans  approve-->
+    	<!--'draft','done','refuse' -->
+    
+        
+        <record id="transre_draft2actre_wait_pcb_info" model="workflow.transition">
+          <field name="act_from" ref="actre_draft"/>
+          <field name="act_to" ref="actre_wait_pcb_info"/>
+          <field name="signal">button_approve</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+       	  <field name="condition">done() and repeat()</field>
+   		 </record>
+    	
+    	<!-- refuse -->
+    	<!--'w_order_director' -->
+    	<record id="transre_draft2refuse" model="workflow.transition">
+          <field name="act_from" ref="actre_draft"/>
+          <field name="act_to" ref="act_refuse"/>
+          <field name="signal">button_refuse</field>
+	      <!-- <field name="group_id" ref="group_id"/> -->
+          <!-- <field name="condition">condition_function</field> -->
+    	</record>
+    	
+</data>
+</openerp>

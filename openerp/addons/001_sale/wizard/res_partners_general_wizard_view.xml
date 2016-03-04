@@ -1,0 +1,33 @@
+<openerp>
+   <data>
+
+        <!-- res partners general view -->
+
+       <record id="view_res_partneres_general_wizard" model="ir.ui.view">
+          <field name="name">res.partners.general.wizard.form</field>
+          <field name="model">res.partners.general.wizard</field>
+          <field name="arch" type="xml">
+            <form string="Convert to general info"  version="7.0">
+                <footer>
+                    <button name="create_partners_general" string="新增" type="object" class="oe_highlight"/>
+                    or
+                    <button string="取消" class="oe_link" special="cancel" />
+                </footer>
+               
+            </form>
+          </field>
+       </record>
+
+
+       <record id="action_res_partneres_general_wizard" model="ir.actions.act_window">
+          <field name="name">客户通用信息</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">res.partners.general.wizard</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">form</field>
+          <field name="target">new</field>
+       </record>
+       
+       
+	</data>
+</openerp>

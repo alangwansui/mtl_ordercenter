@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+<data>
+<record model="ir.ui.view" id="parameter_tree_view">
+    <field name="name">parameter.tree</field>
+	<field name="model">parameter</field>
+	<field name="arch" type="xml">
+		<tree string="employee related of information" >
+			<field name='name'/>
+			<field name='type'/>
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="parameter_form_view">
+    <field name="name">parameter.form</field>
+	<field name="model">parameter</field>
+	<field name="arch" type="xml" >
+		<form string="employee related of information" version="7.0" >
+		    <header> 
+		    	<button string="导入数据" name='parameter_import' type='object' class='oe_highlight'/>
+		    </header> 
+		    <sheet>
+		        <group>
+					<field name='name'/>
+					<field name='type'/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+ 
+<record model="ir.actions.act_window" id="act_parameter">
+	<field name="name">相关参数</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">parameter</field>	
+</record> 
+
+<menuitem  id="menu_hr_new" name="人力资源"  sequence="4" /> 
+
+<menuitem  id="menu_parameter_id" name="参数设置"  parent="menu_hr_new"  sequence="2" /> 
+
+<menuitem  id="menu_prameter_id_id"  name="相关参数"  parent="menu_parameter_id" action="act_parameter" sequence='1'/>
+
+
+</data>
+</openerp>

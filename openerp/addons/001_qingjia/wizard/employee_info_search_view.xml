@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<openerp>
+<data>
+    
+<record id="act_employee_password_search" model="ir.actions.act_window">
+            <field name="name">Employee info search</field>
+            <field name="res_model">employee.password.search</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+</record>
+
+<menuitem  id="menu_wizard_employee_password_search" action="act_employee_password_search"  parent="hr.menu_hr_configuration"  name="Employee info search"/>  
+        
+</data>
+</openerp>

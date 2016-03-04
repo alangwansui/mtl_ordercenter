@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="product_category_new_tree_view">
+       	<field name="name">product_category_new.tree</field>
+       	<field name="model">product.category.new</field>
+       	<field name="type">tree</field>
+       	<field name="arch" type="xml">
+       		<tree  string="product category new">
+       			<field name="name"/>
+       			<field name='up_type'/>
+       			<field name="type"/>
+       			<field name='code'/>
+       		</tree>
+       	</field>       
+</record>
+
+
+<record model="ir.ui.view" id="product_category_new_form_view">
+        <field name="name">product_category_new.form</field>
+        <field name="model">product.category.new</field>
+        <field name="arch" type="xml">
+            <form  string="product category new" version='7.0'>
+				<header>
+              		
+					
+				</header>
+				<sheet>
+				    <group>
+                		<field name='name'/>
+                		<field name='up_type'/>
+                		<field name="type"/>
+       					<field name='code'/>
+       				</group>
+       			</sheet>
+       		</form>
+       	</field>
+</record>
+                		
+<record model="ir.actions.act_window" id="act_product_category_new">
+		<field name="name">物料分类设置</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.category.new</field>
+</record>  
+
+
+<menuitem  id="menu_product" name="物料"    sequence="5" /> 
+<menuitem  id="menu_product_manager" name="物料管理"  parent="menu_product"  sequence="1" /> 
+<menuitem  id="menu_product_category_new" name="物料分类设置"  parent="menu_product_manager"   action="act_product_category_new" sequence="1"/>
+
+                		
+</data>
+</openerp>  		

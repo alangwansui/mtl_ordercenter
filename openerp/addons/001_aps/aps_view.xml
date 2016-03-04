@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<openerp>
+<data>
+
+
+
+<record model="ir.ui.view" id="view_aps_tree">
+        <field name="name">aps.tree</field>
+        <field name="model">aps</field>
+        <field name="arch" type="xml">
+            <tree  string="aps">
+                <field name="name"/>
+			</tree>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_aps_form">
+        <field name="name">aps.form</field>
+        <field name="model">aps</field>
+        <field name="arch" type="xml">
+            <form  string="aps" version='7.0'>
+				<header>
+              		
+					<field name="state" widget="statusbar" statusbar_visible="draft,done" statusbar_colors='{"done":"blue"}'/>
+				</header>
+				<sheet>
+				    <group>
+                		<field name='name'/>
+                		<newline/>
+                		<button name='create_aps' string='新增' type='object' class='oe_highlight'/>
+                		<button name='create_time' string='计算工时' type='object' class='oe_highlight'/>
+					</group>
+                	<field name='aps_line_ids'>
+                	    	<tree string='aps line' editable='bottom'>
+                	        	<field name='code'/>
+                	        	<field name='employee_name'/>
+                	        	<field name='dpt'/>
+                	        	<field name='date'/>
+                	        	<field name='date_one'/>
+                	        	<field name='date_two'/>
+                	        	<field name='date_three'/>
+                	        	<field name='date_four'/>
+                	        	<field name='date_five'/>
+                	        	<field name='date_six'/>
+                	        	<field name='date_seven'/>
+                	        	<field name='date_eight'/>
+                	        	<field name='total_time'/>
+                	        	<field name='jia_ban'/>
+                	   	 	</tree>
+                	   	
+                	</field>
+                	
+                	
+                </sheet>
+			</form>
+		</field>
+</record>
+
+
+
+
+<record model="ir.actions.act_window" id="act_aps">
+		<field name="name">aps</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">aps</field>
+</record>  
+
+
+<menuitem  id="menu_aps" name="aps"    sequence="9" /> 
+<menuitem  id="menu_aps_manager" name="aps manager"  parent="menu_aps"  sequence="11" /> 
+<menuitem  id="menu_apss" name="apss"  parent="menu_aps_manager"   action="act_aps"/>
+
+
+
+
+
+<record model="ir.ui.view" id="view_aps_line_tree">
+        <field name="name">aps.line.tree</field>
+        <field name="model">aps.line</field>
+        <field name="arch" type="xml">
+            <tree  string="aps line">
+                <field name='code'/>
+                	        	<field name='employee_name'/>
+                	        	<field name='dpt'/>
+                	        	<field name='date'/>
+                	        	<field name='date_one'/>
+                	        	<field name='date_two'/>
+                	        	<field name='date_three'/>
+                	        	<field name='date_four'/>
+                	        	<field name='date_five'/>
+                	        	<field name='date_six'/>
+                	        	<field name='date_seven'/>
+                	        	<field name='date_eight'/>
+                	        	<field name='total_time'/>
+                	        	<field name='jia_ban'/>
+                	        	
+			</tree>
+		</field>
+</record>
+
+<record model="ir.actions.act_window" id="act_aps_line">
+		<field name="name">aps.line</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">aps.line</field>
+</record>  
+
+
+
+<menuitem  id="menu_apss_line" name="aps line"  parent="menu_aps_manager"   action="act_aps_line"/>
+
+
+
+
+</data>
+</openerp>
+			

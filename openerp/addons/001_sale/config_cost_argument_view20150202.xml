@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+    <record model='ir.ui.view' id='cost_ready_config_tree_view'>
+        <field name='name'>准备费参数设置</field>
+        <field name='model'>pcb.cost.argument</field>
+        <field name='type'>tree</field>
+        <field name='arch' type='xml'>
+	            <tree string='cost ready tree' editable='bottom'>
+	 
+	                <field name='res_partner_id' width='100'/>
+	                <field name='type'/>
+	                <field name='cost_type'/>
+	                <field name='layer_count'/>
+	                <field name='v'/>
+	                <field name='material_category' width='100'/>
+	                <field name='cu_thickness'/>
+	          
+	            </tree>
+        </field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='act_cost_ready_config'>
+        <field name='name'>准备费参数设置</field>
+        <field name='res_model'>pcb.cost.argument</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree</field>
+        <field name='view_id'  ref='cost_ready_config_tree_view'/>
+    	<field name='domain'>[('cost_type','=','ready')]</field>
+    </record>
+
+	<record model='ir.ui.view' id='cost_plot_config_tree_view'>
+        <field name='name'>菲林费参数设置</field>
+        <field name='model'>pcb.cost.argument</field>
+        <field name='type'>tree</field>
+        <field name='arch' type='xml'>
+	            <tree string='cost plot tree' editable='bottom'>
+	                <field name='res_partner_id'/>
+	                <field name='type'/>
+	                <field name='cost_type'/>
+	                <field name='layer_count'/>
+	                <field name='v'/>
+	                <field name='pcs_area_max'/>
+	                <field name='pcs_area_min'/>
+	            </tree>
+        </field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='action_cost_plot_config'>
+        <field name='name'>菲林费参数设置</field>
+        <field name='res_model'>pcb.cost.argument</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree</field>
+        <field name='view_id'  ref='cost_plot_config_tree_view'/>
+    	<field name='domain'>[('cost_type','=','plot')]</field>
+    </record>
+
+<record model='ir.ui.view' id='cost_test_config_tree_view'>
+        <field name='name'>测试费参数设置</field>
+        <field name='model'>pcb.cost.argument</field>
+        <field name='type'>tree</field>
+        <field name='arch' type='xml'>
+	            <tree string='cost test tree' editable='bottom'>
+	                <field name='res_partner_id'/>
+	                <field name='type'/>
+	                <field name='cost_type'/>
+	                <field name='layer_count'/>
+	                <field name='v'/>
+	                <field name='pcs_area_min'/>
+	                <field name='pcs_area_max'/>
+	                <field name='material_category'/>
+	                <field name='test_point_max'/>
+	                <field name='test_point_min'/>
+	            </tree>
+        </field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='act_cost_test_config'>
+        <field name='name'>测试费参数设置</field>
+        <field name='res_model'>pcb.cost.argument</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree</field>
+        <field name='view_id'  ref='cost_test_config_tree_view'/>
+    	<field name='domain'>[('cost_type','=','test')]</field>
+    </record>
+
+<record model='ir.ui.view' id='cost_base_config_tree_view'>
+        <field name='name'>基板费参数设置</field>
+        <field name='model'>pcb.cost.argument</field>
+        <field name='type'>tree</field>
+        <field name='arch' type='xml'>
+	            <tree string='cost base tree' editable='bottom'>
+	                <field name='res_partner_id'/>
+	                <field name='type'/>
+	                <field name='cost_type'/>
+	                <field name='layer_count'/>
+	                <field name='v'/>
+	                <field name='material_category' width='100'/>
+	                <field name='cu_thickness'/>
+	                <field name='po_area_max'/>
+	                <field name='po_area_min'/>
+	            </tree>
+        </field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='act_cost_base_config'>
+        <field name='name'>基板费参数设置</field>
+        <field name='res_model'>pcb.cost.argument</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree</field>
+        <field name='view_id'  ref='cost_base_config_tree_view'/>
+    	<field name='domain'>[('cost_type','=','base')]</field>
+    </record>
+
+    <record model='ir.ui.view' id='cost_days_config_tree_view'>
+        <field name='name'>加急费参数设置</field>
+        <field name='model'>pcb.cost.argument</field>
+        <field name='type'>tree</field>
+        <field name='arch' type='xml'>
+	            <tree string='cost base tree' editable='bottom'>
+	                <field name='res_partner_id'/>
+	                <field name='type'/>
+	                <field name='cost_type'/>
+	                <field name='layer_count'/>
+	                <field name='cost_days'/>
+	                <field name='v'/>
+	                <field name='po_area_max'/>
+	                <field name='po_area_min'/>
+	            </tree>
+        </field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='act_cost_days_config'>
+        <field name='name'>加急费参数设置</field>
+        <field name='res_model'>pcb.cost.argument</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree</field>
+        <field name='view_id'  ref='cost_days_config_tree_view'/>
+    	<field name='domain'>[('cost_type','=','cost_days')]</field>
+    </record>
+    
+    <record model='ir.ui.view' id='cost_finger_config_tree_view'>
+        <field name='name'>金手指费参数设置</field>
+        <field name='model'>pcb.cost.argument</field>
+        <field name='type'>tree</field>
+        <field name='arch' type='xml'>
+	            <tree string='cost finger tree' editable='bottom'>
+	                <field name='res_partner_id'/>
+	                <field name='type'/>
+	                <field name='cost_type'/>
+	                <field name='layer_count'/>
+	                <field name='v'/>
+	                <field name='au_thick_min'/>
+	                <field name='au_thick_max'/>
+	                <field name='finger_count_min'/>
+	                <field name='finger_count_max'/>
+	            </tree>
+        </field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='act_cost_finger_config'>
+        <field name='name'>金手指费参数设置</field>
+        <field name='res_model'>pcb.cost.argument</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree</field>
+        <field name='view_id'  ref='cost_finger_config_tree_view'/>
+        <field name='domain'>[('cost_type','=','finger')]</field>
+    </record>
+    
+     <record model='ir.ui.view' id='cost_flexible_config_tree_view'>
+        <field name='name'>刚柔结合板费参数设置</field>
+        <field name='model'>pcb.cost.argument</field>
+        <field name='type'>tree</field>
+        <field name='arch' type='xml'>
+	            <tree string='cost flexible tree' editable='bottom'>
+	                <field name='res_partner_id'/>
+	                <field name='type'/>
+	                <field name='cost_type'/>
+	                <field name='layer_count'/>
+	                <field name='v'/>
+	                <field name='flexible_count'/>
+	            </tree>
+        </field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='act_cost_flexible_config'>
+        <field name='name'>刚柔结合板费参数设置</field>
+        <field name='res_model'>pcb.cost.argument</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree</field>
+        <field name='view_id'  ref='cost_flexible_config_tree_view'/>
+    	<field name='domain'>[('cost_type','=','flexible')]</field>
+    </record>
+    
+    <record model='ir.ui.view' id='cost_surface_config_tree_view'>
+        <field name='name'>表面涂覆费参数设置</field>
+        <field name='model'>pcb.cost.argument</field>
+        <field name='type'>tree</field>
+        <field name='arch' type='xml'>
+	            <tree string='cost surface tree' editable='bottom'>
+	                <field name='res_partner_id'/>
+	                <field name='type'/>
+	                <field name='cost_type'/>
+	                <field name='surface_treatment'/>
+	                <field name='layer_count'/>
+	                <field name='v'/>
+	                <field name='material_category'/>
+	            </tree>
+        </field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='act_cost_surface_config'>
+        <field name='name'>表面涂覆费参数设置</field>
+        <field name='res_model'>pcb.cost.argument</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree</field>
+        <field name='view_id'  ref='cost_surface_config_tree_view'/>
+    	<field name='domain'>[('cost_type','=','surface_treatment')]</field>
+    </record>
+    
+     <record model='ir.ui.view' id='cost_standard_days_tree_view'>
+        <field name='name'>标准天数参数设置</field>
+        <field name='model'>pcb.cost.argument</field>
+        <field name='type'>tree</field>
+        <field name='arch' type='xml'>
+	            <tree string='cost standard days tree' editable='bottom'>
+	                <field name='res_partner_id'/>
+	                <field name='type'/>
+	                <field name='cost_type'/>
+	                <field name='layer_count'/>
+	                <field name='v'/>
+	               	<field name='po_area_min'/>
+	                <field name='po_area_max'/>
+	            </tree>
+        </field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='act_standard_days_config'>
+        <field name='name'>标准天数参数设置</field>
+        <field name='res_model'>pcb.cost.argument</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree</field>
+        <field name='view_id'  ref='cost_standard_days_tree_view'/>
+    	<field name='domain'>[('cost_type','=','standard_days')]</field>
+    </record>
+    
+    
+     <record model='ir.ui.view' id='cost_special_tree_view'>
+        <field name='name'>特殊板材料参数设置</field>
+        <field name='model'>pcb.cost.argument</field>
+        <field name='type'>tree</field>
+        <field name='arch' type='xml'>
+	            <tree string='cost special tree' editable='bottom'>
+	                <field name='res_partner_id'/>
+	                <field name='type'/>
+	                <field name='cost_type'/>
+	                <field name='layer_count'/>
+	                <field name='v'/>
+	                <field name='board_size'/>
+	                <field name='use_ratio'/>
+	                <field name='append_amount'/>
+	                <field name='po_area_min'/>
+	                <field name='po_area_max'/>
+	                
+	            </tree>
+        </field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='act_special_config'>
+        <field name='name'>特殊板材料参数设置</field>
+        <field name='res_model'>pcb.cost.argument</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree</field>
+        <field name='view_id'  ref='cost_special_tree_view'/>
+    	<field name='domain'>[('cost_type','=','special_matrial')]</field>
+    </record>
+    
+    <record model='ir.ui.view' id='cost_base_bd_thick_tree_view'>
+        <field name='name'>基板厚度参数设置</field>
+        <field name='model'>pcb.cost.argument</field>
+        <field name='type'>tree</field>
+        <field name='arch' type='xml'>
+	            <tree string='cost base_bd_thick tree' editable='bottom'>
+	                <field name='res_partner_id'/>
+	                <field name='type'/>
+	                <field name='cost_type'/>
+	                <field name='layer_count'/>
+	                <field name='v'/>
+	             	<field name='bd_thick_min'/>
+	               	<field name='bd_thick_max'/>
+	              	<field name='po_area_min'/>
+	                <field name='po_area_max'/>
+	                
+	            </tree>
+        </field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='act_base_bd_thick_config'>
+        <field name='name'>基板厚度参数设置</field>
+        <field name='res_model'>pcb.cost.argument</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree</field>
+        <field name='view_id'  ref='cost_base_bd_thick_tree_view'/>
+    	<field name='domain'>[('cost_type','=','base_bd_thick')]</field>
+    </record>
+    
+    
+    
+      <record model='ir.ui.view' id='cost_au_thickness_tree_view'>
+        <field name='name'>沉金厚度参数设置</field>
+        <field name='model'>pcb.cost.argument</field>
+        <field name='type'>tree</field>
+        <field name='arch' type='xml'>
+	            <tree string='cost au thickness tree' editable='bottom'>
+	                <field name='res_partner_id'/>
+	                <field name='type'/>
+	                <field name='cost_type'/>
+	              	<field name='au_thickness'/>
+	                <field name='v'/>
+	             	
+	              
+	                
+	            </tree>
+        </field>
+    </record>
+    
+    <record model='ir.actions.act_window' id='act_au_thickness_config'>
+        <field name='name'>沉金厚度参数设置</field>
+        <field name='res_model'>pcb.cost.argument</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree</field>
+        <field name='view_id'  ref='cost_au_thickness_tree_view'/>
+    	<field name='domain'>[('cost_type','=','au_amount')]</field>
+    </record>
+    
+    
+    
+	<menuitem   id="menu_sale_config_manager" name="销售参数管理"  parent="001_res_partners.menu_sale"   sequence="3" /> 
+    <menuitem id='cost_argument_config_menu' name='标准报价参数设置' parent='menu_sale_config_manager' sequence="1"/>
+    <menuitem id='cost_ready_config_menu' name='准备费参数设置' parent='cost_argument_config_menu' action='act_cost_ready_config'/>
+    <menuitem id='cost_plot_config_menu' name='菲林费参数设置' parent='cost_argument_config_menu' action='action_cost_plot_config'/>
+    <menuitem id='cost_test_config_menu' name='测试费参数设置' parent='cost_argument_config_menu' action='act_cost_test_config'/>
+    <menuitem id='cost_base_config_menu' name='基板费参数设置' parent='cost_argument_config_menu' action='act_cost_base_config'/>
+    <menuitem id='cost_days_config_menu' name='加急费参数设置' parent='cost_argument_config_menu' action='act_cost_days_config'/>
+    <menuitem id='cost_finger_config_menu' name='金手指费参数设置' parent='cost_argument_config_menu' action='act_cost_finger_config'/>
+    <menuitem id='cost_flexible_config_menu' name='刚柔结合板费参数设置' parent='cost_argument_config_menu' action='act_cost_flexible_config'/>
+    <menuitem id='cost_surface_config_menu' name='表面涂覆费参数设置' parent='cost_argument_config_menu' action='act_cost_surface_config'/>
+    <menuitem id='cost_standard_days_config_menu' name='标准天数参数设置' parent='cost_argument_config_menu' action='act_standard_days_config'/>
+    <menuitem id='cost_special_config_menu' name='特殊板材料参数设置' parent='cost_argument_config_menu' action='act_special_config'/>
+    <menuitem id='cost_base_bd_thick_config_menu' name='基板厚度参数设置' parent='cost_argument_config_menu' action='act_base_bd_thick_config'/>
+    <menuitem id='cost_au_thickness_config_menu' name='沉金厚度参数设置' parent='cost_argument_config_menu' action='act_au_thickness_config'/>
+  
+  
+    
+</data>
+</openerp>

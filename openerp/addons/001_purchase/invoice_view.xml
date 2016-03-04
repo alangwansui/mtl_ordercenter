@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+<record model="ir.ui.view" id="invoice_tree_view">
+    <field name="name">invoice.tree</field>
+	<field name="model">invoice</field>
+	<field name="arch" type="xml">
+		<tree string="invoice">
+			<field name='name'/>
+			<field name='tax_rate'/>
+			<field name='is_add'/>
+			<field name='state'/>
+		</tree>
+		
+	</field>
+</record>
+
+<record model="ir.ui.view" id="invoice_form_view">
+	<field name="name">invoice.form</field>
+	<field name="model">invoice</field>
+		<field name="arch" type="xml">
+		<form string='invoice' version='7.0'>
+			<header>
+	          	<button name='button_approves'  string='审批' class='oe_highlight'/>
+	            <button name='button_refuse'  string='作废' type='object' class='oe_highlight'/>
+	            <field name='state' widget="statusbar" statusbar_visible="draft,done,cancel" statusbar_colors='{"done":"blue"}'/>
+	        </header>
+			<group>
+				  <group>
+						<field name='name' attrs="{'readonly':[('state','!=','draft')]}"/>
+						<field name='tax_rate' attrs="{'readonly':[('state','!=','draft')]}"/>
+						
+				  </group>
+				  <group>
+				<!--    <field name='full_name' attrs="{'readonly':[('state','!=','draft')]}"/>  --> 
+			       <field name='is_add' attrs="{'readonly':[('state','!=','draft')]}"/>
+				  </group>
+			</group>
+		</form>
+		</field>
+</record>
+				
+<record model="ir.actions.act_window" id="act_invoice">
+	<field name="name">发票税率信息</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">invoice</field>
+</record>  
+
+
+<menuitem  id="menu_invoice"  groups="base.group_no_one" name="发票税率信息"  parent="menu_001_purchase_base"   action="act_invoice" sequence='0'/>
+
+
+
+</data>
+</openerp>

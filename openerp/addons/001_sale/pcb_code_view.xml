@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+
+<record model="ir.ui.view" id="pcb_sequence_code_tree_view">
+    <field name="name">pcb_sequence_code.tree</field>
+    <field name="model">pcb.sequence.code</field>
+    <field name="arch" type="xml">
+        <tree string="pcb_sequence_code">
+        	
+            <field name="name"/>
+            <field name='type'/>
+			
+        </tree>
+    </field>
+</record>
+
+<record model="ir.actions.act_window" id="act_pcb_sequence_code">
+	<field name="name">档案号编码</field>
+	<field name="res_model">pcb.sequence.code</field>
+	<field name="type">ir.actions.act_window</field>
+
+	<field name='view_id' ref='pcb_sequence_code_tree_view'/>
+</record>  
+<menuitem  id="menu_pcb_sequence_code"  groups="base.group_no_one" name="档案号编码"  parent="menu_sale_config_manager"   action="act_pcb_sequence_code" sequence="13"/>
+
+
+
+
+
+
+
+
+
+</data>
+</openerp>
+
+

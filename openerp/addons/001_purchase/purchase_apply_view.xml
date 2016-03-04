@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+<record model="ir.ui.view" id="purchase_apply_tree_view">
+    <field name="name">purchase_apply_tree</field>
+	<field name="model">purchase.apply</field>
+	<field name="arch" type="xml">
+		<tree string="purchase apply">
+		
+			<field name='name'/>
+			<field name='dpt_name'/>
+			<field name='responsible_name'/>
+			<field name='apply_date'/>
+			<field name='request_date'/>
+			<field name='state'/>
+			
+			
+			
+		</tree>
+	</field>
+</record>
+		
+		
+<record model="ir.ui.view" id="purchase_apply_form_view">
+	<field name="name">purchase.apply.form</field>
+	<field name="model">purchase.apply</field>
+	<field name="arch" type="xml">
+		<form string="Purchase Apply" version="7.0">
+			<header>
+			  	<button name='button_approve' string='审批' class='oe_highlight'/>
+				<button name='button_cancel' string='作废' class='oe_highlight'/>
+				<field name='state' widget="statusbar" statusbar_visible="draft,done" statusbar_colors='{"draft":"blue"}'/>
+	        </header>
+			<sheet>
+				<group colspan='4' col='4'>
+					<group>		    
+						
+						<field name='name'/>
+						<field name='responsible_name'/>
+						<field name='type'/>
+					</group>
+					<group>		
+						<field name='dpt_name'/>
+						<field name='apply_date'/>
+						<field name='request_date'/>
+			
+			
+					
+					</group>
+				
+				</group>
+				<field name='purchase_apply_line_ids'>
+					<tree string='apply line' editable='bottom'>
+						<field name='product_id'/>
+						<field name='quantity'/>
+						<field name='stock_qty'/>
+						<field name='unit'/>
+						<field name='note'/>
+					</tree>
+					
+					
+				</field>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_purchase_apply">
+	<field name="name">采购申请单</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">purchase.apply</field>
+</record>  
+<menuitem  id="menu_001_purchase_manager" name="采购管理"  parent="menu_001_purchase"  sequence="0" /> 
+<menuitem  id="menu_purchase_apply"  groups="base.group_no_one" name="采购申请单"  parent="menu_001_purchase_manager"   action="act_purchase_apply" sequence='1'/>
+
+
+
+
+</data>
+</openerp>

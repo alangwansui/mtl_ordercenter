@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding='utf-8'?>
+<openerp>
+    <data>
+        
+  	<record model="ir.ui.view" id="view_select_selection_tree">
+        <field name="name">select_selection.tree</field>
+        <field name="model">select.selection</field>
+        <field name="arch" type="xml">
+            <tree  string="select_selection" editable="bottom">
+               
+               <field name='name'/>
+               <field name='label'/>
+            	<field name="type"/>
+            	<field name='variants_id'/>
+            	<field name='sub_type'/>
+	            <field name='thickness'/>
+	            <field name="active"/>
+	            <field name='is_htg'/>
+	            <field name='is_specia_material'/>
+	            <field name='is_rigid_flexible'/>
+	            <field name='sequence'/>      
+	            <field name='partner_id'/>      
+            </tree>
+        </field>
+	</record>
+	
+	
+	
+	<record model="ir.actions.act_window" id="act_select_selection">
+			<field name="name">参数设置表</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">select.selection</field>
+		
+	</record>  
+	
+	
+	<menuitem  id="menu_select" name="参数"    sequence="5" /> 
+	<menuitem  id="menu_select_manager" name="参数管理"  parent="menu_select"  sequence="1" /> 
+
+	<menuitem  id="menu_select_selection" name="参数设置表" parent="menu_select_manager"  action="act_select_selection"/>
+	
+<!--	<menuitem  id="menu_select" name="select"    sequence="20" /> 
+	<menuitem  id="menu_select_manager" name="select manager"  parent="menu_select"  sequence="1" /> 
+
+	<menuitem  id="menu_select_selection" name="select_selection" parent="menu_select_manager"  action="act_select_selection"/>-->
+	
+<!--   	<record model="ir.ui.view" id="select_selection_tree_new_view2">
+	    <field name="name">select_selection.tree.new</field>
+	    <field name="model">select.selection</field>
+	    <field name="arch" type="xml">
+        	<tree string='select tree'>
+            	<field name='label' string='标签'/>
+        	</tree>
+    	</field>
+	</record> --> 
+	
+	
+	
+	
+    </data>
+</openerp>

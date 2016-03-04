@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+        <record id="action_print_dispatch_form" model="ir.actions.act_window">
+            <field name="name">Print dispatch form</field>
+            <field name="res_model">print.dispatch.form</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record> -->
+
+    </data>
+</openerp>
