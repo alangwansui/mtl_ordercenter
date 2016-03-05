@@ -7,7 +7,7 @@ from openerp.tools.translate import _
 import re
 import datetime
 #import win32ui
-import tkFileDialog  #可跨平台打开文件
+#import tkFileDialog  #可跨平台打开文件
 import re,os,string,time
 import string
 server='192.168.10.2'
