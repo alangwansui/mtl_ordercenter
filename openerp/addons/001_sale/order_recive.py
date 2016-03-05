@@ -6,7 +6,7 @@ from openerp.osv import fields, osv
 from openerp.tools.translate import _
 import re
 import datetime
-import win32ui
+#import win32ui
 import tkFileDialog  #可跨平台打开文件
 import re,os,string,time
 import string
@@ -768,7 +768,7 @@ class order_recive(osv.osv):
 #########################接收邮件时间
         def recive_email(self,cr,uid,ids,context=None):
              # 1表示打开文件对话框
-            dlg = win32ui.CreateFileDialog(1) 
+            dlg = None#  win32ui.CreateFileDialog(1)
             dlg.DoModal()
             filename = dlg.GetPathName()  # 获取选择的文件名称
             my=self.browse(cr,uid,ids[0])
