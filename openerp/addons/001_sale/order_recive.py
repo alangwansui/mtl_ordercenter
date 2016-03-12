@@ -810,9 +810,9 @@ class order_recive(osv.osv):
             end_time=my.approve_date
             if not start_time:
                 raise osv.except_osv(_('Error!'),_(u'附件文件名不能为空！'))
-            end_times=datetime.datetime.fromtimestamp(time.mktime(time.strptime(end_time,"%Y-%m-%d %X")))
+            end_times=datetime.datetime.fromtimestamp(time.mktime(time.strptime(end_time,"%Y-%m-%d %H:%M:%S")))
             print end_times,'end_times'
-            start_times = datetime.datetime.fromtimestamp(time.mktime(time.strptime(start_time,"%Y-%m-%d %X")))
+            start_times = datetime.datetime.fromtimestamp(time.mktime(time.strptime(start_time,"%Y-%m-%d %H:%M:%S")))
             print start_times,'start_times'
             total_time=round((end_times-start_times).seconds/3600.0,2)+(end_times-start_times).days*24
             print total_time,'total_time'
